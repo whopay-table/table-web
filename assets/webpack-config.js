@@ -96,7 +96,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, '../web/src/')
+          path.resolve(__dirname, '../src/')
         ],
         use: [
           'babel-loader'
