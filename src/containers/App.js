@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect, Provider } from 'react-redux';
+import { Route, Link } from 'react-router-dom'
+import Home from '../components/Home';
+import Group from '../containers/Group';
 
 const App = ({ store }) => (
   <Provider store={store}>
-    <div>
-      Hello world
-      {/*<Header addTodo={actions.addTodo} />
-      <MainSection todos={todos} actions={actions} />*/}
-    </div>
+    <Route exact path="/" component={Home}/>
+    {/* <Route path="/:groupName" component={Group}/> */}
   </Provider>
 );
 

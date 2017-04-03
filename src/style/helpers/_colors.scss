@@ -1,0 +1,49 @@
+
+@function color($color-name) {
+  $color: map-get((
+    'purple': #7979d3,
+    'purple-hover': #6060a8,
+    'purple-hover-dark': #48487e,
+    'purple-active': #3c3c69,
+    'turq': #63c2c2,
+    'turq-hover': #58aeae,
+    'turq-dark': #3b7474,
+
+    'pink': #e6556c,
+    'yellow': #f2c230,
+    'lime': #91c200,
+    'blue': #00add9,
+    'blue-facebook': #4460A0,
+    'lightpink': #ff9999,
+    'rosy-pink': #f16c82,
+
+    'red': #dc3847,
+    'cranberry': #ef6d83,
+    'cranberry-dark': #be4a72,
+
+    'white': #ffffff,
+    'light-white': #fbfbfb,
+    'light-white-hover': #f6f6f6,
+    'light-grey': #dddddd,
+    'medium-light-grey': #e6e6e6,
+    'grey': #999999,
+    'dark-grey': #6d6d6d,
+    'blue-grey': #393a45,
+    'black': #222222,
+    'real-black': #000000,
+
+    'grey1': #eeeeee,
+    'grey2': #dddddd,
+    'grey3': #cccccc,
+    'grey4': #bbbbbb,
+    'grey5': #aaaaaa,
+    'grey6': #999999,
+    'grey7': #888888,
+    'grey8': #777777,
+    'grey9': #666666,
+    'grey10': #555555,
+    'grey11': #444444,
+    'grey12': #333333
+  ), $color-name);
+  @return $color;
+}

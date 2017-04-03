@@ -1,12 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import './imports';
 import App from './containers/App';
 import store from './store';
 
 render(
-  <BrowserRouter>
+  <Router>
     <App store={store} />
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 );
