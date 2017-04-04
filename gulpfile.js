@@ -35,9 +35,6 @@ gulp.task('webpack-dev-server', ['copy-static-files'], callback => {
   const port = DEFAULT_DEV_PORT;
 
   devConfig.devtool = devtool;
-  devConfig.devServer = {
-    historyApiFallback: true,
-  };
   devConfig.plugins = devConfig.plugins.concat(
     new webpack.LoaderOptionsPlugin({
       debug: true
@@ -45,6 +42,7 @@ gulp.task('webpack-dev-server', ['copy-static-files'], callback => {
   );
 
   new WebpackDevServer(webpack(devConfig), {
+    historyApiFallback: true,
     quiet: argv.quiet,
     contentBase: 'build',
     publicPath: '/assets',

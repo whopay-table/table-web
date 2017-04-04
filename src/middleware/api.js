@@ -3,15 +3,16 @@ import queryString from 'query-string';
 import * as Server from '../../configs/server';
 
 const API_URL = Server.url;
+const API_REQUEST_KEY = 'API_REQUEST';
 
-API_REQUEST: {
-  type: ActionTypes.GET_GROUP_INDEX,
-  method: 'GET',
-  endpoint: '/groups',
-  params: {
-    groupname: groupName
-  }
-}
+// API_REQUEST: {
+//   type: ActionTypes.GET_GROUP_INDEX,
+//   method: 'GET',
+//   endpoint: '/groups',
+//   params: {
+//     groupname: groupName
+//   }
+// }
 
 const requestApi = (method, endpoint, params) => {
   let fullUrl = endpoint.includes(API_URL) ? endpoint : API_ROOT + endpoint;
@@ -51,48 +52,29 @@ export default store => next => action => {
   }
 
   if (typeof endpoint !== 'string') {
-    throw new Error('Specify a string endpoint URL.')
+    throw new Error('Specify a string endpoint URL.');
   }
   if (typeof type !== 'object') {
-    throw new Error('Expected action type to be an object.')
+    throw new Error('Expected action type to be an object.');
   }
   if (!['request', 'success', 'failure'].every(prop => typeof type[prop] === 'string')) {
-    throw new Error('Expected action type to be an object with request, success, and failure string properties.')
+    throw new Error('Expected action type to be an object with request, success, and failure string properties.');
   }
 
   const actionWith = data => {
     const finalAction = Object.assign({}, action, data);
-    delete finalAction['API_REQUEST'];
+    delete finalAction[API_REQUEST_KEY];
     return finalAction;
   };
   next(actionWith({ type: type.request }));
 
   return requestApi(method, endpoint, params).then(response => next(actionWith({
     response,
+    params: params,
     type: type.success
   })), error => next(actionWith({
-    type: type.failure,
-    error: error
+    error: error,
+    params: params,
+    type: type.failure
   })));
-
-
-  const actionWith = data => {
-    const finalAction = Object.assign({}, action, data)
-    delete finalAction[CALL_API]
-    return finalAction
-  }
-
-  const [ requestType, successType, failureType ] = types
-  next(actionWith({ type: requestType }))
-
-  return callApi(endpoint, schema).then(
-    response => next(actionWith({
-      response,
-      type: successType
-    })),
-    error => next(actionWith({
-      type: failureType,
-      error: error.message || 'Something bad happened'
-    }))
-  )
 }
