@@ -18,8 +18,14 @@ class Group extends Component {
   }
 
   render() {
+    let gid = 'unknown';
+    if (this.props.groupIndex === null) {
+      gid = 'none';
+    } else if (this.props.groupIndex) {
+      gid = this.props.groupIndex;
+    }
     return (
-      <div>Group ID for {this.props.match.params.groupname} is {this.props.groupIndex ? this.props.groupIndex.id : 'unknown'}</div>
+      <div>Group ID for {this.props.match.params.groupname} is {gid}</div>
     );
   }
 }
