@@ -5,17 +5,8 @@ import * as Server from '../../configs/server';
 const API_URL = Server.url;
 const API_REQUEST_KEY = 'API_REQUEST';
 
-// API_REQUEST: {
-//   type: ActionTypes.GET_GROUP_INDEX,
-//   method: 'GET',
-//   endpoint: '/groups',
-//   params: {
-//     groupname: groupName
-//   }
-// }
-
 const requestApi = (method, endpoint, params) => {
-  let fullUrl = endpoint.includes(API_URL) ? endpoint : API_ROOT + endpoint;
+  let fullUrl = endpoint.includes(API_URL) ? endpoint : API_URL + endpoint;
   let body = undefined;
   const encodedParams = queryString.stringify(params || {});
   if (typeof method === 'undefined' || method === 'GET') {
@@ -30,13 +21,20 @@ const requestApi = (method, endpoint, params) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: encodedParams
+    body: body
   };
 
-  return fetch(fullUrl, init).then(response => response.json().then(json => {
-    const camelizedJson = camelizeKeys(json);
-    return camelizedJson;
-  }));
+  return fetch(fullUrl, init).then(response => {
+    return response.json().then(json => {
+      if (!response.ok) {
+        return Promise.reject(json);
+      } else {
+        return camelizeKeys(json);
+      }
+    });
+  }, error => {
+    console.error('Failed to request to API', error);
+  });
 }
 
 export default store => next => action => {
@@ -73,7 +71,7 @@ export default store => next => action => {
     params: params,
     type: type.success
   })), error => next(actionWith({
-    error: error,
+    error,
     params: params,
     type: type.failure
   })));

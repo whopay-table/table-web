@@ -8,7 +8,7 @@ export const getGroupIndex = groupname => (dispatch, getState) => {
       method: 'GET',
       endpoint: '/groups',
       params: {
-        groupname: groupName
+        groupname: groupname
       }
     }
   });

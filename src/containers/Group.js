@@ -8,12 +8,12 @@ class Group extends Component {
   };
 
   componentWillMount() {
-    getGroupIndex(this.props.match.params.groupname);
+    this.props.getGroupIndex(this.props.match.params.groupname);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.groupname !== this.props.match.params.groupname) {
-      getGroupIndex(nextProps.match.params.groupname);
+      this.props.getGroupIndex(nextProps.match.params.groupname);
     }
   }
 
@@ -31,4 +31,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, {})(Group);
+export default connect(mapStateToProps, {
+  getGroupIndex
+})(Group);
