@@ -12,9 +12,8 @@ export default class GroupCreate extends Component {
     const {
       createGroup,
       getGroupIndex,
-      isGroupnameAvailable,
-      isGroupnameTaken,
       params,
+      paramErrors,
       setParams
     } = this.props;
 
@@ -25,9 +24,8 @@ export default class GroupCreate extends Component {
         <GroupCreateForm
           createGroup={createGroup}
           getGroupIndex={getGroupIndex}
-          isGroupnameAvailable={isGroupnameAvailable}
-          isGroupnameTaken={isGroupnameTaken}
           params={params}
+          paramErrors={paramErrors}
           setParams={setParams}
         />
       </div>

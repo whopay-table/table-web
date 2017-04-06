@@ -10,7 +10,7 @@ function groupIndexes(state = {}, action) {
 
     case ActionTypes.GET_GROUP_INDEX.success:
       return Object.assign({}, state, {
-        [action.params.groupname]: action.response.groupId
+        [action.params.groupname]: action.response.id
       });
 
     case ActionTypes.GET_GROUP_INDEX.failure:

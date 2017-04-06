@@ -7,7 +7,9 @@ export default class GroupForm extends Component {
   };
 
   handleGroupnameBlur(e) {
-    this.props.getGroupIndex(this.props.params['group[groupname]']);
+    if (this.props.params['group[groupname]']) {
+      this.props.getGroupIndex(this.props.params['group[groupname]']);
+    }
   }
 
   handleInputChange(e) {
@@ -21,111 +23,91 @@ export default class GroupForm extends Component {
   }
 
   render() {
-    console.log(this.props.isGroupnameTaken, this.props.isGroupnameAvailable);
+    const { paramErrors } = this.props;
+
+    const formBase = [
+      {
+        label: '그룹 ID',
+        inputType: 'text',
+        name: 'group[groupname]',
+        placeholder: '',
+        onBlur: e => this.handleGroupnameBlur(e)
+      },
+      {
+        label: '그룹 이름',
+        inputType: 'text',
+        name: 'group[title]',
+        placeholder: ''
+      },
+      {
+        label: 'Email 주소',
+        inputType: 'email',
+        name: 'user[email]',
+        placeholder: ''
+      },
+      {
+        label: 'ID',
+        inputType: 'text',
+        name: 'user[username]',
+        placeholder: ''
+      },
+      {
+        label: '이름',
+        inputType: 'text',
+        name: 'user[name]',
+        placeholder: ''
+      },
+      {
+        label: '비밀번호',
+        inputType: 'password',
+        name: 'user[password]',
+        placeholder: ''
+      },
+      {
+        label: '비밀번호 확인',
+        inputType: 'password',
+        name: 'user[password_confirmation]',
+        placeholder: ''
+      },
+    ];
+
+    const formGroups = formBase.map(item => {
+      const errorBlock = paramErrors[item.name] ? (
+        <span className="help-block">
+          {paramErrors[item.name]}
+        </span>
+      ) : null;
+      return (
+        <div
+          key={item.name}
+          className={classnames(
+            'form-group',
+            { 'has-error': paramErrors[item.name] }
+          )}
+        >
+          <label htmlFor={`group-create-${item.name}`}>
+            {item.label}
+          </label>
+          <input
+            type={item.inputType}
+            className="form-control"
+            id={`group-create-${item.name}`}
+            name={item.name}
+            placeholder={item.placeholder}
+            onChange={e => this.handleInputChange(e)}
+            onBlur={item.onBlur}
+          />
+          {errorBlock}
+        </div>
+      );
+    });
+
     return (
       <form
         className="c-group-form"
         onSubmit={e => this.handleSubmit(e)}
       >
-        <div className="form-group">
-          <label htmlFor="group-create-groupname">
-            그룹 ID
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="group-create-groupname"
-            name="group[groupname]"
-            placeholder=""
-            onChange={e => this.handleInputChange(e)}
-            onBlur={e => this.handleGroupnameBlur(e)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="group-create-group-title">
-            그룹 이름
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="group-create-group-title"
-            name="group[title]"
-            placeholder=""
-            onChange={e => this.handleInputChange(e)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="group-create-user-email">
-            Email 주소
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="group-create-user-email"
-            name="user[email]"
-            placeholder=""
-            onChange={e => this.handleInputChange(e)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="group-create-user-username">
-            ID
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="group-create-user-username"
-            name="user[username]"
-            placeholder=""
-            onChange={e => this.handleInputChange(e)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="group-create-user-name">
-            이름
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="group-create-user-name"
-            name="user[name]"
-            placeholder=""
-            onChange={e => this.handleInputChange(e)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="group-create-user-password">
-            비밀번호
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="group-create-user-password"
-            name="user[password]"
-            placeholder=""
-            onChange={e => this.handleInputChange(e)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="group-create-user-password-confirmation">
-            비밀번호 확인
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="group-create-user-password-confirmation"
-            name="user[password_confirmation]"
-            placeholder=""
-            onChange={e => this.handleInputChange(e)}
-            required
-          />
-        </div>
+        {formGroups}
         <input
           type="submit"
           className="btn btn-default"
