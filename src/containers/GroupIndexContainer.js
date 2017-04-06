@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getGroupIndex } from '../actions';
 
-class Group extends Component {
+class GroupIndexContainer extends Component {
   static propTypes = {
 
   };
@@ -39,4 +39,4 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(mapStateToProps, {
   getGroupIndex
-})(Group);
+})(GroupIndexContainer);

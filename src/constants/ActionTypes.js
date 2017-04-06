@@ -8,3 +8,4 @@ function getRequestActionTypes(actionType) {
 }
 
 export const GET_GROUP_INDEX = getRequestActionTypes('GET_GROUP_INDEX');
+export const CREATE_GROUP = getRequestActionTypes('CREATE_GROUP');

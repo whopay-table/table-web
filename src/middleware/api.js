@@ -64,7 +64,7 @@ export default store => next => action => {
     delete finalAction[API_REQUEST_KEY];
     return finalAction;
   };
-  next(actionWith({ type: type.request }));
+  next(actionWith({ type: type.request, params: params }));
 
   return requestApi(method, endpoint, params).then(response => next(actionWith({
     response,

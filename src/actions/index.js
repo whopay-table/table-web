@@ -13,3 +13,14 @@ export const getGroupIndex = groupname => (dispatch, getState) => {
     }
   });
 };
+
+export const createGroup = params => (dispatch, getState) => {
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.CREATE_GROUP,
+      method: 'POST',
+      endpoint: '/groups',
+      params: params
+    }
+  });
+};
