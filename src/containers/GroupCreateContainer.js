@@ -37,6 +37,15 @@ class GroupCreateContainer extends Component {
     });
   };
 
+  createGroup = () => {
+    const { params, paramErrors } = this.state;
+    const isError = Object.keys(paramErrors).map(key => paramErrors[key]).join('') !== '';
+    
+    if (!this.isGroupnameTaken() && !isError) {
+      this.props.createGroup(this.state.params);
+    }
+  };
+
   validateParams() {
     const { params } = this.state;
     const paramErrors = {};
@@ -72,7 +81,7 @@ class GroupCreateContainer extends Component {
     if (params['user[password]']) {
       if (!hasLengthBetween(params['user[password]'], 8, 20)) {
         paramErrors['user[password]'] = '비밀번호는 8-20 글자로 이루어져야 합니다.';
-      } else if (!ALPHABET_REGEX.test(params) || !DIGIT_REGEX.test(params)) {
+      } else if (!ALPHABET_REGEX.test(params['user[password]']) || !DIGIT_REGEX.test(params['user[password]'])) {
         paramErrors['user[password]'] = '비밀번호에는 적어도 한 개의 알파벳 문자와 숫자가 포함되어야 합니다.';
       }
     }
@@ -100,12 +109,12 @@ class GroupCreateContainer extends Component {
   }
 
   render() {
-    const { createCroup, getGroupIndex } = this.props;
+    const { getGroupIndex } = this.props;
     const { params } = this.state;
 
     return (
       <GroupCreate
-        createGroup={createGroup}
+        createGroup={this.createGroup}
         getGroupIndex={getGroupIndex}
         params={params}
         paramErrors={this.getParamErrors()}
