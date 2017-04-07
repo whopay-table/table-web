@@ -14,6 +14,7 @@ export default class GroupCreate extends Component {
       getGroupIndex,
       params,
       paramErrors,
+      alert,
       setParams
     } = this.props;
 
@@ -26,6 +27,7 @@ export default class GroupCreate extends Component {
           getGroupIndex={getGroupIndex}
           params={params}
           paramErrors={paramErrors}
+          alert={alert}
           setParams={setParams}
         />
       </div>

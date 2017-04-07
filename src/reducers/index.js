@@ -18,6 +18,11 @@ function groupIndexes(state = {}, action) {
         [action.params.groupname]: null
       });
 
+    case ActionTypes.CREATE_GROUP.success:
+      return Object.assign({}, state, {
+        [action.response.groupname]: action.response.id
+      });
+
     default:
       return state;
   }

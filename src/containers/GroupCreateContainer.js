@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { createGroup, getGroupIndex } from '../actions';
 import GroupCreate from '../components/GroupCreate';
 
@@ -29,6 +30,8 @@ class GroupCreateContainer extends Component {
   state = {
     params: Object.assign({}, CREATE_GROUP_PARAMS),
     paramErrors: Object.assign({}, CREATE_GROUP_PARAMS),
+    alert: null,
+    redirectGroupname: null
   };
 
   setParams = params => {
@@ -40,9 +43,20 @@ class GroupCreateContainer extends Component {
   createGroup = () => {
     const { params, paramErrors } = this.state;
     const isError = Object.keys(paramErrors).map(key => paramErrors[key]).join('') !== '';
-    
+
     if (!this.isGroupnameTaken() && !isError) {
-      this.props.createGroup(this.state.params);
+      this.setState({ alert: null }, () => {
+        this.props.createGroup(this.state.params).then(v => {
+          if (v.response) {
+            this.setState({ redirectGroupname: v.response.groupname });
+          } else if (v.error) {
+            this.setState({ alert: '그룹을 생성하지 못 했습니다. 작성된 내용을 다시 확인해 주세요.' });
+            this.props.getGroupIndex(v.params['group[groupname]']);
+          }
+        });
+      });
+    } else {
+      this.setState({ alert: '그룹을 생성하지 못 했습니다. 작성된 내용을 다시 확인해 주세요.' });
     }
   };
 
@@ -110,7 +124,11 @@ class GroupCreateContainer extends Component {
 
   render() {
     const { getGroupIndex } = this.props;
-    const { params } = this.state;
+    const { redirectGroupname, params, alert } = this.state;
+
+    if (redirectGroupname) {
+      return <Redirect push to={`/${redirectGroupname}`}/>;
+    }
 
     return (
       <GroupCreate
@@ -118,6 +136,7 @@ class GroupCreateContainer extends Component {
         getGroupIndex={getGroupIndex}
         params={params}
         paramErrors={this.getParamErrors()}
+        alert={alert}
         setParams={this.setParams}
       />
     );

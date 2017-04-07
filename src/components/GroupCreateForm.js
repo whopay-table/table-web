@@ -23,7 +23,7 @@ export default class GroupForm extends Component {
   }
 
   render() {
-    const { paramErrors } = this.props;
+    const { alert, paramErrors } = this.props;
 
     const formBase = [
       {
@@ -102,12 +102,19 @@ export default class GroupForm extends Component {
       );
     });
 
+    const alertBlock = alert ? (
+      <div className="alert alert-danger" role="alert">
+        {alert}
+      </div>
+    ) : null;
+
     return (
       <form
         className="c-group-form"
         onSubmit={e => this.handleSubmit(e)}
       >
         {formGroups}
+        {alertBlock}
         <input
           type="submit"
           className="btn btn-default"
