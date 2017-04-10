@@ -5,10 +5,21 @@ import * as Server from '../../configs/server';
 const API_URL = Server.url;
 const API_REQUEST_KEY = 'API_REQUEST';
 
-const requestApi = (method, endpoint, params) => {
+const requestApi = (method, endpoint, params, token) => {
   let fullUrl = endpoint.includes(API_URL) ? endpoint : API_URL + endpoint;
   let body = undefined;
-  const encodedParams = queryString.stringify(params || {});
+
+  const encodeParams = params => {
+    const filteredParams = {};
+    for (const key of Object.keys(params || {})) {
+      if (!key.startsWith('_')) {
+        filteredParams[key] = params[key];
+      }
+    }
+    return queryString.stringify(filteredParams);
+  };
+
+  const encodedParams = encodeParams(params);
   if (typeof method === 'undefined' || method === 'GET') {
     const separator = fullUrl.includes('?') ? '&' : '?';
     fullUrl = `${fullUrl}${separator}${encodedParams}`;
@@ -18,9 +29,11 @@ const requestApi = (method, endpoint, params) => {
 
   const init = {
     method: method || 'GET',
-    headers: {
+    headers: Object.assign({
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    }, token ? {
+      'Authorization': `Token ${token}`
+    } : {}),
     body: body
   };
 
@@ -35,7 +48,7 @@ const requestApi = (method, endpoint, params) => {
   }, error => {
     console.error('Failed to request to API', error);
   });
-}
+};
 
 export default store => next => action => {
   const request = action.API_REQUEST;
@@ -44,7 +57,7 @@ export default store => next => action => {
     return next(action);
   }
   let { endpoint } = request;
-  const { type, method, params } = request;
+  const { type, method, params, token } = request;
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState());
   }
@@ -66,7 +79,7 @@ export default store => next => action => {
   };
   next(actionWith({ type: type.request, params }));
 
-  return requestApi(method, endpoint, params).then(response => next(actionWith({
+  return requestApi(method, endpoint, params, token).then(response => next(actionWith({
     response,
     params,
     type: type.success

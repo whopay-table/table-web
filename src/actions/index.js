@@ -24,3 +24,46 @@ export const createGroup = params => (dispatch, getState) => {
     }
   });
 };
+
+export const getGroup = id => (dispatch, getState) => {
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.GET_GROUP,
+      method: 'GET',
+      endpoint: `/groups/${id}`,
+      params: {
+        _id: id
+      },
+      token: getState().entities.groupSessions[id]
+    }
+  });
+};
+
+export const login = params => (dispatch, getState) => {
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.LOGIN,
+      method: 'POST',
+      endpoint: `/groups/${params.groupId}/login`,
+      params: {
+        _groupId: params.groupId,
+        email: params.email,
+        password: params.password
+      }
+    }
+  });
+};
+
+export const logout = params => (dispatch, getState) => {
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.LOGOUT,
+      method: 'POST',
+      endpoint: `/groups/${params.groupId}/logout`,
+      params: {
+        _groupId: params.groupId
+      },
+      token: getState().entities.groupSessions[params.groupId]
+    }
+  });
+};

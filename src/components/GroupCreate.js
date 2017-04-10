@@ -1,4 +1,3 @@
-
 import React, { Component, PropTypes } from 'react';
 import GroupCreateForm from './GroupCreateForm';
 import Header from './Header';

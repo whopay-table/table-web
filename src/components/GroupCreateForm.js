@@ -19,7 +19,6 @@ export default class GroupForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.createGroup();
-    // TODO: Redirect user to somewhere.
   }
 
   render() {

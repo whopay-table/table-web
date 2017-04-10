@@ -28,8 +28,59 @@ function groupIndexes(state = {}, action) {
   }
 }
 
+function groups(state = {}, action) {
+  switch (action.type) {
+    case ActionTypes.GET_GROUP.request:
+      return Object.assign({}, state, {
+        [action.params._id]: undefined
+      });
+
+    case ActionTypes.GET_GROUP.success:
+      return Object.assign({}, state, {
+        [action.params._id]: action.response
+      });
+
+    case ActionTypes.GET_GROUP.failure:
+      return Object.assign({}, state, {
+        [action.params._id]: null
+      });
+
+    default:
+      return state;
+  }
+}
+
+function groupSessions(state = {}, action) {
+  switch (action.type) {
+    case ActionTypes.LOGIN.request:
+      return Object.assign({}, state, {
+        [action.params._groupId]: undefined
+      });
+
+    case ActionTypes.LOGIN.success:
+      return Object.assign({}, state, {
+        [action.params._groupId]: action.response.token
+      });
+
+    case ActionTypes.LOGIN.failure:
+      return Object.assign({}, state, {
+        [action.params._groupId]: false
+      });
+
+    case ActionTypes.LOGOUT.success:
+      return Object.assign({}, state, {
+        [action.params._groupId]: null
+      });
+
+    default:
+      return state;
+  }
+}
+
 const entities = combineReducers({
-  groupIndexes
+  groupIndexes,
+  groups,
+  groupSessions
 });
 
 const app = combineReducers({
