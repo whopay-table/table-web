@@ -26,15 +26,17 @@ export const createGroup = params => (dispatch, getState) => {
 };
 
 export const getGroup = id => (dispatch, getState) => {
+  const token = getState().entities.groupSessions[id] || localStorage.getItem(`table-session-${id}`);
   return dispatch({
     API_REQUEST: {
       type: ActionTypes.GET_GROUP,
       method: 'GET',
       endpoint: `/groups/${id}`,
       params: {
-        _id: id
+        _id: id,
+        _token: token
       },
-      token: getState().entities.groupSessions[id]
+      token: token
     }
   });
 };

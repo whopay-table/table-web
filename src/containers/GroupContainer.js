@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getGroupIndex, getGroup, login, logout } from '../actions';
 import Login from '../components/Login';
+import Group from '../components/Group';
 
 class GroupContainer extends Component {
   static propTypes = {
@@ -58,9 +59,10 @@ class GroupContainer extends Component {
       );
     } else {
       return (
-        <div>
-          GroupIndex {this.props.groupIndex} Group {JSON.stringify(this.props.group)}
-        </div>
+        <Group
+          group={this.props.group}
+          logout={this.logout}
+        />
       );
     }
   }

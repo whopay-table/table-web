@@ -58,6 +58,7 @@ function groupSessions(state = {}, action) {
       });
 
     case ActionTypes.LOGIN.success:
+      localStorage.setItem(`table-session-${action.params._groupId}`, action.response.token);
       return Object.assign({}, state, {
         [action.params._groupId]: action.response.token
       });
@@ -68,8 +69,19 @@ function groupSessions(state = {}, action) {
       });
 
     case ActionTypes.LOGOUT.success:
+      localStorage.removeItem(`table-session-${action.params._groupId}`);
       return Object.assign({}, state, {
         [action.params._groupId]: null
+      });
+
+    case ActionTypes.GET_GROUP.success:
+      return Object.assign({}, state, {
+        [action.params._id]: action.params._token
+      });
+
+    case ActionTypes.GET_GROUP.failure:
+      return Object.assign({}, state, {
+        [action.params._id]: null
       });
 
     default:
