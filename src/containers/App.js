@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, Route, Switch } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom';
 import GroupCreateContainer from './GroupCreateContainer';
 import Home from '../components/Home';
 import GroupContainer from './GroupContainer';
