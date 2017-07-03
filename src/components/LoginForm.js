@@ -26,7 +26,7 @@ export default class LoginForm extends Component {
   }
 
   render() {
-    const { groupSession } = this.props;
+    const { groupname, groupSession } = this.props;
     const isLoginFailed = groupSession === false;
 
     const formBase = [
@@ -49,15 +49,18 @@ export default class LoginForm extends Component {
         <div
           key={item.name}
           className={classnames(
-            'form-group'
+            'u-input-group'
           )}
         >
-          <label htmlFor={`group-create-${item.name}`}>
+          <label
+            className="u-label"
+            htmlFor={`group-create-${item.name}`}
+          >
             {item.label}
           </label>
           <input
             type={item.inputType}
-            className="form-control"
+            className="u-input"
             id={`group-create-${item.name}`}
             name={item.name}
             placeholder={item.placeholder}
@@ -79,13 +82,22 @@ export default class LoginForm extends Component {
         className="c-group-form"
         onSubmit={e => this.handleSubmit(e)}
       >
+        <div className="c-login__form-title">
+          <span className="c-login__group-title">
+            {groupname}
+          </span>
+          그룹에 로그인 합니다.
+        </div>
         {formGroups}
         {alertBlock}
-        <input
-          type="submit"
-          className="btn btn-default"
-          value="로그인"
-        />
+        <div className="u-button-row">
+          <a
+            className="u-button"
+            onClick={e => this.handleSubmit(e)}
+          >
+            로그인
+          </a>
+        </div>
       </form>
     );
   }

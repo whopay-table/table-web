@@ -1,0 +1,142 @@
+
+.u-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.u-header-container {
+  padding-top: $header-height;
+}
+
+.u-group-header-container {
+  padding-top: $group-header-height;
+}
+
+.u-float-container {
+  display: block;
+  overflow: hidden;
+}
+
+.u-amount {
+  color: color('lime');
+
+  &--is-negative {
+    color: color('pink');
+  }
+}
+
+.u-page-title {
+  padding: 8px 0;
+  color: color('black');
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.u-pagination {
+  padding: 16px 0;
+  text-align: center;
+
+  &__link {
+    display: inline-block;
+    padding: 0 14px;
+    color: color('grey');
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+    &--is-active {
+      text-decoration: underline;
+      color: color('link');
+    }
+  }
+}
+
+.u-input-group {
+  padding: 4px 0;
+}
+
+.u-label {
+  display: block;
+  padding: 4px 0;
+  color: color('dark-grey');
+  font-size: 12px;
+}
+
+.u-input {
+  display: block;
+  margin: 4px 0;
+  border: 1px solid color('grey');
+  border-radius: 0;
+  outline: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: color('dark-grey');
+  width: 100%;
+
+  &:focus {
+    border: 1px solid color('link');
+  }
+}
+
+.u-input-selector {
+  display: block;
+  overflow: hidden;
+
+  &__button {
+    float: left;
+    background-color: color('link');
+    padding: 8px 12px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    width: 100px;
+    text-align: center;
+    color: color('white');
+    font-size: 12px;
+    cursor: pointer;
+
+    &--is-clear {
+      background-color: color('grey');
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.u-input-info {
+  display: block;
+  padding-bottom: 4px;
+  color: color('grey');
+  font-size: 11px;
+}
+
+.u-button-row {
+  padding: 16px 0;
+  overflow: hidden;
+}
+
+.u-button {
+  display: block;
+  float: right;
+  background-color: color('link');
+  padding: 8px 12px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  min-width: 100px;
+  text-align: center;
+  color: color('white');
+  font-size: 12px;
+  cursor: pointer;
+
+  &--is-cancel {
+    background-color: color('grey');
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

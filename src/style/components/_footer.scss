@@ -1,0 +1,34 @@
+
+.c-footer {
+  border-top: 1px solid color('light-grey');
+  padding: 16px 32px;
+  overflow: hidden;
+  color: color('dark-grey');
+
+  &__info {
+    float: left;
+    width: 70%;
+    font-size: 14px;
+    line-height: 32px;
+  }
+
+  &__links {
+    float: right;
+    width: 30%;
+    overflow: hidden;
+  }
+
+  &__link {
+    display: block;
+    float: right;
+    padding-left: 12px;
+    font-size: 12px;
+    line-height: 32px;
+    color: color('grey');
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

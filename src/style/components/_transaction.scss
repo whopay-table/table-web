@@ -1,0 +1,29 @@
+
+.c-transaction {
+  border-bottom: 1px solid color('light-white');
+  padding: 18px 12px;
+  font-size: 14px;
+  color: color('black');
+  overflow: hidden;
+
+  &__description {
+    float: left;
+    padding-right: 12px;
+  }
+
+  &__amount {
+    float: left;
+    padding-right: 12px;
+    color: color('lime');
+  }
+
+  &__name {
+    float: left;
+    padding-right: 12px;
+  }
+
+  &__created-at {
+    float: right;
+    color: color('grey');
+  }
+}

@@ -1,0 +1,28 @@
+
+.c-user-balance-bar {
+  padding: 4px 0;
+
+  &__info {
+    padding-bottom: 4px;
+    font-size: 14px;
+    color: color('black');
+  }
+
+  &__amount {
+    color: color('dark-grey')
+  }
+
+  &__bar-container {
+    width: 100%;
+    height: 14px;
+  }
+
+  &__bar-content {
+    background-color: color('lime');
+    height: 100%;
+
+    &--is-negative {
+      background-color: color('pink');
+    }
+  }
+}

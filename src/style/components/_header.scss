@@ -1,0 +1,15 @@
+
+.c-header {
+  position: fixed;
+  background-color: color('main');
+  top: 0;
+  width: 100%;
+  min-height: $header-height;
+
+  &__logo {
+    float: left;
+    margin: 16px 16px;
+    height: $header-height - 32px;
+    width: auto;
+  }
+}

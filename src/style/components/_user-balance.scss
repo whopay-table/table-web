@@ -1,0 +1,16 @@
+
+.c-user-balance {
+  padding: 16px 12px;
+  color: color('black');
+
+  &__name {
+    padding: 8px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__balance {
+    padding: 0;
+    font-size: 14px;
+  }
+}

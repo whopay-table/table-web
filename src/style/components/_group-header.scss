@@ -1,0 +1,46 @@
+
+.c-group-header {
+  position: fixed;
+  background-color: color('main');
+  top: 0;
+  width: 100%;
+  min-height: $group-header-height;
+
+  &__logo {
+    float: left;
+    margin: 16px 16px;
+    height: $group-header-height - 32px;
+    width: auto;
+  }
+
+  &__menu {
+    float: left;
+    overflow: hidden;
+    height: $group-header-height;
+  }
+
+  &__right-menu {
+    float: right;
+    overflow: hidden;
+    height: $group-header-height;
+  }
+
+  &__menu-item {
+    float: left;
+    padding: 0 16px;
+    height: $group-header-height;
+    font-size: 14px;
+    line-height: $group-header-height;
+    color: color('white');
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &--is-active {
+      text-decoration: underline;
+    }
+  }
+
+}

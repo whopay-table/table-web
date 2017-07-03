@@ -48,30 +48,36 @@ class GroupContainer extends Component {
   };
 
   render() {
-    const isNotLoggedIn = this.props.groupIndex && !this.props.groupSession;
-    if (isNotLoggedIn) {
-      return (
-        <Login
-          groupname={this.props.match.params.groupname}
-          groupSession={this.props.groupSession}
-          login={this.login}
-        />
-      );
+    const isLoaded = this.props.groupIndex;
+    const isLoggedIn = !(this.props.groupIndex && !this.props.groupSession);
+    if (isLoaded) {
+      if (isLoggedIn) {
+        return (
+          <Group
+            group={this.props.group}
+            logout={this.logout}
+          />
+        );
+      } else {
+        return (
+          <Login
+            groupname={this.props.match.params.groupname}
+            groupSession={this.props.groupSession}
+            login={this.login}
+          />
+        );
+      }
     } else {
-      return (
-        <Group
-          group={this.props.group}
-          logout={this.logout}
-        />
-      );
+      return <div />;
     }
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   const groupIndex = state.entities.groupIndexes[ownProps.match.params.groupname];
-  const groupSession = groupIndex ? state.entities.groupSessions[groupIndex] : null;
-  const group = groupIndex ? state.entities.groups[groupIndex] : null;
+  const groupSession = groupIndex ? state.entities.groupSessions[groupIndex] : undefined;
+  const group = groupIndex ? state.entities.groups[groupIndex] : undefined;
+
   return {
     groupIndex,
     groupSession,
