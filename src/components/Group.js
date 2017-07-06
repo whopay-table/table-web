@@ -35,6 +35,7 @@ export default class Group extends Component {
             render={() => (
               <GroupHome
                 currentUser={currentUser}
+                group={group}
                 groupname={groupname}
               />
             )}
