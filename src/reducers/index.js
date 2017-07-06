@@ -111,11 +111,57 @@ function groupCurrentUsers(state = {}, action) {
   }
 }
 
+function mergeTransactions(transactions, newTransactions) {
+  const isTransactionsArray = Array.isArray(transactions);
+  const transactionIds = {};
+  if (isTransactionsArray) {
+    for (const t of transactions) {
+      transactionIds[t.id] = true;
+    }
+  }
+  const mergedTransactions = isTransactionsArray ? transactions.slice(0) : [];
+  for (const t of newTransactions) {
+    if (!transactionIds[t.id]) {
+      mergedTransactions.push(t);
+    }
+  }
+  mergedTransactions.sort((a, b) => {
+    if (a.id < b.id) {
+      return 1;
+    } else if (a.id > b.id) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+  return mergedTransactions;
+}
+
+function groupTransactionLists(state = {}, action) {
+  switch (action.type) {
+    case ActionTypes.GET_TRANSACTIONS.request:
+      return state;
+
+    case ActionTypes.GET_TRANSACTIONS.success:
+      console.log('res?', action.response);
+      return Object.assign({}, state, {
+        [action.params._groupId]: mergeTransactions(state[action.params._groupId], action.response)
+      });
+
+    case ActionTypes.GET_TRANSACTIONS.failure:
+      return state;
+
+    default:
+      return state;
+  }
+}
+
 const entities = combineReducers({
   groupIndexes,
   groups,
   groupSessions,
-  groupCurrentUsers
+  groupCurrentUsers,
+  groupTransactionLists
 });
 
 const app = combineReducers({

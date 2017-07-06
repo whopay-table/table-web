@@ -26,26 +26,30 @@ export default class GroupHeader extends Component {
           </a>
         </div>
         <div className="c-group-header__menu">
-          <a
+          <Link
+            to={`/${groupname}`}
             className="c-group-header__menu-item c-group-header__menu-item--is-active"
           >
             대시보드
-          </a>
-          <a
+          </Link>
+          <Link
+            to={`/${groupname}`}
             className="c-group-header__menu-item"
           >
             거래 내역
-          </a>
-          <a
+          </Link>
+          <Link
+            to={`/${groupname}`}
             className="c-group-header__menu-item"
           >
             송금
-          </a>
-          <a
+          </Link>
+          <Link
+            to={`/${groupname}`}
             className="c-group-header__menu-item"
           >
             송금 요청
-          </a>
+          </Link>
         </div>
       </div>
     );

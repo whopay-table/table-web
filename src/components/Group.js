@@ -13,6 +13,7 @@ export default class Group extends Component {
       currentUser,
       group,
       groupname,
+      transactions,
       logout
     } = this.props;
 
@@ -37,6 +38,7 @@ export default class Group extends Component {
                 currentUser={currentUser}
                 group={group}
                 groupname={groupname}
+                transactions={transactions}
               />
             )}
           />
