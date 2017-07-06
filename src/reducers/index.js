@@ -143,7 +143,6 @@ function groupTransactionLists(state = {}, action) {
       return state;
 
     case ActionTypes.GET_TRANSACTIONS.success:
-      console.log('res?', action.response);
       return Object.assign({}, state, {
         [action.params._groupId]: mergeTransactions(state[action.params._groupId], action.response)
       });

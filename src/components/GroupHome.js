@@ -2,15 +2,19 @@ import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import GroupHeader from './GroupHeader';
+import Transaction from './Transaction';
 import UserBalance from './UserBalance';
 import UserBalanceBar from './UserBalanceBar';
+
+const MAX_TRANSACTION_COUNT = 20;
 
 export default class GroupHome extends Component {
   static defaultProps = {
     currentUser: {},
     group: {
       users: []
-    }
+    },
+    transactions: []
   };
 
   render() {
@@ -18,12 +22,27 @@ export default class GroupHome extends Component {
       currentUser,
       group,
       groupname,
+      transactions,
       logout
     } = this.props;
 
     const userBalanceBars = group.users.map(user => (
       <UserBalanceBar key={user.id} users={group.users} user={user} />
     ));
+
+    const isTooManyTransactions = transactions.length > MAX_TRANSACTION_COUNT;
+    const trimmedTransactions = isTooManyTransactions ? transactions.slice(0, MAX_TRANSACTION_COUNT) : transactions;
+    const transactionItems = trimmedTransactions.map(transaction => (
+      <Transaction key={transaction.id} transaction={transaction} />
+    ));
+
+    const moreTransactionsButton = isTooManyTransactions ? (
+      <a
+        className="c-group__more-link"
+      >
+        더 보기
+      </a>
+    ) : null;
 
     return (
       <div className="c-group-home u-group-header-container">
@@ -50,6 +69,8 @@ export default class GroupHome extends Component {
               <div className="c-group-home__section-title">
                 최근 거래 내역
               </div>
+              {transactionItems}
+              {moreTransactionsButton}
             </div>
           </div>
         </div>

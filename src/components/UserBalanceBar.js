@@ -38,7 +38,10 @@ export default class UserBalanceBar extends Component {
         </div>
         <div className="c-user-balance-bar__bar-container">
           <div
-            className="c-user-balance-bar__bar-content"
+            className={classnames(
+              'c-user-balance-bar__bar-content',
+              { 'c-user-balance-bar__bar-content--is-negative': user.balance < 0 }
+            )}
             style={{width: this.getBarContentWidth()}}
           />
         </div>
