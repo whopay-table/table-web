@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getGroupIndex, getGroup, login, logout } from '../actions';
+import { getCurrentUser, getGroupIndex, getGroup, login, logout } from '../actions';
 import Login from '../components/Login';
 import Group from '../components/Group';
 
@@ -23,6 +23,7 @@ class GroupContainer extends Component {
     this.props.getGroupIndex(groupname).then(v => {
       if (v.response) {
         this.props.getGroup(v.response.id);
+        this.props.getCurrentUser({ groupId: v.response.id });
       } else if (v.error) {
         // TODO: handle unknown groupname.
       }
@@ -37,6 +38,7 @@ class GroupContainer extends Component {
     }).then(v => {
       if (v.response) {
         this.props.getGroup(this.props.groupIndex);
+        this.props.getCurrentUser({ groupId: v.response.id });
       }
     });
   };
@@ -52,12 +54,14 @@ class GroupContainer extends Component {
     const isLoggedIn = !(this.props.groupIndex && !this.props.groupSession);
     if (isLoaded) {
       if (isLoggedIn) {
-        return (
+        return this.props.group ? (
           <Group
             group={this.props.group}
+            groupname={this.props.match.params.groupname}
+            currentUser={this.props.currentUser}
             logout={this.logout}
           />
-        );
+        ) : <div />;
       } else {
         return (
           <Login
@@ -75,19 +79,22 @@ class GroupContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const groupIndex = state.entities.groupIndexes[ownProps.match.params.groupname];
-  const groupSession = groupIndex ? state.entities.groupSessions[groupIndex] : undefined;
-  const group = groupIndex ? state.entities.groups[groupIndex] : undefined;
+  const groupSession = groupIndex ? state.entities.groupSessions[groupIndex] : null;
+  const group = groupIndex ? state.entities.groups[groupIndex] : null;
+  const currentUser = groupIndex ? state.entities.groupCurrentUsers[groupIndex] : null;
 
   return {
     groupIndex,
     groupSession,
-    group
+    group,
+    currentUser
   };
 };
 
 export default connect(mapStateToProps, {
   getGroupIndex,
   getGroup,
+  getCurrentUser,
   login,
   logout
 })(GroupContainer);

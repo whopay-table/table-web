@@ -41,6 +41,22 @@ export const getGroup = id => (dispatch, getState) => {
   });
 };
 
+export const getCurrentUser = params => (dispatch, getState) => {
+  const groupId = params.groupId;
+  const token = getState().entities.groupSessions[groupId] || localStorage.getItem(`table-session-${groupId}`);
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.GET_CURRENT_USER,
+      method: 'GET',
+      endpoint: `/groups/${params.groupId}/users/me`,
+      params: {
+        _groupId: params.groupId
+      },
+      token: token
+    }
+  });
+};
+
 export const login = params => (dispatch, getState) => {
   return dispatch({
     API_REQUEST: {

@@ -89,10 +89,33 @@ function groupSessions(state = {}, action) {
   }
 }
 
+function groupCurrentUsers(state = {}, action) {
+  switch (action.type) {
+    case ActionTypes.GET_CURRENT_USER.request:
+      return Object.assign({}, state, {
+        [action.params._groupId]: undefined
+      });
+
+    case ActionTypes.GET_CURRENT_USER.success:
+      return Object.assign({}, state, {
+        [action.params._groupId]: action.response
+      });
+
+    case ActionTypes.GET_CURRENT_USER.failure:
+      return Object.assign({}, state, {
+        [action.params._groupId]: null
+      });
+
+    default:
+      return state;
+  }
+}
+
 const entities = combineReducers({
   groupIndexes,
   groups,
-  groupSessions
+  groupSessions,
+  groupCurrentUsers
 });
 
 const app = combineReducers({

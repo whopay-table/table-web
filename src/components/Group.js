@@ -10,7 +10,9 @@ export default class Group extends Component {
 
   render() {
     const {
+      currentUser,
       group,
+      groupname,
       logout
     } = this.props;
 
@@ -18,16 +20,26 @@ export default class Group extends Component {
       <div className="c-group">
         <GroupHeader
           group={group}
+          groupname={groupname}
           logout={logout}
         />
         <Switch>
-          <Route exact path="/" component={GroupHome} />
-          {/* <Route path="/transactions/create" component={GroupTransactionCreateContainer} />
-          <Route path="/transactions" component={GroupTransactions} />
-          <Route path="/users" component={GroupUsers} />
-          <Route path="/users/create" component={GroupUserCreateContainer} */}
+          {/*
+            <Route path="/transactions/create" component={GroupTransactionCreateContainer} />
+            <Route path="/transactions" component={GroupTransactions} />
+            <Route path="/users" component={GroupUsers} />
+            <Route path="/users/create" component={GroupUserCreateContainer} />
+          */}
+          <Route
+            path="/"
+            render={() => (
+              <GroupHome
+                currentUser={currentUser}
+                groupname={groupname}
+              />
+            )}
+          />
         </Switch>
-        {JSON.stringify(group)}
       </div>
     );
   }

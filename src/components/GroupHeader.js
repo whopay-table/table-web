@@ -7,10 +7,10 @@ export default class GroupHeader extends Component {
   };
 
   render() {
-    const { group } = this.props;
+    const { group, groupname } = this.props;
     return (
       <div className="c-group-header">
-        <Link to={`/${group.groupname}`}>
+        <Link to={`/${groupname}`}>
           <img
             src="/image/titled-logo-wide.png"
             className="c-group-header__logo"
