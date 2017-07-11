@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import GroupHeader from './GroupHeader';
 import GroupHome from './GroupHome';
+import GroupTransactionCreate from './GroupTransactionCreate';
 
 export default class Group extends Component {
   static propTypes = {
@@ -26,22 +27,25 @@ export default class Group extends Component {
         />
         <Switch>
           {/*
-            <Route path="/transactions/create" component={GroupTransactionCreateContainer} />
             <Route path="/transactions" component={GroupTransactions} />
             <Route path="/users" component={GroupUsers} />
             <Route path="/users/create" component={GroupUserCreateContainer} />
           */}
-          <Route
-            path="/"
-            render={() => (
-              <GroupHome
-                currentUser={currentUser}
-                group={group}
-                groupname={groupname}
-                transactions={transactions}
-              />
-            )}
-          />
+          <Route path="/:groupname/transactions/create">
+            <GroupTransactionCreate
+              currentUser={currentUser}
+              group={group}
+              groupname={groupname}
+            />
+          </Route>
+          <Route exact path="/:groupname">
+            <GroupHome
+              currentUser={currentUser}
+              group={group}
+              groupname={groupname}
+              transactions={transactions}
+            />
+          </Route>
         </Switch>
       </div>
     );

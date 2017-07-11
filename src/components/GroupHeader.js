@@ -33,19 +33,19 @@ export default class GroupHeader extends Component {
             대시보드
           </Link>
           <Link
-            to={`/${groupname}`}
+            to={`/${groupname}/transactions`}
             className="c-group-header__menu-item"
           >
             거래 내역
           </Link>
           <Link
-            to={`/${groupname}`}
+            to={`/${groupname}/transactions/create`}
             className="c-group-header__menu-item"
           >
             송금
           </Link>
           <Link
-            to={`/${groupname}`}
+            to={`/${groupname}/transactions/create_request`}
             className="c-group-header__menu-item"
           >
             송금 요청
