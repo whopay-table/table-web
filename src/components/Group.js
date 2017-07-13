@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import GroupHeader from './GroupHeader';
 import GroupHome from './GroupHome';
-import GroupTransactionCreate from './GroupTransactionCreate';
+import GroupTransactionCreateContainer from '../containers/GroupTransactionCreateContainer';
 
 export default class Group extends Component {
   static propTypes = {
@@ -31,10 +31,11 @@ export default class Group extends Component {
             <Route path="/users" component={GroupUsers} />
             <Route path="/users/create" component={GroupUserCreateContainer} />
           */}
-          <Route path="/:groupname/transactions/create">
-            <GroupTransactionCreate
-              currentUser={currentUser}
-              group={group}
+          <Route
+            path="/:groupname/transactions/create"
+          >
+            <GroupTransactionCreateContainer
+              isFromCurrentUser={true}
               groupname={groupname}
             />
           </Route>

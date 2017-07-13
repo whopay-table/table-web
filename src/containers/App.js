@@ -5,14 +5,16 @@ import GroupCreateContainer from './GroupCreateContainer';
 import Home from '../components/Home';
 import GroupContainer from './GroupContainer';
 
-const App = ({ store }) => (
-  <div className="c-app">
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/create" component={GroupCreateContainer} />
-      <Route path="/:groupname" component={GroupContainer} />
-    </Switch>
-  </div>
-);
+const App = ({ store }) => {
+  return (
+    <div className="c-app">
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/create" component={GroupCreateContainer} />
+        <Route path="/:groupname" component={GroupContainer} />
+      </Switch>
+    </div>
+  );
+};
 
 export default connect()(App);

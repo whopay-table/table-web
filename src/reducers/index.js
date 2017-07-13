@@ -150,6 +150,17 @@ function groupTransactionLists(state = {}, action) {
     case ActionTypes.GET_TRANSACTIONS.failure:
       return state;
 
+    case ActionTypes.CREATE_TRANSACTION.request:
+      return state;
+
+    case ActionTypes.CREATE_TRANSACTION.success:
+      return Object.assign({}, state, {
+        [action.params.groupId]: mergeTransactions(state[action.params.groupId], action.response)
+      });
+
+    case ActionTypes.CREATE_TRANSACTION.failure:
+      return state;
+
     default:
       return state;
   }

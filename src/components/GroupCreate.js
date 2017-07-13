@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import GroupCreateForm from './GroupCreateForm';
+import GroupForm from './GroupForm';
 import Header from './Header';
 
 export default class GroupCreate extends Component {
@@ -19,10 +19,9 @@ export default class GroupCreate extends Component {
 
     return (
       <div className="c-group-create">
-        GroupCreate
         <Header />
-        <GroupCreateForm
-          createGroup={createGroup}
+        <GroupForm
+          onSubmit={createGroup}
           getGroupIndex={getGroupIndex}
           params={params}
           paramErrors={paramErrors}

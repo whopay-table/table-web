@@ -54,30 +54,43 @@ class GroupContainer extends Component {
   };
 
   logout = () => {
-    this.props.login({
+    this.props.logout({
       groupId: this.props.groupIndex
     });
   };
 
   render() {
-    const isLoaded = this.props.groupIndex;
-    const isLoggedIn = !(this.props.groupIndex && !this.props.groupSession);
+    const {
+      currentUser,
+      match,
+      location,
+      group,
+      transactions,
+      groupIndex,
+      groupSession
+    } = this.props;
+
+    const isLoaded = groupIndex;
+    const isLoggedIn = !(groupIndex && !groupSession);
+
     if (isLoaded) {
       if (isLoggedIn) {
-        return this.props.group ? (
+        return group ? (
           <Group
-            currentUser={this.props.currentUser}
-            group={this.props.group}
-            groupname={this.props.match.params.groupname}
-            transactions={this.props.transactions}
+            currentUser={currentUser}
+            location={location}
+            match={match}
+            group={group}
+            groupname={match.params.groupname}
+            transactions={transactions}
             logout={this.logout}
           />
         ) : <div />;
       } else {
         return (
           <Login
-            groupname={this.props.match.params.groupname}
-            groupSession={this.props.groupSession}
+            groupname={match.params.groupname}
+            groupSession={groupSession}
             login={this.login}
           />
         );

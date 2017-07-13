@@ -57,6 +57,20 @@ export const getCurrentUser = params => (dispatch, getState) => {
   });
 };
 
+export const createTransaction = params => (dispatch, getState) => {
+  const groupId = params.groupId;
+  const token = getState().entities.groupSessions[groupId];
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.CREATE_TRANSACTION,
+      method: 'POST',
+      endpoint: `/groups/${params.groupId}/transactions`,
+      params: params,
+      token: token
+    }
+  });
+};
+
 export const getTransactions = params => (dispatch, getState) => {
   const groupId = params.groupId;
   const token = getState().entities.groupSessions[groupId] || localStorage.getItem(`table-session-${groupId}`);
