@@ -3,6 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import GroupHeader from './GroupHeader';
 import GroupHome from './GroupHome';
 import GroupTransactionCreateContainer from '../containers/GroupTransactionCreateContainer';
+import GroupTransactions from './GroupTransactions';
 
 export default class Group extends Component {
   static propTypes = {
@@ -15,16 +16,12 @@ export default class Group extends Component {
       group,
       groupname,
       transactions,
+      getMoreTransactions,
       logout
     } = this.props;
 
     return (
       <div className="c-group">
-        <GroupHeader
-          group={group}
-          groupname={groupname}
-          logout={logout}
-        />
         <Switch>
           {/*
             <Route path="/transactions" component={GroupTransactions} />
@@ -36,7 +33,21 @@ export default class Group extends Component {
           >
             <GroupTransactionCreateContainer
               isFromCurrentUser={true}
+              group={group}
               groupname={groupname}
+              logout={logout}
+            />
+          </Route>
+          <Route
+            path="/:groupname/transactions"
+          >
+            <GroupTransactions
+              currentUser={currentUser}
+              group={group}
+              groupname={groupname}
+              transactions={transactions}
+              getMoreTransactions={getMoreTransactions}
+              logout={logout}
             />
           </Route>
           <Route exact path="/:groupname">
@@ -45,6 +56,7 @@ export default class Group extends Component {
               group={group}
               groupname={groupname}
               transactions={transactions}
+              logout={logout}
             />
           </Route>
         </Switch>
