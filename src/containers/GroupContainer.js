@@ -4,7 +4,7 @@ import { getCurrentUser, getGroupIndex, getGroup, getTransactions, login, logout
 import Login from '../components/Login';
 import Group from '../components/Group';
 
-const REQUEST_TRANSACTION_COUNT = 30;
+const REQUEST_TRANSACTION_COUNT = 10;
 
 class GroupContainer extends Component {
   static propTypes = {
@@ -27,7 +27,7 @@ class GroupContainer extends Component {
     this.props.getTransactions({
       groupId: groupId,
       offset: 0,
-      count: REQUEST_TRANSACTION_COUNT
+      count: REQUEST_TRANSACTION_COUNT,
     });
   }
 
@@ -40,6 +40,14 @@ class GroupContainer extends Component {
       }
     })
   }
+
+  getMoreTransactions = () => {
+    this.props.getTransactions({
+      groupId: this.props.groupIndex,
+      offset: this.props.transactions.length,
+      count: REQUEST_TRANSACTION_COUNT,
+    });
+  };
 
   login = (email, password) => {
     this.props.login({
@@ -83,6 +91,7 @@ class GroupContainer extends Component {
             group={group}
             groupname={match.params.groupname}
             transactions={transactions}
+            getMoreTransactions={this.getMoreTransactions}
             logout={this.logout}
           />
         ) : <div />;

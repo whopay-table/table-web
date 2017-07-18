@@ -1,5 +1,7 @@
 
 .u-container {
+  padding-left: 10px;
+  padding-right: 10px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -138,5 +140,19 @@
 
   &:hover {
     opacity: 0.8;
+  }
+}
+
+.u-more-button {
+  display: block;
+  border-bottom: 1px solid color('light-white');
+  padding: 18px 12px;
+  font-size: 14px;
+  color: color('black');
+  overflow: hidden;
+  text-align: center;
+
+  &:hover {
+    color: color('lime');
   }
 }

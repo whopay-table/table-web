@@ -44,12 +44,12 @@ export default class GroupHeader extends Component {
           >
             송금
           </Link>
-          <Link
+          {/* <Link
             to={`/${groupname}/transactions/create_request`}
             className="c-group-header__menu-item"
           >
             송금 요청
-          </Link>
+          </Link> */}
         </div>
       </div>
     );

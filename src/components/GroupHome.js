@@ -6,7 +6,7 @@ import Transaction from './Transaction';
 import UserBalance from './UserBalance';
 import UserBalanceBar from './UserBalanceBar';
 
-const MAX_TRANSACTION_COUNT = 20;
+const MAX_TRANSACTION_COUNT = 10;
 
 export default class GroupHome extends Component {
   static defaultProps = {
@@ -30,18 +30,19 @@ export default class GroupHome extends Component {
       <UserBalanceBar key={user.id} users={group.users} user={user} />
     ));
 
-    const isTooManyTransactions = transactions.length > MAX_TRANSACTION_COUNT;
+    const isTooManyTransactions = true;//transactions.length > MAX_TRANSACTION_COUNT;
     const trimmedTransactions = isTooManyTransactions ? transactions.slice(0, MAX_TRANSACTION_COUNT) : transactions;
     const transactionItems = trimmedTransactions.map(transaction => (
       <Transaction key={transaction.id} transaction={transaction} />
     ));
 
     const moreTransactionsButton = isTooManyTransactions ? (
-      <a
-        className="c-group__more-link"
+      <Link
+        className="u-more-button"
+        to={`/${groupname}/transactions`}
       >
         더 보기
-      </a>
+      </Link>
     ) : null;
 
     return (
