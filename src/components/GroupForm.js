@@ -80,7 +80,7 @@ export default class GroupForm extends Component {
         <div
           key={item.name}
           className={classnames(
-            'form-group',
+            'u-input-group',
             { 'has-error': paramErrors[item.name] }
           )}
         >
@@ -89,7 +89,7 @@ export default class GroupForm extends Component {
           </label>
           <input
             type={item.inputType}
-            className="form-control"
+            className="u-input"
             id={`group-create-${item.name}`}
             name={item.name}
             placeholder={item.placeholder}

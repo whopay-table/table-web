@@ -7,12 +7,13 @@
 @import "helpers/utilities";
 
 @import "components/footer";
-@import "components/group-home";
+@import "components/group-create";
 @import "components/group-header";
-@import "components/login";
+@import "components/group-home";
 @import "components/group-transaction-create";
 @import "components/group-transactions";
 @import "components/header";
-@import "components/user-balance";
-@import "components/user-balance-bar";
+@import "components/login";
 @import "components/transaction";
+@import "components/user-balance-bar";
+@import "components/user-balance";

@@ -25,6 +25,26 @@ export const createGroup = params => (dispatch, getState) => {
   });
 };
 
+export const createUser = params => (dispatch, getState) => {
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.CREATE_USER,
+      method: 'POST',
+      endpoint: `/groups/${ids}/users`,
+      params: {
+        'user[email]': params['user[email]'],
+        'user[username]': params['user[username]'],
+        'user[name]': params['user[name]'],
+        'user[password]': params['user[password]'],
+        'user[password_confirmation]': params['user[password_confirmation]'],
+        'user[account_info]': params['user[account_info]'],
+        'group_id': params.groupId,
+        'group_signup_key': params.groupSignupKey
+      }
+    }
+  });
+};
+
 export const getGroup = id => (dispatch, getState) => {
   const token = getState().entities.groupSessions[id] || localStorage.getItem(`table-session-${id}`);
   return dispatch({

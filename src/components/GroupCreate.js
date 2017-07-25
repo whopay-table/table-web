@@ -18,16 +18,23 @@ export default class GroupCreate extends Component {
     } = this.props;
 
     return (
-      <div className="c-group-create">
+      <div className="c-group-create u-header-container">
         <Header />
-        <GroupForm
-          onSubmit={createGroup}
-          getGroupIndex={getGroupIndex}
-          params={params}
-          paramErrors={paramErrors}
-          alert={alert}
-          setParams={setParams}
-        />
+        <div className="u-container">
+          <div className="c-group-create__body">
+            <div className="u-page-title">
+              새 그룹 만들기
+            </div>
+            <GroupForm
+              onSubmit={createGroup}
+              getGroupIndex={getGroupIndex}
+              params={params}
+              paramErrors={paramErrors}
+              alert={alert}
+              setParams={setParams}
+            />
+          </div>
+        </div>
       </div>
     );
   }

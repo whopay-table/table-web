@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router-dom';
+import Header from './Header';
 
 export default class Home extends Component {
   static propTypes = {};
@@ -11,14 +12,27 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div className="c-home container">
-        <h3>가상 화폐를 이체하세요</h3>
-        <p>
-          가상의 화폐를 이체하고, 모바일 뱅킹 앱은 더이상 켜지 마세요.
-          가상 화폐가 가장 부족한 사람이 함께 쓴 비용을 결제하면 영원히 계좌이체를 하지 않아도
-          번갈아가면서 적당히 돈을 쓸 수 있습니다.
-        </p>
-        <Link to={'/tester1'}>Go tester1 group</Link>
+      <div className="c-home u-header-container">
+        <Header />
+        <div className="u-container">
+          <div className="c-home__body">
+            <div className="c-home__title">
+              계좌이체 대신 WHOPAY!
+            </div>
+            <div className="c-home__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id leo non purus elementum dictum.
+              Maecenas aliquet risus eget convallis gravida. Sed vitae enim ut arcu dictum congue eu non nunc.
+            </div>
+            <div className="c-home__button-container">
+              <Link
+                className="c-home__button"
+                to="/create"
+              >
+                새 그룹 만들기
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

@@ -17,14 +17,13 @@ export default class Login extends Component {
     return (
       <div className="c-login u-header-container">
         <Header />
-        <LoginForm
-          groupname={groupname}
-          groupSession={groupSession}
-          login={login}
-        />
         <div className="u-container">
           <div className="c-login__body">
-
+            <LoginForm
+              groupname={groupname}
+              groupSession={groupSession}
+              login={login}
+            />
           </div>
         </div>
       </div>
