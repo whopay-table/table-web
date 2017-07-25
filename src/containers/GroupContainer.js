@@ -50,13 +50,14 @@ class GroupContainer extends Component {
   };
 
   login = (email, password) => {
+    const { groupIndex } = this.props;
     this.props.login({
-      groupId: this.props.groupIndex,
+      groupId: groupIndex,
       email,
       password
     }).then(v => {
       if (v.response) {
-        this.getGroupWithId(v.response.id);
+        this.getGroupWithId(groupIndex);
       }
     });
   };
