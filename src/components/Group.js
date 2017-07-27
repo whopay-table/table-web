@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import GroupHeader from './GroupHeader';
 import GroupHome from './GroupHome';
+import GroupInvite from './GroupInvite';
 import GroupTransactionCreateContainer from '../containers/GroupTransactionCreateContainer';
 import GroupTransactions from './GroupTransactions';
 
@@ -47,6 +48,14 @@ export default class Group extends Component {
               groupname={groupname}
               transactions={transactions}
               getMoreTransactions={getMoreTransactions}
+              logout={logout}
+            />
+          </Route>
+          <Route exact path="/:groupname/invite">
+            <GroupInvite
+              currentUser={currentUser}
+              group={group}
+              groupname={groupname}
               logout={logout}
             />
           </Route>

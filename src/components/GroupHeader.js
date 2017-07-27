@@ -44,6 +44,12 @@ export default class GroupHeader extends Component {
           >
             송금
           </Link>
+          <Link
+            to={`/${groupname}/invite`}
+            className="c-group-header__menu-item"
+          >
+            그룹 초대
+          </Link>
           {/* <Link
             to={`/${groupname}/transactions/create_request`}
             className="c-group-header__menu-item"
