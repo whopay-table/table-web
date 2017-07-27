@@ -3456,6 +3456,10 @@ parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
 
+parse-query@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/parse-query/-/parse-query-0.0.13.tgz#ab23fe3f3faad509901b0d2b51f0a60dfd549a73"
+
 parseurl@~1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"

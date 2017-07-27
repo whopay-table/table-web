@@ -1,10 +1,16 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 
-export default class GroupForm extends Component {
-  handleGroupnameBlur(e) {
-    if (this.props.params['group[groupname]']) {
-      this.props.getGroupIndex(this.props.params['group[groupname]']);
+export default class GroupUserForm extends Component {
+  handleEmailBlur(e) {
+    if (this.props.params['user[email]']) {
+      this.props.getUserIdByEmail(this.props.params['user[email]']);
+    }
+  }
+
+  handleUsernameBlur(e) {
+    if (this.props.params['user[username]']) {
+      this.props.getUserIdByUsername(this.props.params['user[username]']);
     }
   }
 
@@ -22,29 +28,18 @@ export default class GroupForm extends Component {
 
     const formBase = [
       {
-        label: '그룹 ID',
-        inputType: 'text',
-        name: 'group[groupname]',
-        placeholder: '',
-        onBlur: e => this.handleGroupnameBlur(e)
-      },
-      {
-        label: '그룹 이름',
-        inputType: 'text',
-        name: 'group[title]',
-        placeholder: ''
-      },
-      {
         label: 'Email 주소',
         inputType: 'email',
         name: 'user[email]',
-        placeholder: ''
+        placeholder: '',
+        onBlur: e => this.handleEmailBlur(e)
       },
       {
         label: 'ID',
         inputType: 'text',
         name: 'user[username]',
-        placeholder: ''
+        placeholder: '',
+        onBlur: e => this.handleUsernameBlur(e)
       },
       {
         label: '이름',
@@ -80,13 +75,13 @@ export default class GroupForm extends Component {
             { 'has-error': paramErrors[item.name] }
           )}
         >
-          <label htmlFor={`group-create-${item.name}`}>
+          <label htmlFor={`group-user-create-${item.name}`}>
             {item.label}
           </label>
           <input
             type={item.inputType}
             className="u-input"
-            id={`group-create-${item.name}`}
+            id={`group-user-create-${item.name}`}
             name={item.name}
             placeholder={item.placeholder}
             onChange={e => this.handleInputChange(e)}
@@ -105,7 +100,7 @@ export default class GroupForm extends Component {
 
     return (
       <form
-        className="c-group-form"
+        className="c-group-user-form"
         onSubmit={e => this.handleSubmit(e)}
       >
         {formGroups}

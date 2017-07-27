@@ -30,7 +30,7 @@ export const createUser = params => (dispatch, getState) => {
     API_REQUEST: {
       type: ActionTypes.CREATE_USER,
       method: 'POST',
-      endpoint: `/groups/${ids}/users`,
+      endpoint: `/groups/${params.groupId}/users`,
       params: {
         'user[email]': params['user[email]'],
         'user[username]': params['user[username]'],
@@ -60,6 +60,34 @@ export const getGroup = id => (dispatch, getState) => {
     }
   });
 };
+
+export const getUserIdByEmail = params => (dispatch, getState) => {
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.GET_USER_ID_BY_EMAIL,
+      method: 'GET',
+      endpoint: `/groups/${params.groupId}/users`,
+      params: {
+        email: params.email,
+        group_signup_key: params.groupSignupKey
+      }
+    }
+  });
+}
+
+export const getUserIdByUsername = params => (dispatch, getState) => {
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.GET_USER_ID_BY_USERNAME,
+      method: 'GET',
+      endpoint: `/groups/${params.groupId}/users`,
+      params: {
+        username: params.username,
+        group_signup_key: params.groupSignupKey
+      }
+    }
+  });
+}
 
 export const getCurrentUser = params => (dispatch, getState) => {
   const groupId = params.groupId;

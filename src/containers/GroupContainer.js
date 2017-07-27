@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentUser, getGroupIndex, getGroup, getTransactions, login, logout } from '../actions';
-import Login from '../components/Login';
 import Group from '../components/Group';
+import GroupAuth from '../components/GroupAuth';
 
 const REQUEST_TRANSACTION_COUNT = 10;
 
@@ -97,9 +97,8 @@ class GroupContainer extends Component {
           />
         ) : <div />;
       } else {
-        // TODO: return GroupUserCreateContainer when URL matches.
         return (
-          <Login
+          <GroupAuth
             groupname={match.params.groupname}
             groupSession={groupSession}
             login={this.login}
