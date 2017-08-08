@@ -12,12 +12,19 @@ export default class GroupTransactionForm extends Component {
 
   handleAddFromUser(userId) {
     const { params } = this.props;
-    const fromUserIds = JSON.parse(params[`transaction['from_user_ids']`]);
+    const fromUserIds = JSON.parse(params[`transaction[from_user_ids]`]);
     if (!fromUserIds.includes(userId)) {
       this.props.setParams(Object.assign({}, params, {
         'transaction[from_user_ids]': JSON.stringify(fromUserIds.concat([userId]))
       }));
     }
+  }
+
+  handleClearFromUser() {
+    const { params } = this.props;
+    this.props.setParams(Object.assign({}, params, {
+      'transaction[from_user_ids]': '[]'
+    }));
   }
 
   handleSelectToUser(userId) {
@@ -40,7 +47,7 @@ export default class GroupTransactionForm extends Component {
 
   getUserNameById(userId) {
     const {
-      group
+      group,
     } = this.props;
     const filteredUsers = group.users.filter(user => user.id === userId);
     if (filteredUsers.length > 0) {
@@ -50,14 +57,14 @@ export default class GroupTransactionForm extends Component {
     }
   }
 
-  render() {
+  renderToUserSelector() {
     const {
-      alert,
+      currentUser,
       group,
-      params
+      params,
     } = this.props;
 
-    const userSelectorButtons = group.users.map(user => (
+    const userSelectorButtons = group.users.filter(user => user.id !== currentUser.id).map(user => (
       <a
         key={user.id}
         className="u-input-selector__button"
@@ -67,11 +74,90 @@ export default class GroupTransactionForm extends Component {
       </a>
     ));
 
+    return (
+      <div className="u-input-group">
+        <label className="u-label">
+          받는 사람
+        </label>
+        <input
+          className="u-input"
+          type="text"
+          value={this.getUserNameById(params[`transaction[to_user_id]`])}
+          disabled
+        />
+        <div className="u-input-selector">
+          {userSelectorButtons}
+        </div>
+        <small className="u-input-info">
+          버튼을 눌러 사람을 선택하세요.
+        </small>
+      </div>
+    );
+  }
+
+  renderFromUserSelector() {
+    const {
+      currentUser,
+      group,
+      params,
+    } = this.props;
+
+    const userSelectorButtons = group.users.filter(user => user.id !== currentUser.id).map(user => (
+      <a
+        key={user.id}
+        className="u-input-selector__button"
+        onClick={() => this.handleAddFromUser(user.id)}
+      >
+        {user.name}
+      </a>
+    ));
+
+    const fromUserIds = JSON.parse(params[`transaction[from_user_ids]`]);
+    const fromUserNamesString = fromUserIds.map(uid => this.getUserNameById(uid)).join(', ');
+
+    return (
+      <div className="u-input-group">
+        <label className="u-label">
+          내게 송금할 사람
+        </label>
+        <input
+          className="u-input"
+          type="text"
+          value={fromUserNamesString}
+          disabled
+        />
+        <div className="u-input-selector">
+          {userSelectorButtons}
+          <a
+            className="u-input-selector__button"
+            onClick={() => this.handleClearFromUser()}
+          >
+            리셋
+          </a>
+        </div>
+        <small className="u-input-info">
+          버튼을 눌러 사람을 선택하세요.
+        </small>
+      </div>
+    );
+  }
+
+  render() {
+    const {
+      alert,
+      group,
+      params,
+      isFromCurrentUser
+    } = this.props;
+
     const alertBlock = alert ? (
       <div className="alert alert-danger" role="alert">
         {alert}
       </div>
     ) : null;
+
+    const amountLabel = isFromCurrentUser ? '내가 보낼 금액' : '내가 받을 금액';
+    const userSelector = isFromCurrentUser ? this.renderToUserSelector() : this.renderFromUserSelector();
 
     return (
       <form
@@ -81,7 +167,7 @@ export default class GroupTransactionForm extends Component {
       >
         <div className="u-input-group">
           <label className="u-label">
-            보낼 금액
+            {amountLabel}
           </label>
           <input
             className="u-input"
@@ -91,23 +177,7 @@ export default class GroupTransactionForm extends Component {
             value={params[`transaction[amount]`]}
           />
         </div>
-        <div className="u-input-group">
-          <label className="u-label">
-            받는 사람
-          </label>
-          <input
-            className="u-input"
-            type="text"
-            value={this.getUserNameById(params[`transaction[to_user_id]`])}
-            disabled
-          />
-          <div className="u-input-selector">
-            {userSelectorButtons}
-          </div>
-          <small className="u-input-info">
-            버튼을 눌러 사람을 선택하세요.
-          </small>
-        </div>
+        {userSelector}
         <div className="u-input-group">
           <label className="u-label">
             설명

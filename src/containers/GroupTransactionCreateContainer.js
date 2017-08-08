@@ -42,7 +42,9 @@ class GroupTransactionCreateContainer extends Component {
       groupId: this.props.groupIndex
     }, isFromCurrentUser ? {
       'transaction[from_user_ids]': JSON.stringify([currentUser.id])
-    } : {})).then(v => {
+    } : {
+      'transaction[to_user_id]': currentUser.id
+    })).then(v => {
       if (v.response) {
         this.setState({ redirectToHome: true });
       } else if (v.error) {

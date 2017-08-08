@@ -24,6 +24,8 @@ export default class GroupTransactionCreate extends Component {
       logout
     } = this.props;
 
+    const title = isFromCurrentUser ? '송금' : '송금 요청';
+
     return (
       <div className="c-group-transaction-create u-group-header-container">
         <GroupHeader
@@ -34,7 +36,7 @@ export default class GroupTransactionCreate extends Component {
         <div className="u-container">
           <div className="c-group-transaction-create__body">
             <div className="u-page-title">
-              송금
+              {title}
             </div>
             <GroupTransactionForm
               params={params}

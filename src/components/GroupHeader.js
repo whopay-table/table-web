@@ -30,7 +30,7 @@ export default class GroupHeader extends Component {
             to={`/${groupname}`}
             className="c-group-header__menu-item c-group-header__menu-item--is-active"
           >
-            대시보드
+            홈
           </Link>
           <Link
             to={`/${groupname}/transactions`}
@@ -45,17 +45,17 @@ export default class GroupHeader extends Component {
             송금
           </Link>
           <Link
+            to={`/${groupname}/transactions/create_request`}
+            className="c-group-header__menu-item"
+          >
+            송금 요청
+          </Link>
+          <Link
             to={`/${groupname}/invite`}
             className="c-group-header__menu-item"
           >
             그룹 초대
           </Link>
-          {/* <Link
-            to={`/${groupname}/transactions/create_request`}
-            className="c-group-header__menu-item"
-          >
-            송금 요청
-          </Link> */}
         </div>
       </div>
     );

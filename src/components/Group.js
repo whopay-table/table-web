@@ -40,6 +40,16 @@ export default class Group extends Component {
             />
           </Route>
           <Route
+            path="/:groupname/transactions/create_request"
+          >
+            <GroupTransactionCreateContainer
+              isFromCurrentUser={false}
+              group={group}
+              groupname={groupname}
+              logout={logout}
+            />
+          </Route>
+          <Route
             path="/:groupname/transactions"
           >
             <GroupTransactions
