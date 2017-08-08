@@ -77,7 +77,7 @@ export default class GroupTransactionForm extends Component {
     return (
       <div className="u-input-group">
         <label className="u-label">
-          받는 사람
+          내게 송금받는 사람
         </label>
         <input
           className="u-input"
