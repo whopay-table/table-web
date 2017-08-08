@@ -1,6 +1,8 @@
 node_modules/
 build/
 logs/
+configs/*
+!configs/examples/
 npm-debug.log
 yarn-error.log
 *.sublime-*
