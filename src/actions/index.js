@@ -119,6 +119,34 @@ export const createTransaction = params => (dispatch, getState) => {
   });
 };
 
+export const acceptTransaction = params => (dispatch, getState) => {
+  const groupId = params.groupId;
+  const token = getState().entities.groupSessions[groupId];
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.ACCEPT_TRANSACTION,
+      method: 'POST',
+      endpoint: `/groups/${params.groupId}/transactions/${params.transactionId}/accept`,
+      params: params,
+      token: token
+    }
+  });
+};
+
+export const rejectTransaction = params => (dispatch, getState) => {
+  const groupId = params.groupId;
+  const token = getState().entities.groupSessions[groupId];
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.REJECT_TRANSACTION,
+      method: 'POST',
+      endpoint: `/groups/${params.groupId}/transactions/${params.transactionId}/reject`,
+      params: params,
+      token: token
+    }
+  });
+};
+
 export const getTransactions = params => (dispatch, getState) => {
   const groupId = params.groupId;
   const token = getState().entities.groupSessions[groupId] || localStorage.getItem(`table-session-${groupId}`);

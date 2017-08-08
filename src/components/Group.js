@@ -19,6 +19,8 @@ export default class Group extends Component {
       transactions,
       getMoreTransactions,
       refreshGroup,
+      acceptTransaction,
+      rejectTransaction,
       logout,
     } = this.props;
 
@@ -61,6 +63,8 @@ export default class Group extends Component {
               groupname={groupname}
               transactions={transactions}
               getMoreTransactions={getMoreTransactions}
+              acceptTransaction={acceptTransaction}
+              rejectTransaction={rejectTransaction}
               logout={logout}
             />
           </Route>
@@ -78,6 +82,8 @@ export default class Group extends Component {
               group={group}
               groupname={groupname}
               transactions={transactions}
+              acceptTransaction={acceptTransaction}
+              rejectTransaction={rejectTransaction}
               logout={logout}
             />
           </Route>

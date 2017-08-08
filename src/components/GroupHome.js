@@ -23,7 +23,9 @@ export default class GroupHome extends Component {
       group,
       groupname,
       transactions,
-      logout
+      acceptTransaction,
+      rejectTransaction,
+      logout,
     } = this.props;
 
     const userBalanceBars = group.users.map(user => (
@@ -37,6 +39,8 @@ export default class GroupHome extends Component {
         key={transaction.id}
         transaction={transaction}
         currentUser={currentUser}
+        acceptTransaction={acceptTransaction}
+        rejectTransaction={rejectTransaction}
       />
     ));
 

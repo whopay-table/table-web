@@ -1,6 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getCurrentUser, getGroupIndex, getGroup, getTransactions, login, logout } from '../actions';
+import {
+  acceptTransaction,
+  getCurrentUser,
+  getGroupIndex,
+  getGroup,
+  getTransactions,
+  login,
+  logout,
+  rejectTransaction
+} from '../actions';
 import Group from '../components/Group';
 import GroupAuth from '../components/GroupAuth';
 
@@ -56,6 +65,24 @@ class GroupContainer extends Component {
     });
   };
 
+  acceptTransaction = transactionId => {
+    const groupId = this.props.groupIndex;
+    this.props.acceptTransaction({
+      groupId,
+      transactionId,
+    });
+  };
+
+  rejectTransaction = transactionId => {
+    const groupId = this.props.groupIndex;
+    this.props.rejectTransaction({
+      groupId,
+      transactionId,
+    }).then(v => {
+      this.refreshGroup();
+    });
+  };
+
   login = (email, password) => {
     const { groupIndex } = this.props;
     this.props.login({
@@ -101,6 +128,8 @@ class GroupContainer extends Component {
             transactions={transactions}
             getMoreTransactions={this.getMoreTransactions}
             refreshGroup={this.refreshGroup}
+            acceptTransaction={this.acceptTransaction}
+            rejectTransaction={this.rejectTransaction}
             logout={this.logout}
           />
         ) : <div />;
@@ -140,6 +169,8 @@ export default connect(mapStateToProps, {
   getGroup,
   getCurrentUser,
   getTransactions,
+  acceptTransaction,
+  rejectTransaction,
   login,
   logout
 })(GroupContainer);

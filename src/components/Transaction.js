@@ -38,6 +38,8 @@ export default class Transaction extends Component {
       transaction
     } = this.props;
     const {
+      id,
+      fromUser,
       isAccepted,
       isRejected,
     } = transaction;
@@ -48,13 +50,16 @@ export default class Transaction extends Component {
       <div className="c-transaction__buttons">
         <a
           className="c-transaction__button"
-          onClick={() => {}}
+          onClick={() => this.props.acceptTransaction(id)}
         >
           수락
         </a>
         <a
-          className="c-transaction__button c-transaction__button--is-cancel"
-          onClick={() => {}}
+          className={classnames(
+            'c-transaction__button',
+            'c-transaction__button--is-cancel'
+          )}
+          onClick={() => this.props.rejectTransaction(id)}
         >
           거절
         </a>

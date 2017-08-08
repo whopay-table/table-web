@@ -215,6 +215,36 @@ function groupTransactionLists(state = {}, action) {
     case ActionTypes.CREATE_TRANSACTION.failure:
       return state;
 
+    case ActionTypes.ACCEPT_TRANSACTION.request:
+      return state;
+
+    case ActionTypes.ACCEPT_TRANSACTION.success:
+      return Object.assign({}, state, {
+        [action.params.groupId]: state[action.params.groupId].map(transaction => (
+          transaction.id === action.params.transactionId ? Object.assign({}, transaction, {
+            isAccepted: true,
+          }) : transaction
+        ))
+      });
+
+    case ActionTypes.ACCEPT_TRANSACTION.failure:
+      return state;
+
+    case ActionTypes.REJECT_TRANSACTION.request:
+      return state;
+
+    case ActionTypes.REJECT_TRANSACTION.success:
+    return Object.assign({}, state, {
+      [action.params.groupId]: state[action.params.groupId].map(transaction => (
+        transaction.id === action.params.transactionId ? Object.assign({}, transaction, {
+          isRejected: true,
+        }) : transaction
+      ))
+    });
+
+    case ActionTypes.REJECT_TRANSACTION.failure:
+      return state;
+
     default:
       return state;
   }

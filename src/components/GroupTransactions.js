@@ -20,7 +20,9 @@ export default class GroupTransactions extends Component {
       groupname,
       transactions,
       getMoreTransactions,
-      logout
+      acceptTransaction,
+      rejectTransaction,
+      logout,
     } = this.props;
 
     const transactionItems = transactions.map(transaction => (
@@ -28,6 +30,8 @@ export default class GroupTransactions extends Component {
         key={transaction.id}
         transaction={transaction}
         currentUser={currentUser}
+        acceptTransaction={acceptTransaction}
+        rejectTransaction={rejectTransaction}
       />
     ));
 
