@@ -35,7 +35,8 @@ class GroupTransactionCreateContainer extends Component {
     const {
       currentUser,
       isFromCurrentUser,
-      groupIndex
+      groupIndex,
+      refreshGroup,
     } = this.props;
 
     this.props.createTransaction(Object.assign({}, params, {
@@ -47,6 +48,7 @@ class GroupTransactionCreateContainer extends Component {
     })).then(v => {
       if (v.response) {
         this.setState({ redirectToHome: true });
+        refreshGroup();
       } else if (v.error) {
         this.setState({ alert: '거래 등록에 실패했습니다. 작성된 내용을 다시 확인해 주세요.' });
       }

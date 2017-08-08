@@ -18,7 +18,8 @@ export default class Group extends Component {
       groupname,
       transactions,
       getMoreTransactions,
-      logout
+      refreshGroup,
+      logout,
     } = this.props;
 
     return (
@@ -37,6 +38,7 @@ export default class Group extends Component {
               group={group}
               groupname={groupname}
               logout={logout}
+              refreshGroup={refreshGroup}
             />
           </Route>
           <Route
@@ -47,6 +49,7 @@ export default class Group extends Component {
               group={group}
               groupname={groupname}
               logout={logout}
+              refreshGroup={refreshGroup}
             />
           </Route>
           <Route

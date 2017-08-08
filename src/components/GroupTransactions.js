@@ -24,7 +24,11 @@ export default class GroupTransactions extends Component {
     } = this.props;
 
     const transactionItems = transactions.map(transaction => (
-      <Transaction key={transaction.id} transaction={transaction} />
+      <Transaction
+        key={transaction.id}
+        transaction={transaction}
+        currentUser={currentUser}
+      />
     ));
 
     return (

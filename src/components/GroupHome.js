@@ -33,7 +33,11 @@ export default class GroupHome extends Component {
     const isTooManyTransactions = true;//transactions.length > MAX_TRANSACTION_COUNT;
     const trimmedTransactions = isTooManyTransactions ? transactions.slice(0, MAX_TRANSACTION_COUNT) : transactions;
     const transactionItems = trimmedTransactions.map(transaction => (
-      <Transaction key={transaction.id} transaction={transaction} />
+      <Transaction
+        key={transaction.id}
+        transaction={transaction}
+        currentUser={currentUser}
+      />
     ));
 
     const moreTransactionsButton = isTooManyTransactions ? (

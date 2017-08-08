@@ -41,6 +41,13 @@ class GroupContainer extends Component {
     })
   }
 
+  refreshGroup = callback => {
+    const { groupIndex } = this.props;
+    this.props.getGroup(groupIndex).then(v => {
+      callback && callback();
+    });
+  };
+
   getMoreTransactions = () => {
     this.props.getTransactions({
       groupId: this.props.groupIndex,
@@ -93,6 +100,7 @@ class GroupContainer extends Component {
             groupname={match.params.groupname}
             transactions={transactions}
             getMoreTransactions={this.getMoreTransactions}
+            refreshGroup={this.refreshGroup}
             logout={this.logout}
           />
         ) : <div />;
