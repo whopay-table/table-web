@@ -17,8 +17,10 @@ export default class Group extends Component {
       group,
       groupname,
       transactions,
+      userTransactions,
       getMoreTransactions,
       refreshGroup,
+      refreshUserTransactions,
       acceptTransaction,
       rejectTransaction,
       logout,
@@ -27,11 +29,6 @@ export default class Group extends Component {
     return (
       <div className="c-group">
         <Switch>
-          {/*
-            <Route path="/transactions" component={GroupTransactions} />
-            <Route path="/users" component={GroupUsers} />
-            <Route path="/users/create" component={GroupUserCreateContainer} />
-          */}
           <Route
             path="/:groupname/transactions/create"
           >
@@ -41,6 +38,7 @@ export default class Group extends Component {
               groupname={groupname}
               logout={logout}
               refreshGroup={refreshGroup}
+              refreshUserTransactions={refreshUserTransactions}
             />
           </Route>
           <Route
@@ -52,6 +50,7 @@ export default class Group extends Component {
               groupname={groupname}
               logout={logout}
               refreshGroup={refreshGroup}
+              refreshUserTransactions={refreshUserTransactions}
             />
           </Route>
           <Route
@@ -82,6 +81,7 @@ export default class Group extends Component {
               group={group}
               groupname={groupname}
               transactions={transactions}
+              userTransactions={userTransactions}
               acceptTransaction={acceptTransaction}
               rejectTransaction={rejectTransaction}
               logout={logout}

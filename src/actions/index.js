@@ -160,7 +160,26 @@ export const getTransactions = params => (dispatch, getState) => {
         offset: params.offset,
         count: params.count
       },
-      token: token
+      token: token,
+    }
+  });
+};
+
+export const getUserTransactions = params => (dispatch, getState) => {
+  const groupId = params.groupId;
+  const token = getState().entities.groupSessions[groupId] || localStorage.getItem(`table-session-${groupId}`);
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.GET_USER_TRANSACTIONS,
+      method: 'GET',
+      endpoint: `/groups/${params.groupId}/users/${params.userId}/transactions`,
+      params: {
+        _groupId: params.groupId,
+        _userID: params.userId,
+        offset: params.offset,
+        count: params.count
+      },
+      token: token,
     }
   });
 };

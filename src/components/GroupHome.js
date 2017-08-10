@@ -12,9 +12,10 @@ export default class GroupHome extends Component {
   static defaultProps = {
     currentUser: {},
     group: {
-      users: []
+      users: [],
     },
-    transactions: []
+    transactions: [],
+    userTransactions: [],
   };
 
   render() {
@@ -23,6 +24,7 @@ export default class GroupHome extends Component {
       group,
       groupname,
       transactions,
+      userTransactions,
       acceptTransaction,
       rejectTransaction,
       logout,
@@ -32,9 +34,7 @@ export default class GroupHome extends Component {
       <UserBalanceBar key={user.id} users={group.users} user={user} />
     ));
 
-    const isTooManyTransactions = true;//transactions.length > MAX_TRANSACTION_COUNT;
-    const trimmedTransactions = isTooManyTransactions ? transactions.slice(0, MAX_TRANSACTION_COUNT) : transactions;
-    const transactionItems = trimmedTransactions.map(transaction => (
+    const transactionItems = userTransactions.map(transaction => (
       <Transaction
         key={transaction.id}
         transaction={transaction}
@@ -44,14 +44,14 @@ export default class GroupHome extends Component {
       />
     ));
 
-    const moreTransactionsButton = isTooManyTransactions ? (
+    const allTransactionsButton = (
       <Link
         className="u-more-button"
         to={`/${groupname}/transactions`}
       >
-        더 보기
+        모든 거래내역 보기
       </Link>
-    ) : null;
+    );
 
     return (
       <div className="c-group-home u-group-header-container">
@@ -76,10 +76,10 @@ export default class GroupHome extends Component {
             </div>
             <div className="c-group-home__transactions">
               <div className="c-group-home__section-title">
-                최근 거래 내역
+                내 거래 내역 
               </div>
               {transactionItems}
-              {moreTransactionsButton}
+              {allTransactionsButton}
             </div>
           </div>
         </div>

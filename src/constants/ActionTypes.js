@@ -13,6 +13,7 @@ export const GET_USER_ID_BY_EMAIL = getRequestActionTypes('GET_USER_ID_BY_EMAIL'
 export const GET_USER_ID_BY_USERNAME = getRequestActionTypes('GET_USER_ID_BY_USERNAME');
 export const GET_CURRENT_USER = getRequestActionTypes('GET_CURRENT_USER');
 export const GET_TRANSACTIONS = getRequestActionTypes('GET_TRANSACTIONS');
+export const GET_USER_TRANSACTIONS = getRequestActionTypes('GET_USER_TRANSACTIONS');
 export const CREATE_TRANSACTION = getRequestActionTypes('CREATE_TRANSACTION');
 export const ACCEPT_TRANSACTION = getRequestActionTypes('ACCEPT_TRANSACTION');
 export const REJECT_TRANSACTION = getRequestActionTypes('REJECT_TRANSACTION');

@@ -6,6 +6,7 @@ import {
   getGroupIndex,
   getGroup,
   getTransactions,
+  getUserTransactions,
   login,
   logout,
   rejectTransaction
@@ -32,7 +33,18 @@ class GroupContainer extends Component {
 
   getGroupWithId(groupId) {
     this.props.getGroup(groupId);
-    this.props.getCurrentUser({ groupId: groupId });
+    this.props.getCurrentUser({ groupId: groupId }).then(v => {
+      if (v.response) {
+        this.props.getUserTransactions({
+          groupId: groupId,
+          userId: v.response.id,
+          offset: 0,
+          count: REQUEST_TRANSACTION_COUNT,
+        });
+      } else if (v.error) {
+        // TODO: handle unknown groupname.
+      }
+    });
     this.props.getTransactions({
       groupId: groupId,
       offset: 0,
@@ -57,6 +69,15 @@ class GroupContainer extends Component {
     });
   };
 
+  refreshUserTransactions = () => {
+    this.props.getUserTransactions({
+      groupId: this.props.groupIndex,
+      userId: this.props.currentUser.id,
+      offset: 0,
+      count: REQUEST_TRANSACTION_COUNT,
+    });
+  };
+
   getMoreTransactions = () => {
     this.props.getTransactions({
       groupId: this.props.groupIndex,
@@ -70,6 +91,8 @@ class GroupContainer extends Component {
     this.props.acceptTransaction({
       groupId,
       transactionId,
+    }).then(v => {
+      this.refreshUserTransactions();
     });
   };
 
@@ -80,6 +103,7 @@ class GroupContainer extends Component {
       transactionId,
     }).then(v => {
       this.refreshGroup();
+      this.refreshUserTransactions();
     });
   };
 
@@ -109,6 +133,7 @@ class GroupContainer extends Component {
       location,
       group,
       transactions,
+      userTransactions,
       groupIndex,
       groupSession
     } = this.props;
@@ -126,8 +151,10 @@ class GroupContainer extends Component {
             group={group}
             groupname={match.params.groupname}
             transactions={transactions}
+            userTransactions={userTransactions}
             getMoreTransactions={this.getMoreTransactions}
             refreshGroup={this.refreshGroup}
+            refreshUserTransactions={this.refreshUserTransactions}
             acceptTransaction={this.acceptTransaction}
             rejectTransaction={this.rejectTransaction}
             logout={this.logout}
@@ -154,13 +181,15 @@ const mapStateToProps = (state, ownProps) => {
   const group = groupIndex ? state.entities.groups[groupIndex] : null;
   const currentUser = groupIndex ? state.entities.groupCurrentUsers[groupIndex] : null;
   const transactions = groupIndex ? state.entities.groupTransactionLists[groupIndex] : null;
+  const userTransactions = groupIndex ? state.entities.groupUserTransactionLists[groupIndex] : null;
 
   return {
     groupIndex,
     groupSession,
     group,
     currentUser,
-    transactions
+    transactions,
+    userTransactions,
   };
 };
 
@@ -169,8 +198,9 @@ export default connect(mapStateToProps, {
   getGroup,
   getCurrentUser,
   getTransactions,
+  getUserTransactions,
   acceptTransaction,
   rejectTransaction,
   login,
-  logout
+  logout,
 })(GroupContainer);
