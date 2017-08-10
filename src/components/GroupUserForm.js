@@ -63,7 +63,7 @@ export default class GroupUserForm extends Component {
 
     const formGroups = formBase.map(item => {
       const errorBlock = paramErrors[item.name] ? (
-        <span className="help-block">
+        <span className="u-help-block">
           {paramErrors[item.name]}
         </span>
       ) : null;

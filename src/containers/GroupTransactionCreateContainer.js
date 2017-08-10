@@ -11,6 +11,13 @@ const CREATE_TRANSACTION_PARAMS = {
   'transaction[description]': ''
 };
 
+const CREATE_TRANSACTION_PARAM_ERRORS = {
+  'transaction[from_user_ids]': '',
+  'transaction[to_user_id]': '',
+  'transaction[amount]': '',
+  'transaction[description]': ''
+};
+
 class GroupTransactionCreateContainer extends Component {
   static propTypes = {
 
@@ -18,13 +25,15 @@ class GroupTransactionCreateContainer extends Component {
 
   state = {
     params: Object.assign({}, CREATE_TRANSACTION_PARAMS),
-    paramErrors: Object.assign({}, CREATE_TRANSACTION_PARAMS),
+    paramErrors: Object.assign({}, CREATE_TRANSACTION_PARAM_ERRORS),
     alert: null,
     redirectToHome: false
   };
 
   setParams = params => {
-    this.setState({ params });
+    this.setState({ params }, () => {
+      this.validateParams();
+    });
   };
 
   createTransaction = () => {
@@ -39,23 +48,41 @@ class GroupTransactionCreateContainer extends Component {
       refreshGroup,
       refreshUserTransactions,
     } = this.props;
+    const isError = Object.keys(paramErrors).map(key => paramErrors[key]).join('') !== '';
 
-    this.props.createTransaction(Object.assign({}, params, {
-      groupId: this.props.groupIndex
-    }, isFromCurrentUser ? {
-      'transaction[from_user_ids]': JSON.stringify([currentUser.id])
-    } : {
-      'transaction[to_user_id]': currentUser.id
-    })).then(v => {
-      if (v.response) {
-        this.setState({ redirectToHome: true });
-        refreshGroup();
-        refreshUserTransactions();
-      } else if (v.error) {
-        this.setState({ alert: '거래 등록에 실패했습니다. 작성된 내용을 다시 확인해 주세요.' });
-      }
-    });
+    if (!isError) {
+      this.setState({ alert: null }, () => {
+        this.props.createTransaction(Object.assign({}, params, {
+          groupId: this.props.groupIndex
+        }, isFromCurrentUser ? {
+          'transaction[from_user_ids]': JSON.stringify([currentUser.id])
+        } : {
+          'transaction[to_user_id]': currentUser.id
+        })).then(v => {
+          if (v.response) {
+            this.setState({ redirectToHome: true });
+            refreshGroup();
+            refreshUserTransactions();
+          } else if (v.error) {
+            this.setState({ alert: '거래 등록에 실패했습니다. 작성된 내용을 다시 확인해 주세요.' });
+          }
+        });
+      });
+    } else {
+      this.setState({ alert: '거래 등록에 실패했습니다. 작성된 내용을 다시 확인해 주세요.' });
+    }
   };
+
+  validateParams() {
+    const { params } = this.state;
+    const paramErrors = {};
+    if (params['transaction[amount]']) {
+      if (parseFloat(params['transaction[amount]']) <= 0) {
+        paramErrors['transaction[amount]'] = '금액은 0보다 커야 합니다.'
+      }
+    }
+    this.setState({ paramErrors: Object.assign({}, CREATE_TRANSACTION_PARAM_ERRORS, paramErrors) });
+  }
 
   logout = () => {
     this.props.logout({
@@ -72,6 +99,7 @@ class GroupTransactionCreateContainer extends Component {
     } = this.props;
     const {
       params,
+      paramErrors,
       alert,
       redirectToHome
     } = this.state;
@@ -83,6 +111,7 @@ class GroupTransactionCreateContainer extends Component {
     return (
       <GroupTransactionCreate
         params={params}
+        paramErrors={paramErrors}
         alert={alert}
         currentUser={currentUser}
         group={group}

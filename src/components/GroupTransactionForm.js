@@ -147,17 +147,24 @@ export default class GroupTransactionForm extends Component {
       alert,
       group,
       params,
+      paramErrors,
       isFromCurrentUser
     } = this.props;
 
     const alertBlock = alert ? (
-      <div className="alert alert-danger" role="alert">
+      <div className="u-alert">
         {alert}
       </div>
     ) : null;
 
     const amountLabel = isFromCurrentUser ? '내가 보낼 금액' : '내가 받을 금액';
     const userSelector = isFromCurrentUser ? this.renderToUserSelector() : this.renderFromUserSelector();
+
+    const amountErrorBlock = paramErrors['transaction[amount]'] ? (
+      <span className="u-help-block">
+        {paramErrors['transaction[amount]']}
+      </span>
+    ) : null;
 
     return (
       <form
@@ -176,6 +183,7 @@ export default class GroupTransactionForm extends Component {
             onChange={this.handleInputChange}
             value={params[`transaction[amount]`]}
           />
+          {amountErrorBlock}
         </div>
         {userSelector}
         <div className="u-input-group">

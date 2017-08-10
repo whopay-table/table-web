@@ -120,6 +120,20 @@
   font-size: 11px;
 }
 
+.u-help-block {
+  display: block;
+  padding-bottom: 4px;
+  color: color('red');
+  font-size: 11px;
+}
+
+.u-alert {
+  display: block;
+  margin: 4px 0;
+  color: color('red');
+  font-size: 14px;
+}
+
 .u-button-row {
   padding: 16px 0;
   overflow: hidden;

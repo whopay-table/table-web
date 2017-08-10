@@ -14,11 +14,13 @@ export default class GroupTransactionCreate extends Component {
 
   render() {
     const {
+      alert,
       currentUser,
       isFromCurrentUser,
       group,
       groupname,
       params,
+      paramErrors,
       createTransaction,
       setParams,
       logout
@@ -39,7 +41,9 @@ export default class GroupTransactionCreate extends Component {
               {title}
             </div>
             <GroupTransactionForm
+              alert={alert}
               params={params}
+              paramErrors={paramErrors}
               currentUser={currentUser}
               isFromCurrentUser={isFromCurrentUser}
               group={group}

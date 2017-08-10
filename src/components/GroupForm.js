@@ -68,7 +68,7 @@ export default class GroupForm extends Component {
 
     const formGroups = formBase.map(item => {
       const errorBlock = paramErrors[item.name] ? (
-        <span className="help-block">
+        <span className="u-help-block">
           {paramErrors[item.name]}
         </span>
       ) : null;
@@ -98,7 +98,7 @@ export default class GroupForm extends Component {
     });
 
     const alertBlock = alert ? (
-      <div className="alert alert-danger" role="alert">
+      <div className="u-alert">
         {alert}
       </div>
     ) : null;
