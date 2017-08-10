@@ -254,7 +254,7 @@ export default class GroupTransactionForm extends Component {
     );
 
     const amount = params[`transaction[amount]`] === '' ? 0 : params[`transaction[amount]`];
-    const amountInfo = params.totalAmount !== null ? (
+    const amountInfo = !isFromCurrentUser && (params.totalAmount !== null) ? (
       <small className="u-input-info">
         {`한 사람당 내가 받을 금액은 ${amount} 입니다.`}
       </small>
