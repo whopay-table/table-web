@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, Route, Switch } from 'react-router-dom';
+import GroupContainer from './GroupContainer';
 import GroupCreateContainer from './GroupCreateContainer';
 import Home from '../components/Home';
-import GroupContainer from './GroupContainer';
 
 const App = ({ store }) => {
   return (

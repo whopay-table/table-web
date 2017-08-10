@@ -13,6 +13,7 @@ import {
 } from '../actions';
 import Group from '../components/Group';
 import GroupAuth from '../components/GroupAuth';
+import NotFound from '../components/NotFound';
 
 const REQUEST_TRANSACTION_COUNT = 10;
 
@@ -56,8 +57,6 @@ class GroupContainer extends Component {
     this.props.getGroupIndex(groupname).then(v => {
       if (v.response) {
         this.getGroupWithId(v.response.id);
-      } else if (v.error) {
-        // TODO: handle unknown groupname.
       }
     })
   }
@@ -139,6 +138,7 @@ class GroupContainer extends Component {
     } = this.props;
 
     const isLoaded = groupIndex;
+    const isNotFound = groupIndex === null;
     const isLoggedIn = !(groupIndex && !groupSession);
 
     if (isLoaded) {
@@ -169,7 +169,12 @@ class GroupContainer extends Component {
           />
         );
       }
+    } else if (isNotFound) {
+      return (
+        <NotFound />
+      )
     } else {
+      // TODO: show spinner here.
       return <div />;
     }
   }

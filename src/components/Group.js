@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import GroupHeader from './GroupHeader';
 import GroupHome from './GroupHome';
 import GroupInvite from './GroupInvite';
 import GroupTransactionCreateContainer from '../containers/GroupTransactionCreateContainer';
 import GroupTransactions from './GroupTransactions';
+import NotFound from './NotFound';
 
 export default class Group extends Component {
   static propTypes = {
@@ -67,13 +68,16 @@ export default class Group extends Component {
               logout={logout}
             />
           </Route>
-          <Route exact path="/:groupname/invite">
+          <Route path="/:groupname/invite">
             <GroupInvite
               currentUser={currentUser}
               group={group}
               groupname={groupname}
               logout={logout}
             />
+          </Route>
+          <Route path="/:groupname/users/create">
+            <Redirect push to={`/${groupname}`} />
           </Route>
           <Route exact path="/:groupname">
             <GroupHome
@@ -87,6 +91,7 @@ export default class Group extends Component {
               logout={logout}
             />
           </Route>
+          <Route component={NotFound} />
         </Switch>
       </div>
     );
