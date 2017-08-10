@@ -8,14 +8,15 @@ const CREATE_TRANSACTION_PARAMS = {
   'transaction[from_user_ids]': '[]',
   'transaction[to_user_id]': '',
   'transaction[amount]': '',
-  'transaction[description]': ''
+  'transaction[description]': '',
+  'totalAmount': '',
 };
 
 const CREATE_TRANSACTION_PARAM_ERRORS = {
   'transaction[from_user_ids]': '',
   'transaction[to_user_id]': '',
   'transaction[amount]': '',
-  'transaction[description]': ''
+  'transaction[description]': '',
 };
 
 class GroupTransactionCreateContainer extends Component {
@@ -39,7 +40,7 @@ class GroupTransactionCreateContainer extends Component {
   createTransaction = () => {
     const {
       params,
-      paramErrors
+      paramErrors,
     } = this.state;
     const {
       currentUser,

@@ -108,7 +108,8 @@
     }
 
     &:hover {
-      opacity: 0.8;
+      background-color: lighten(color('link'), 20%);
+      color: color('white');
     }
   }
 }
@@ -152,12 +153,38 @@
   font-size: 12px;
   cursor: pointer;
 
+  &:hover {
+    background-color: lighten(color('link'), 20%);
+    color: color('white');
+  }
+
+  &--left-align {
+    float: left
+  }
+
   &--is-cancel {
     background-color: color('grey');
   }
 
-  &:hover {
-    opacity: 0.8;
+  &--is-disabled {
+    background-color: lighten(color('link'), 50%);
+    cursor: not-allowed;
+    color: color('white');
+
+    &:hover {
+      background-color: lighten(color('link'), 50%);
+      color: color('white');
+    }
+  }
+
+  &--is-active {
+    background-color: lighten(color('link'), 20%);
+    color: color('white');
+
+    &:hover {
+      background-color: lighten(color('link'), 20%);
+      color: color('white');
+    }
   }
 }
 
