@@ -13,7 +13,7 @@ export default class Transaction extends Component {
     if (isRequested) {
       return (
         <div className="c-transaction__status">
-          요청됨
+          승인 대기
         </div>
       );
     } else if (isRejected) {
@@ -52,7 +52,7 @@ export default class Transaction extends Component {
           className="c-transaction__button"
           onClick={() => this.props.acceptTransaction(id)}
         >
-          수락
+          승인
         </a>
         <a
           className={classnames(
