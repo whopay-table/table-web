@@ -20,6 +20,12 @@
   padding-top: $group-header-height;
 }
 
+@media (max-width: $media-sm-width) {
+  .u-group-header-container {
+    padding-top: $group-header-sm-height;
+  }
+}
+
 .u-float-container {
   display: block;
   overflow: hidden;

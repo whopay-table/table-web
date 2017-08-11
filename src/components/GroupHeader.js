@@ -11,11 +11,17 @@ export default class GroupHeader extends Component {
     return (
       <div className="c-group-header">
         <Link to={`/${groupname}`}>
-          <img
-            src="/image/titled-logo-wide.png"
-            className="c-group-header__logo"
-          />
+          <div className="c-group-header__logo-block">
+            <img
+              src="/image/colored-logo.png"
+              className="c-group-header__logo"
+            />
+            <div className="c-group-header__group-title">
+              {group.title}
+            </div>
+          </div>
         </Link>
+
 
         <div className="c-group-header__right-menu">
           <a

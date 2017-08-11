@@ -1,16 +1,35 @@
 
 .c-group-header {
   position: fixed;
-  background-color: color('main');
+  padding: 0 rem(16px);
+  background-color: color('light-white');
+  border-bottom: 1px solid color('light-grey');
   top: 0;
   width: 100%;
-  min-height: $group-header-height;
+  height: rem($group-header-height);
+
+  &__logo-block {
+    float: left;
+    padding-right: rem(32px);
+    height: rem($group-header-height);
+    width: auto;
+    color: color('main');
+  }
 
   &__logo {
+    $logo-height: 28px;
     float: left;
-    margin: 16px 16px;
-    height: $group-header-height - 32px;
+    margin: rem(($group-header-height - $logo-height) / 2) 0;
+    height: rem($logo-height);
     width: auto;
+  }
+
+  &__group-title {
+    float: left;
+    padding-left: rem(12px);
+    font-size: rem(16px);
+    font-weight: $bold;
+    line-height: rem($group-header-height);
   }
 
   &__menu {
@@ -27,21 +46,48 @@
 
   &__menu-item {
     float: left;
-    padding: 0 16px;
+    margin-right: rem(32px);
     height: $group-header-height;
-    font-size: 14px;
+    font-size: rem(14px);
     line-height: $group-header-height;
-    color: color('white');
+    color: color('dark-grey');
     cursor: pointer;
 
     &:hover {
-      text-decoration: underline;
-      color: color('white');
+      color: color('black');
+    }
+
+    &:last-of-type {
+      margin-right: 0;
     }
 
     &--is-active {
-      text-decoration: underline;
+      color: color('main');
     }
   }
+}
 
+@media (max-width: $media-lg-width) {
+  .c-group-header {
+    &__menu-item {
+      margin-right: rem(24px);
+    }
+  }
+}
+
+@media (max-width: $media-sm-width) {
+  .c-group-header {
+    padding: 0 rem(16px) rem($group-header-sm-height / 2) rem(16px);
+    height: rem($group-header-sm-height);
+
+    &__menu {
+      position: absolute;
+      padding: 0 rem(16px);
+      top: rem($group-header-sm-height / 2);
+      left: 0;
+      width: 100%;
+      height: rem($group-header-sm-height / 2);
+      overflow-x: scroll;
+    }
+  }
 }
