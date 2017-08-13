@@ -18,7 +18,7 @@ export default class GroupPayback extends Component {
     } = this.props;
 
     let balance = currentUser.balance;
-    const users = group.users.slice(0);
+    const users = group.users.map(user => Object.assign({}, user));
     users.sort((a, b) => (b.balance - a.balance)).filter(user => user.id !== currentUser.id);
 
     const userAmounts = [];

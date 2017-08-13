@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import GroupHeader from './GroupHeader';
 import GroupPayback from './GroupPayback';
+import GroupSettlement from './GroupSettlement';
 import GroupWithdraw from './GroupWithdraw';
 import Transaction from './Transaction';
 import UserBalance from './UserBalance';
@@ -23,6 +24,7 @@ export default class GroupHome extends Component {
   state = {
     isWithdrawVisible: false,
     isPaybackVisible: false,
+    isSettlementVisible: false,
   };
 
   showWithdraw() {
@@ -39,6 +41,14 @@ export default class GroupHome extends Component {
 
   hidePayback() {
     this.setState({ isPaybackVisible: false });
+  }
+
+  showSettlement() {
+    this.setState({ isSettlementVisible: true });
+  }
+
+  hideSettlement() {
+    this.setState({ isSettlementVisible: false });
   }
 
   renderWithdrawBlock() {
@@ -119,6 +129,45 @@ export default class GroupHome extends Component {
     );
   }
 
+  renderSettlementBlock() {
+    const {
+      currentUser,
+      group,
+    } = this.props;
+    const {
+      isSettlementVisible,
+    } = this.state;
+
+    const settlementButton = !isSettlementVisible ? (
+      <div className="u-button-row u-button-row--tight">
+        <a
+          className={classnames(
+            'u-button',
+            'u-button--left-align'
+          )}
+          onClick={() => this.showSettlement()}
+        >
+          그룹 전체 정산하기
+        </a>
+      </div>
+    ) : null;
+
+    const settlement = isSettlementVisible ? (
+      <GroupSettlement
+        group={group}
+        currentUser={currentUser}
+        onClose={() => this.hideSettlement()}
+      />
+    ) : null;
+
+    return (
+      <div className="u-info-block-container">
+        {settlementButton}
+        {settlement}
+      </div>
+    );
+  }
+
   render() {
     const {
       currentUser,
@@ -177,6 +226,7 @@ export default class GroupHome extends Component {
                 그룹 잔액 현황
               </div>
               {userBalanceBars}
+              {currentUser.balance !== 0 ? this.renderSettlementBlock() : null}
             </div>
             <div className="c-group-home__transactions">
               <div className="c-group-home__section-title">
