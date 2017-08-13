@@ -41,6 +41,7 @@ export default class GroupTransactions extends Component {
           group={group}
           groupname={groupname}
           logout={logout}
+          activeMenuItem="transactions"
         />
         <div className="u-container">
           <div className="c-group-transactions__body">

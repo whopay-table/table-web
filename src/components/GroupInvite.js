@@ -30,6 +30,7 @@ export default class GroupInvite extends Component {
           group={group}
           groupname={groupname}
           logout={logout}
+          activeMenuItem="invite"
         />
         <div className="u-container">
           <div className="c-group-invite__body">

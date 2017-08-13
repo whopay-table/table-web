@@ -24,11 +24,17 @@
     width: auto;
   }
 
-  &__group-title {
+  &__app-title {
+    padding-right: 4px;
+  }
+
+  &__title {
     float: left;
     padding-left: rem(12px);
     font-size: rem(16px);
     font-weight: $bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
     line-height: rem($group-header-height);
   }
 
@@ -69,6 +75,10 @@
 
 @media (max-width: $media-lg-width) {
   .c-group-header {
+    &__title {
+      max-width: 350px;
+    }
+
     &__menu-item {
       margin-right: rem(24px);
     }
@@ -79,6 +89,14 @@
   .c-group-header {
     padding: 0 rem(16px) rem($group-header-sm-height / 2) rem(16px);
     height: rem($group-header-sm-height);
+
+    &__app-title {
+      display: none;
+    }
+
+    &__title {
+      max-width: 200px;
+    }
 
     &__menu {
       display: flex;
