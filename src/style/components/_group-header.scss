@@ -81,13 +81,22 @@
     height: rem($group-header-sm-height);
 
     &__menu {
+      display: flex;
+      flex-wrap: nowrap;
       position: absolute;
       padding: 0 rem(16px);
       top: rem($group-header-sm-height / 2);
       left: 0;
       width: 100%;
       height: rem($group-header-sm-height / 2);
-      overflow-x: scroll;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+    &__menu-item {
+      float: none;
+      flex: 0 0 auto;
     }
   }
 }

@@ -17,7 +17,7 @@ export default class GroupHeader extends Component {
               className="c-group-header__logo"
             />
             <div className="c-group-header__group-title">
-              {group.title}
+              {`WHOPAY × ${group.title}`}
             </div>
           </div>
         </Link>
