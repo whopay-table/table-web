@@ -2,6 +2,8 @@ import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import GroupHeader from './GroupHeader';
+import GroupPayback from './GroupPayback';
+import GroupWithdraw from './GroupWithdraw';
 import Transaction from './Transaction';
 import UserBalance from './UserBalance';
 import UserBalanceBar from './UserBalanceBar';
@@ -17,6 +19,105 @@ export default class GroupHome extends Component {
     transactions: [],
     userTransactions: [],
   };
+
+  state = {
+    isWithdrawVisible: false,
+    isPaybackVisible: false,
+  };
+
+  showWithdraw() {
+    this.setState({ isWithdrawVisible: true });
+  }
+
+  hideWithdraw() {
+    this.setState({ isWithdrawVisible: false });
+  }
+
+  showPayback() {
+    this.setState({ isPaybackVisible: true });
+  }
+
+  hidePayback() {
+    this.setState({ isPaybackVisible: false });
+  }
+
+  renderWithdrawBlock() {
+    const {
+      currentUser,
+      group,
+    } = this.props;
+    const {
+      isWithdrawVisible,
+    } = this.state;
+
+    const withdrawButton = !isWithdrawVisible ? (
+      <div className="u-button-row u-button-row--tight">
+        <a
+          className={classnames(
+            'u-button',
+            'u-button--left-align'
+          )}
+          onClick={() => this.showWithdraw()}
+        >
+          현금 출금하기
+        </a>
+      </div>
+    ) : null;
+
+    const withdraw = isWithdrawVisible ? (
+      <GroupWithdraw
+        group={group}
+        currentUser={currentUser}
+        onClose={() => this.hideWithdraw()}
+      />
+    ) : null;
+
+    return (
+      <div className="u-info-block-container">
+        {withdrawButton}
+        {withdraw}
+      </div>
+    );
+  }
+
+  renderPaybackBlock() {
+    const {
+      currentUser,
+      group,
+    } = this.props;
+    const {
+      isPaybackVisible,
+    } = this.state;
+
+    const paybackButton = !isPaybackVisible ? (
+      <div className="u-button-row u-button-row--tight">
+        <a
+          className={classnames(
+            'u-button',
+            'u-button--left-align'
+          )}
+          onClick={() => this.showPayback()}
+        >
+          빚 갚기
+        </a>
+      </div>
+    ) : null;
+
+    const payback = isPaybackVisible ? (
+      <GroupPayback
+        group={group}
+        currentUser={currentUser}
+        onClose={() => this.hidePayback()}
+      />
+    ) : null;
+
+    return (
+      <div className="u-info-block-container">
+        {paybackButton}
+        {payback}
+      </div>
+    );
+  }
 
   render() {
     const {
@@ -67,6 +168,8 @@ export default class GroupHome extends Component {
               users={group.users}
               user={currentUser}
             />
+            {currentUser.balance > 0 ? this.renderWithdrawBlock() : null}
+            {currentUser.balance < 0 ? this.renderPaybackBlock() : null}
           </div>
           <div className="c-group-home__info-blocks">
             <div className="c-group-home__group-balance">

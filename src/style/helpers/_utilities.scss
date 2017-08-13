@@ -148,6 +148,10 @@
 .u-button-row {
   padding: 16px 0;
   overflow: hidden;
+
+  &--tight {
+    padding: 4px 0;
+  }
 }
 
 .u-button {
@@ -209,5 +213,34 @@
 
   &:hover {
     color: color('lime');
+  }
+}
+
+.u-info-block-container {
+  padding: 12px 0;
+}
+
+.u-info-block {
+  background-color: color('light-white');
+  border: 1px solid color('light-grey');
+  padding: 4px 4px;
+
+  &__description {
+    display: block;
+    padding: 4px 0;
+    font-size: 14px;
+    color: color('black');
+  }
+
+  &__items {
+    font-size: 12px;
+    color: color('dark-grey');
+  }
+
+  &__item {
+    padding: 4px 0;
+    line-height: 1.5em;
+    list-style-type: square;
+    list-style-position: inside;
   }
 }
