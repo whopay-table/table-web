@@ -44,7 +44,7 @@ export default class GroupTransactions extends Component {
           activeMenuItem="transactions"
         />
         <div className="u-container">
-          <div className="c-group-transactions__body">
+          <div className="c-group-transactions__body u-page-body">
             <div className="u-page-title">
               거래 내역
             </div>

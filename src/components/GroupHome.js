@@ -59,6 +59,7 @@ export default class GroupHome extends Component {
           group={group}
           groupname={groupname}
           logout={logout}
+          activeMenuItem="home"
         />
         <div className="u-container">
           <div className="c-group-home__user-balance">
@@ -67,7 +68,7 @@ export default class GroupHome extends Component {
               user={currentUser}
             />
           </div>
-          <div className="u-float-container">
+          <div className="c-group-home__info-blocks">
             <div className="c-group-home__group-balance">
               <div className="c-group-home__section-title">
                 그룹 잔액 현황
@@ -76,7 +77,7 @@ export default class GroupHome extends Component {
             </div>
             <div className="c-group-home__transactions">
               <div className="c-group-home__section-title">
-                내 거래 내역 
+                내 거래 내역
               </div>
               {transactionItems}
               {allTransactionsButton}

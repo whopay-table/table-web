@@ -37,7 +37,7 @@ export default class GroupTransactionCreate extends Component {
           activeMenuItem={isFromCurrentUser ? 'transactions-create' : 'transaction-request-create'}
         />
         <div className="u-container">
-          <div className="c-group-transaction-create__body">
+          <div className="c-group-transaction-create__body u-page-body">
             <div className="u-page-title">
               {title}
             </div>

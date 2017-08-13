@@ -2,14 +2,19 @@
 .c-group-home {
   padding-bottom: 32px;
 
+  &__info-blocks {
+    overflow: hidden
+  }
+
   &__section-title {
     padding: 8px 0;
     color: color('black');
     font-size: 16px;
     font-weight: bold;
   }
-  
+
   &__user-balance {
+    padding: 16px 12px;
     border-bottom: 1px solid color('light-grey');
   }
 
@@ -24,5 +29,31 @@
     float: right;
     width: 60%;
     padding: 16px 12px;
+  }
+}
+
+@media (max-width: $media-sm-width) {
+  .c-group-home {
+    &__info-blocks {
+
+    }
+
+    &__user-balance {
+      border: 0;
+      padding: 8px 0;
+    }
+
+    &__group-balance {
+      float: none;
+      width: auto;
+      padding: 8px 0;
+    }
+
+    &__transactions {
+      border: 0;
+      float: none;
+      width: auto;
+      padding: 8px 0;
+    }
   }
 }

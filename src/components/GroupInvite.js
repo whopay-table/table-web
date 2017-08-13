@@ -33,7 +33,7 @@ export default class GroupInvite extends Component {
           activeMenuItem="invite"
         />
         <div className="u-container">
-          <div className="c-group-invite__body">
+          <div className="c-group-invite__body u-page-body">
             <div className="u-page-title">
               그룹 초대하기
             </div>
@@ -42,7 +42,10 @@ export default class GroupInvite extends Component {
                 'u-input-group'
               )}
             >
-              <label htmlFor="group-invite-signup-link">
+              <label
+                className="u-label"
+                htmlFor="group-invite-signup-link"
+              >
                 초대하고 싶은 사람에게 아래 그룹 가입 링크를 공유하세요.
               </label>
               <input
