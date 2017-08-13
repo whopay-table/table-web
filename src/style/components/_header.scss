@@ -1,15 +1,38 @@
 
 .c-header {
   position: fixed;
-  background-color: color('main');
+  padding: 0 rem(16px);
+  background-color: color('light-white');
+  border-bottom: 1px solid color('light-grey');
   top: 0;
   width: 100%;
-  min-height: $header-height;
+  height: rem($header-height);
+
+  &__logo-block {
+    float: left;
+    padding-right: rem(32px);
+    height: rem($header-height);
+    width: auto;
+    color: color('main');
+  }
 
   &__logo {
+    $logo-height: 28px;
     float: left;
-    margin: 16px 16px;
-    height: $header-height - 32px;
+    margin: rem(($header-height - $logo-height) / 2) 0;
+    height: rem($logo-height);
     width: auto;
+  }
+
+  &__app-title {
+    padding-right: 4px;
+  }
+
+  &__title {
+    float: left;
+    padding-left: rem(12px);
+    font-size: rem(16px);
+    font-weight: $regular;
+    line-height: rem($group-header-height);
   }
 }
