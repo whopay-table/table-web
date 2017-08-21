@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import NumberFormat from 'react-number-format';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -44,7 +45,7 @@ export default class GroupSettlement extends Component {
           key={user.id}
           className="c-group-settlement__item u-info-block__item"
         >
-          {`${user.name} ➔ ${payment.user.name}: ${payment.amount}`}
+          {user.name} ➔ {payment.user.name}: {this.renderAmount(payment.amount)}
         </li>
       );
     });
@@ -71,6 +72,17 @@ export default class GroupSettlement extends Component {
         {`모든 사람들의 현금 전달이 끝나면, WHOPAY에서 같은 액수를 ${user.name} 에게 송금 요청합니다.`}
       </li>
     ];
+  }
+
+  renderAmount(amount) {
+    return (
+      <NumberFormat
+        value={amount}
+        suffix="원"
+        displayType="text"
+        thousandSeparator={true}
+      />
+    );
   }
 
   isCurrentUserPaymentRequired() {
