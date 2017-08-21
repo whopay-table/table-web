@@ -1,6 +1,8 @@
 import classnames from 'classnames';
+import NumberFormat from 'react-number-format';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
+import TimeAgo from './TimeAgo';
 
 export default class Transaction extends Component {
   renderStatus() {
@@ -94,15 +96,20 @@ export default class Transaction extends Component {
               { 'c-transaction__amount--is-rejected': isRejected }
             )}
           >
-            {`${amount}원`}
+            <NumberFormat
+              value={amount}
+              suffix="원"
+              displayType="text"
+              thousandSeparator={true}
+            />
           </div>
           <div className="c-transaction__name">
             {`${fromUser.name} ➔ ${toUser.name}`}
           </div>
-          {this.renderStatus()}
           <div className="c-transaction__created-at">
-            {/* {createdAt} */}
+            <TimeAgo date={createdAt} />
           </div>
+          {this.renderStatus()}
         </div>
         {this.renderButtons()}
       </div>

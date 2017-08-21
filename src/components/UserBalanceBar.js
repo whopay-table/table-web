@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import NumberFormat from 'react-number-format';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -33,7 +34,12 @@ export default class UserBalanceBar extends Component {
               { 'c-user-balance-bar__amount--is-negative': user.balance < 0 }
             )}
           >
-            {`${user.balance}원`}
+            <NumberFormat
+              value={user.balance}
+              suffix="원"
+              displayType="text"
+              thousandSeparator={true}
+            />
           </span>
         </div>
         <div className="c-user-balance-bar__bar-container">

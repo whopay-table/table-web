@@ -39,6 +39,7 @@
 
   &__status {
     float: right;
+    padding-right: 12px;
     color: color('lime');
 
     &--is-rejected {
