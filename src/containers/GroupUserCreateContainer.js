@@ -2,17 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import QueryString from 'query-string';
-import { createUser, getUserIdByEmail, getUserIdByUsername } from '../actions';
+import { createUser, getUserIdByEmail } from '../actions';
 import GroupUserCreate from '../components/GroupUserCreate';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const USERNAME_REGEX = /^[a-zA-Z0-9\-_]+$/i;
 const ALPHABET_REGEX = /[a-zA-Z]/i;
 const DIGIT_REGEX = /[0-9]/i;
 
 const CREATE_USER_PARAMS = {
   'user[email]': '',
-  'user[username]': '',
   'user[name]': '',
   'user[password]': '',
   'user[password_confirmation]': '',
@@ -51,7 +49,7 @@ class GroupUserCreateContainer extends Component {
     } = this.props;
     const isError = Object.keys(paramErrors).map(key => paramErrors[key]).join('') !== '';
 
-    if (!this.isEmailTaken() && !this.isUsernameTaken() && !isError) {
+    if (!this.isEmailTaken() && !isError) {
       this.setState({ alert: null }, () => {
         this.props.createUser(Object.assign({}, params, {
           groupId: this.props.groupIndex,
@@ -75,13 +73,6 @@ class GroupUserCreateContainer extends Component {
     if (params['user[email]']) {
       if (!EMAIL_REGEX.test(params['user[email]'])) {
         paramErrors['user[email]'] = '올바른 email 주소를 입력해 주세요.';
-      }
-    }
-    if (params['user[username]']) {
-      if (!USERNAME_REGEX.test(params['user[username]'])) {
-        paramErrors['user[username]'] = 'ID에는 알파벳, 숫자, 또는 "-", "_"만 사용할 수 있습니다.';
-      } else if (!hasLengthBetween(params['user[username]'], 3, 20)) {
-        paramErrors['user[username]'] = 'ID는 3-20 글자로 이루어져야 합니다.';
       }
     }
     if (params['user[name]']) {
@@ -118,37 +109,18 @@ class GroupUserCreateContainer extends Component {
     });
   };
 
-  getUserIdByUsername = username => {
-    const { groupIndex } = this.props;
-    this.props.getUserIdByUsername({
-      groupId: groupIndex,
-      username,
-      groupSignupKey: this.getSignupKey()
-    });
-  };
-
   getUserIdByEmailFromState() {
     return this.props.groupUserIdsByEmails[this.state.params['user[email]']];
-  }
-
-  getUserIdByUsernameFromState() {
-    return this.props.groupUserIdsByUsernames[this.state.params['user[username]']];
   }
 
   isEmailTaken() {
     return this.getUserIdByEmailFromState() !== undefined && this.getUserIdByEmailFromState() !== null;
   }
 
-  isUsernameTaken() {
-    return this.getUserIdByUsernameFromState() !== undefined && this.getUserIdByUsernameFromState() !== null;
-  }
-
   getParamErrors() {
     const { params, paramErrors } = this.state;
     return Object.assign({}, paramErrors, this.isEmailTaken() ? {
       'user[email]': `이미 사용중인 이메일 주소입니다. (${params['user[email]']})`
-    } : {}, this.isUsernameTaken() ? {
-      'user[username]': `이미 사용중인 사용자 ID입니다. (${params['user[username]']})`
     } : {});
   }
 
@@ -173,7 +145,6 @@ class GroupUserCreateContainer extends Component {
         groupname={groupname}
         createUser={this.createUser}
         getUserIdByEmail={this.getUserIdByEmail}
-        getUserIdByUsername={this.getUserIdByUsername}
         params={params}
         paramErrors={this.getParamErrors()}
         alert={alert}
@@ -186,17 +157,14 @@ class GroupUserCreateContainer extends Component {
 const mapStateToProps = (state, ownProps) => {
   const groupIndex = state.entities.groupIndexes[ownProps.match.params.groupname];
   const groupUserIdsByEmails = state.entities.groupUserIdsByEmails;
-  const groupUserIdsByUsernames = state.entities.groupUserIdsByUsernames;
 
   return {
     groupIndex,
     groupUserIdsByEmails,
-    groupUserIdsByUsernames
   };
 };
 
 export default connect(mapStateToProps, {
   createUser,
   getUserIdByEmail,
-  getUserIdByUsername
 })(GroupUserCreateContainer);

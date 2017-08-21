@@ -8,12 +8,6 @@ export default class GroupUserForm extends Component {
     }
   }
 
-  handleUsernameBlur(e) {
-    if (this.props.params['user[username]']) {
-      this.props.getUserIdByUsername(this.props.params['user[username]']);
-    }
-  }
-
   handleInputChange(e) {
     this.props.setParams(Object.assign({}, this.props.params, {[e.target.name]: e.target.value}));
   }
@@ -33,13 +27,6 @@ export default class GroupUserForm extends Component {
         name: 'user[email]',
         placeholder: '',
         onBlur: e => this.handleEmailBlur(e)
-      },
-      {
-        label: 'ID',
-        inputType: 'text',
-        name: 'user[username]',
-        placeholder: '',
-        onBlur: e => this.handleUsernameBlur(e)
       },
       {
         label: '이름',

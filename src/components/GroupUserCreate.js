@@ -7,12 +7,11 @@ export default class GroupUserCreate extends Component {
     const {
       createUser,
       getUserIdByEmail,
-      getUserIdByUsername,
       groupname,
       params,
       paramErrors,
       alert,
-      setParams
+      setParams,
     } = this.props;
 
     return (
@@ -26,7 +25,6 @@ export default class GroupUserCreate extends Component {
             <GroupUserForm
               onSubmit={createUser}
               getUserIdByEmail={getUserIdByEmail}
-              getUserIdByUsername={getUserIdByUsername}
               params={params}
               paramErrors={paramErrors}
               alert={alert}

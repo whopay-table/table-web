@@ -41,12 +41,6 @@ export default class GroupForm extends Component {
         placeholder: ''
       },
       {
-        label: 'ID',
-        inputType: 'text',
-        name: 'user[username]',
-        placeholder: ''
-      },
-      {
         label: '이름',
         inputType: 'text',
         name: 'user[name]',

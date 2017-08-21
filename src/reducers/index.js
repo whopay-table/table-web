@@ -89,33 +89,6 @@ function groupSessions(state = {}, action) {
   }
 }
 
-function groupUserIdsByUsernames(state = {}, action) {
-  switch (action.type) {
-    case ActionTypes.GET_USER_ID_BY_USERNAME.request:
-      return Object.assign({}, state, {
-        [action.params.username]: undefined
-      });
-
-    case ActionTypes.GET_USER_ID_BY_USERNAME.success:
-      return Object.assign({}, state, {
-        [action.params.username]: action.response.id
-      });
-
-    case ActionTypes.GET_USER_ID_BY_USERNAME.failure:
-      return Object.assign({}, state, {
-        [action.params.username]: null
-      });
-
-    case ActionTypes.CREATE_USER.success:
-      return Object.assign({}, state, {
-        [action.response.username]: action.response.id
-      });
-
-    default:
-      return state;
-  }
-}
-
 function groupUserIdsByEmails(state = {}, action) {
   switch (action.type) {
     case ActionTypes.GET_USER_ID_BY_EMAIL.request:
@@ -287,7 +260,6 @@ const entities = combineReducers({
   groups,
   groupSessions,
   groupUserIdsByEmails,
-  groupUserIdsByUsernames,
   groupCurrentUsers,
   groupTransactionLists,
   groupUserTransactionLists,

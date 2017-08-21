@@ -6,7 +6,6 @@ import GroupCreate from '../components/GroupCreate';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 const GROUPNAME_REGEX = /^[a-zA-Z0-9\-_]+$/i;
-const USERNAME_REGEX = /^[a-zA-Z0-9\-_]+$/i;
 const ALPHABET_REGEX = /[a-zA-Z]/i;
 const DIGIT_REGEX = /[0-9]/i;
 
@@ -14,7 +13,6 @@ const CREATE_GROUP_PARAMS = {
   'group[groupname]': '',
   'group[title]': '',
   'user[email]': '',
-  'user[username]': '',
   'user[name]': '',
   'user[password]': '',
   'user[password_confirmation]': '',
@@ -78,13 +76,6 @@ class GroupCreateContainer extends Component {
     if (params['user[email]']) {
       if (!EMAIL_REGEX.test(params['user[email]'])) {
         paramErrors['user[email]'] = '올바른 email 주소를 입력해 주세요.';
-      }
-    }
-    if (params['user[username]']) {
-      if (!USERNAME_REGEX.test(params['user[username]'])) {
-        paramErrors['user[username]'] = 'ID에는 알파벳, 숫자, 또는 "-", "_"만 사용할 수 있습니다.';
-      } else if (!hasLengthBetween(params['user[username]'], 3, 20)) {
-        paramErrors['user[username]'] = 'ID는 3-20 글자로 이루어져야 합니다.';
       }
     }
     if (params['user[name]']) {
