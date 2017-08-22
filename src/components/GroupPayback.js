@@ -54,7 +54,7 @@ export default class GroupPayback extends Component {
         key={user.id}
         className="c-group-payback__item u-info-block__item"
       >
-        {user.name} 에게 {this.renderAmount(amount)} 를 현금으로 주고, 대신 WHOPAY에서 같은 액수를 송금 요청합니다.
+        {user.name} 에게 {this.renderAmount(amount)} 현금으로 주고, 대신 WHOPAY에서 같은 액수를 송금 요청합니다.
       </li>
     ));
   }

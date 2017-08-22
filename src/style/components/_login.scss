@@ -24,4 +24,18 @@
     padding-right: 8px;
     color: color('link');
   }
+
+  &__small-link {
+    text-align: right;
+    color: color('link');
+    font-size: 12px;
+
+    a {
+      color: color('link');
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
 }

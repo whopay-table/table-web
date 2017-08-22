@@ -163,6 +163,7 @@ class GroupContainer extends Component {
       } else {
         return (
           <GroupAuth
+            groupId={groupIndex}
             groupname={match.params.groupname}
             groupSession={groupSession}
             login={this.login}

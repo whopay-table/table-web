@@ -73,10 +73,24 @@ export const destroyUser = params => (dispatch, getState) => {
       method: 'DELETE',
       endpoint: `/groups/${params.groupId}/users/${params.userId}`,
       params: {
-        'password': params.password,
+        password: params.password,
         _groupId: params.groupId,
       },
       token: token,
+    }
+  });
+};
+
+export const resetUserPassword = params => (dispatch, getState) => {
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.RESET_USER_PASSWORD,
+      method: 'POST',
+      endpoint: `/groups/${params.groupId}/users/reset_password`,
+      params: {
+        email: params.email,
+        _groupId: params.groupId,
+      },
     }
   });
 };
