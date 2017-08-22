@@ -33,7 +33,7 @@ export default class GroupResetPassword extends Component {
 
     const succeedBlock = isSucceed ? (
       <div className="alert alert-success" role="alert">
-        입력하신 이메일 주소로 새로운 비밀번호가 전송 되었습니다.
+        입력하신 email 주소로 새로운 비밀번호가 전송 되었습니다.
         확인 후 새로운 비밀번호를 사용해 로그인 해주세요.
       </div>
     ) : null;
@@ -83,7 +83,7 @@ export default class GroupResetPassword extends Component {
             >
               <div className="u-input-group">
                 <label className="u-label">
-                  이메일
+                  Email
                 </label>
                 <input
                   type="text"

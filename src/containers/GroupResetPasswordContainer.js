@@ -31,7 +31,7 @@ class GroupResetPasswordContainer extends Component {
         } else if (v.error) {
           const firstError = v.error.errors[0];
           if (firstError.code === 'model_error' && firstError.key === 'user') {
-            this.setState({ alert: '해당 이메일로 가입된 사용자가 없습니다. 확인 후 다시 시도해주세요.' });
+            this.setState({ alert: '해당 email로 가입된 사용자가 없습니다. 확인 후 다시 시도해주세요.' });
           } else {
             this.setState({ alert: '비밀번호 재설정에 실패했습니다. 잠시 후 다시 시도해주세요. 문제가 계속되면 관리자에게 문의해주세요.' });
           }
