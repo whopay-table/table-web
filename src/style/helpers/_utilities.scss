@@ -178,6 +178,16 @@
 
   &--is-cancel {
     background-color: color('grey');
+    &:hover {
+      background-color: lighten(color('grey'), 20%);
+    }
+  }
+
+  &--is-danger {
+    background-color: color('red');
+    &:hover {
+      background-color: lighten(color('red'), 20%);
+    }
   }
 
   &--is-disabled {

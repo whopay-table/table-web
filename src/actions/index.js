@@ -58,7 +58,23 @@ export const updateUser = params => (dispatch, getState) => {
         'user[password_confirmation]': params['user[password_confirmation]'],
         'user[account_info]': params['user[account_info]'],
         'password': params.password,
-        'group_id': params.groupId
+        _groupId: params.groupId,
+      },
+      token: token,
+    }
+  });
+};
+
+export const destroyUser = params => (dispatch, getState) => {
+  const token = getState().entities.groupSessions[params.groupId];
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.DESTROY_USER,
+      method: 'DELETE',
+      endpoint: `/groups/${params.groupId}/users/${params.userId}`,
+      params: {
+        'password': params.password,
+        _groupId: params.groupId,
       },
       token: token,
     }

@@ -13,7 +13,9 @@ export default class GroupUserForm extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     this.props.onSubmit();
   }
 
@@ -153,9 +155,17 @@ export default class GroupUserForm extends Component {
         {alertBlock}
         <input
           type="submit"
-          className="btn btn-default"
-          value="확인"
+          className="u-no-display"
+          value="-"
         />
+        <div className="u-button-row">
+          <a
+            className="u-button"
+            onClick={() => this.handleSubmit()}
+          >
+            {isUpdate ? '수정' : '확인'}
+          </a>
+        </div>
       </form>
     );
   }

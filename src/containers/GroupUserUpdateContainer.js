@@ -67,6 +67,8 @@ class GroupUserUpdateContainer extends Component {
     const {
       currentUser,
       groupIndex,
+      refreshGroup,
+      refreshUserTransactions,
     } = this.props;
     const isError = Object.keys(paramErrors).map(key => paramErrors[key]).join('') !== '';
 
@@ -85,12 +87,14 @@ class GroupUserUpdateContainer extends Component {
         })).then(v => {
           if (v.response) {
             this.setState({ redirectToHome: true });
+            refreshGroup();
+            refreshUserTransactions();
           } else if (v.error) {
             const firstError = v.error.errors[0];
             if (firstError.code === 'password_fail') {
               this.setState({ alert: '현재 비밀번호가 틀렸습니다. 다시 한번 확인해 주세요.' });
             } else if (firstError.code === 'invalid_param' && firstError.key === 'email') {
-              this.setState({ alert: '사용할 수 없는 이메일입니다. 다른 이메일 주소를 입력하세요.' });  
+              this.setState({ alert: '사용할 수 없는 이메일입니다. 다른 이메일 주소를 입력하세요.' });
             } else {
               this.setState({ alert: '내 정보 수정에 실패했습니다. 작성한 내용을 다시 한번 확인해 주세요.' });
             }

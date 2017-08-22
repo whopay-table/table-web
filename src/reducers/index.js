@@ -28,6 +28,12 @@ function groupIndexes(state = {}, action) {
   }
 }
 
+function filterGroupUsers(group) {
+  const filteredGroup = Object.assign({}, group);
+  filteredGroup.users = filteredGroup.users.filter(u => !u.isDisabled);
+  return filteredGroup;
+}
+
 function groups(state = {}, action) {
   switch (action.type) {
     case ActionTypes.GET_GROUP.request:
@@ -37,7 +43,7 @@ function groups(state = {}, action) {
 
     case ActionTypes.GET_GROUP.success:
       return Object.assign({}, state, {
-        [action.params._id]: action.response
+        [action.params._id]: filterGroupUsers(action.response)
       });
 
     case ActionTypes.GET_GROUP.failure:
@@ -69,6 +75,12 @@ function groupSessions(state = {}, action) {
       });
 
     case ActionTypes.LOGOUT.success:
+      localStorage.removeItem(`table-session-${action.params._groupId}`);
+      return Object.assign({}, state, {
+        [action.params._groupId]: null
+      });
+
+    case ActionTypes.DESTROY_USER.success:
       localStorage.removeItem(`table-session-${action.params._groupId}`);
       return Object.assign({}, state, {
         [action.params._groupId]: null
@@ -131,6 +143,11 @@ function groupCurrentUsers(state = {}, action) {
     case ActionTypes.GET_CURRENT_USER.failure:
       return Object.assign({}, state, {
         [action.params._groupId]: null
+      });
+
+    case ActionTypes.UPDATE_USER.success:
+      return Object.assign({}, state, {
+        [action.params._groupId]: action.response
       });
 
     default:

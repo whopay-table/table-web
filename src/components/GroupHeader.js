@@ -36,7 +36,7 @@ export default class GroupHeader extends Component {
 
         <div className="c-group-header__right-menu">
           <Link
-            to={`/${groupname}/me/edit`}
+            to={`/${groupname}/me/update`}
             className={classnames(
               'c-group-header__menu-item'
             )}
