@@ -31,6 +31,7 @@ export default class GroupTransactionCreate extends Component {
     return (
       <div className="c-group-transaction-create u-group-header-container">
         <GroupHeader
+          currentUser={currentUser}
           group={group}
           groupname={groupname}
           logout={logout}

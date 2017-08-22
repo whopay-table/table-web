@@ -5,6 +5,7 @@ import GroupHome from './GroupHome';
 import GroupInvite from './GroupInvite';
 import GroupTransactionCreateContainer from '../containers/GroupTransactionCreateContainer';
 import GroupTransactions from './GroupTransactions';
+import GroupUserUpdateContainer from '../containers/GroupUserUpdateContainer';
 import NotFound from './NotFound';
 
 export default class Group extends Component {
@@ -74,6 +75,16 @@ export default class Group extends Component {
               group={group}
               groupname={groupname}
               logout={logout}
+            />
+          </Route>
+          <Route path="/:groupname/me/edit">
+            <GroupUserUpdateContainer
+              currentUser={currentUser}
+              group={group}
+              groupname={groupname}
+              logout={logout}
+              refreshGroup={refreshGroup}
+              refreshUserTransactions={refreshUserTransactions}
             />
           </Route>
           <Route path="/:groupname/users/create">

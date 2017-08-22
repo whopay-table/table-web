@@ -74,7 +74,10 @@ export default class GroupForm extends Component {
             { 'has-error': paramErrors[item.name] }
           )}
         >
-          <label htmlFor={`group-create-${item.name}`}>
+          <label
+            className="u-label"
+            htmlFor={`group-create-${item.name}`}
+          >
             {item.label}
           </label>
           <input

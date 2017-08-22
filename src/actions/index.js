@@ -33,7 +33,6 @@ export const createUser = params => (dispatch, getState) => {
       endpoint: `/groups/${params.groupId}/users`,
       params: {
         'user[email]': params['user[email]'],
-        'user[username]': params['user[username]'],
         'user[name]': params['user[name]'],
         'user[password]': params['user[password]'],
         'user[password_confirmation]': params['user[password_confirmation]'],
@@ -41,6 +40,27 @@ export const createUser = params => (dispatch, getState) => {
         'group_id': params.groupId,
         'group_signup_key': params.groupSignupKey
       }
+    }
+  });
+};
+
+export const updateUser = params => (dispatch, getState) => {
+  const token = getState().entities.groupSessions[params.groupId];
+  return dispatch({
+    API_REQUEST: {
+      type: ActionTypes.UPDATE_USER,
+      method: 'PATCH',
+      endpoint: `/groups/${params.groupId}/users/${params.userId}`,
+      params: {
+        'user[email]': params['user[email]'],
+        'user[name]': params['user[name]'],
+        'user[password]': params['user[password]'],
+        'user[password_confirmation]': params['user[password_confirmation]'],
+        'user[account_info]': params['user[account_info]'],
+        'password': params.password,
+        'group_id': params.groupId
+      },
+      token: token,
     }
   });
 };
@@ -69,20 +89,6 @@ export const getUserIdByEmail = params => (dispatch, getState) => {
       endpoint: `/groups/${params.groupId}/users`,
       params: {
         email: params.email,
-        group_signup_key: params.groupSignupKey
-      }
-    }
-  });
-}
-
-export const getUserIdByUsername = params => (dispatch, getState) => {
-  return dispatch({
-    API_REQUEST: {
-      type: ActionTypes.GET_USER_ID_BY_USERNAME,
-      method: 'GET',
-      endpoint: `/groups/${params.groupId}/users`,
-      params: {
-        username: params.username,
         group_signup_key: params.groupSignupKey
       }
     }

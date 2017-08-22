@@ -8,7 +8,12 @@ export default class GroupHeader extends Component {
   };
 
   render() {
-    const { group, groupname, activeMenuItem } = this.props;
+    const {
+      currentUser,
+      group,
+      groupname,
+      activeMenuItem,
+    } = this.props;
     return (
       <div className="c-group-header">
         <Link to={`/${groupname}`}>
@@ -30,6 +35,14 @@ export default class GroupHeader extends Component {
 
 
         <div className="c-group-header__right-menu">
+          <Link
+            to={`/${groupname}/me/edit`}
+            className={classnames(
+              'c-group-header__menu-item'
+            )}
+          >
+            {currentUser.name}님
+          </Link>
           <a
             onClick={() => this.props.logout()}
             className={classnames(
