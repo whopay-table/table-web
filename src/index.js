@@ -9,7 +9,11 @@ import store from './store';
 const RouteDeliverer = ({ match, location, history }) => {
   return (
     <Provider store={store}>
-      <App location={location} store={store} />
+      <App
+        match={match}
+        location={location}
+        store={store}
+      />
     </Provider>
   );
 };
