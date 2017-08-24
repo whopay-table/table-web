@@ -107,6 +107,7 @@
     &__main-row-info-item {
       padding: rem(4px) 0;
       line-height: 1.5em;
+      word-break: keep-all;
     }
 
     &__main-row-action {
