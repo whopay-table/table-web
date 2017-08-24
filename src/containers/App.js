@@ -45,7 +45,7 @@ class App extends Component {
     const groupname = this.getGroupname();
     let redirectTo = null;
 
-    if (HOST_GROUP_NAME && HOST_GROUP_NAME !== 'www') {
+    if (IS_PROD_DOMAIN && HOST_GROUP_NAME && HOST_GROUP_NAME !== 'www') {
       if (!groupname) {
         redirectTo = `/${HOST_GROUP_NAME}`;
       } else if (groupname !== HOST_GROUP_NAME) {
