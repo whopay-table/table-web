@@ -32,7 +32,7 @@ export default class LoginForm extends Component {
     const formBase = [
       {
         label: 'Email',
-        inputType: 'text',
+        inputType: 'email',
         name: 'email',
         placeholder: '',
       },

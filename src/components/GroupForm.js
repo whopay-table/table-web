@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class GroupForm extends Component {
   handleGroupnameBlur(e) {
@@ -13,12 +14,14 @@ export default class GroupForm extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     this.props.onSubmit();
   }
 
   render() {
-    const { alert, paramErrors } = this.props;
+    const { alert, params, paramErrors } = this.props;
 
     const formBase = [
       {
@@ -26,6 +29,7 @@ export default class GroupForm extends Component {
         inputType: 'text',
         name: 'group[groupname]',
         placeholder: '',
+        autoCapitalize: 'none',
         onBlur: e => this.handleGroupnameBlur(e)
       },
       {
@@ -88,6 +92,8 @@ export default class GroupForm extends Component {
             placeholder={item.placeholder}
             onChange={e => this.handleInputChange(e)}
             onBlur={item.onBlur}
+            autoCapitalize={item.autoCapitalize || 'sentences'}
+            value={params[item.name]}
           />
           {errorBlock}
         </div>
@@ -109,9 +115,22 @@ export default class GroupForm extends Component {
         {alertBlock}
         <input
           type="submit"
-          className="btn btn-default"
-          value="확인"
+          className="u-no-display"
         />
+        <div className="u-button-row">
+          <Link
+            className="u-button u-button--is-cancel"
+            to="/"
+          >
+            취소
+          </Link>
+          <a
+            className="u-button"
+            onClick={e => this.handleSubmit(e)}
+          >
+            확인
+          </a>
+        </div>
       </form>
     );
   }

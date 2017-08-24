@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import QueryString from 'query-string';
 import { createGroup, getGroupIndex } from '../actions';
 import GroupCreate from '../components/GroupCreate';
 
@@ -31,6 +32,20 @@ class GroupCreateContainer extends Component {
     alert: null,
     redirectGroupname: null
   };
+
+  componentDidMount() {
+    const { location, getGroupIndex } = this.props;
+    const { params } = this.state;
+    const getParams = QueryString.parse(location.search);
+    const groupname = getParams.groupname;
+
+    if (groupname) {
+      getGroupIndex(groupname);
+      this.setParams(Object.assign({}, params, {
+        'group[groupname]': groupname,
+      }));
+    }
+  }
 
   setParams = params => {
     this.setState({ params }, () => {
