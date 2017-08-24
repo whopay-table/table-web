@@ -86,12 +86,13 @@
     }
 
     &__main-row-info {
-      padding: rem(12px) rem(12px);
+      padding: rem(24px) rem(12px);
       flex: none;
-      font-size: rem(24px);
+      font-size: rem(16px);
     }
 
     &__main-row-info-title {
+      padding: rem(24px);
       font-size: rem(36px);
       font-weight: $bold;
       text-align: center;
