@@ -132,10 +132,6 @@
     &:focus {
       border: 1px solid color('link');
     }
-
-    &::placeholder {
-      font-size: 12px;
-    }
   }
 
   &__domain {
