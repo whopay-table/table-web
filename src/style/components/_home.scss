@@ -1,0 +1,121 @@
+
+.c-home {
+  &__row-body {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  &__main-row {
+    background-color: lighten(color('link'), 60%);
+  }
+
+  &__main-row-body {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: rem(60px) 0;
+    overflow: hidden;
+  }
+
+  &__main-row-info {
+    padding: rem(60px) rem(32px);
+    flex-basis: auto;
+    flex-shrink: 1;
+    flex-grow: 1;
+    font-size: rem(24px);
+  }
+
+  &__main-row-info-title {
+    font-size: rem(64px);
+    font-weight: $bold;
+  }
+
+  &__main-row-info-items {
+    display: block;
+    padding: rem(40px) 0;
+  }
+
+  &__main-row-info-item {
+    padding: rem(10px) 0;
+    line-height: 1.5em;
+  }
+
+  &__main-row-action {
+    position: relative;
+    padding: 0 rem(32px);
+    flex-basis: 400px;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  &__main-row-action-contents {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  &__main-row-action-button {
+    display: inline-block;
+    padding: 16px 12px;
+    background-color: color('link');
+    border-radius: 4px;
+    color: color('white');
+    font-size: 14px;
+    text-align: center;
+    min-width: 180px;
+
+    &:hover {
+      background-color: lighten(color('link'), 20%);
+      color: color('white');
+    }
+  }
+}
+
+@media (max-width: $media-sm-width) {
+  .c-home {
+    &__main-row-body {
+      display: block;
+      padding: rem(12px) 0;
+      overflow: hidden;
+    }
+
+    &__main-row-info {
+      padding: rem(12px) rem(12px);
+      flex: none;
+      font-size: rem(24px);
+    }
+
+    &__main-row-info-title {
+      font-size: rem(36px);
+      font-weight: $bold;
+      text-align: center;
+    }
+
+    &__main-row-info-items {
+      display: block;
+      padding: rem(8px) 0;
+      text-align: center;
+    }
+
+    &__main-row-info-item {
+      padding: rem(4px) 0;
+      line-height: 1.5em;
+    }
+
+    &__main-row-action {
+      position: relative;
+      flex: none;
+      padding: rem(24px) rem(12px);
+    }
+
+    &__main-row-action-contents {
+      position: static;
+      top: 0;
+      left: 0;
+      transform: none;
+      text-align: center;
+    }
+  }
+}
