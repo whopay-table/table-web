@@ -116,7 +116,7 @@ export default class GroupTransactionForm extends Component {
           className="u-input"
           type="text"
           value={this.getUserNameById(params[`transaction[to_user_id]`])}
-          disabled
+          readOnly
         />
         <div className="u-input-selector">
           {userSelectorButtons}
@@ -157,7 +157,7 @@ export default class GroupTransactionForm extends Component {
           className="u-input"
           type="text"
           value={fromUserNamesString}
-          disabled
+          readOnly
         />
         <div className="u-input-selector">
           {userSelectorButtons}
