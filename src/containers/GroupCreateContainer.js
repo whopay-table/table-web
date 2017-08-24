@@ -4,6 +4,12 @@ import { Redirect } from 'react-router-dom';
 import QueryString from 'query-string';
 import { createGroup, getGroupIndex } from '../actions';
 import GroupCreate from '../components/GroupCreate';
+import * as Server from '../../configs/server';
+
+const HOSTNAME = window.location.hostname;
+const DOMAIN = Server.domain;
+const PORT = window.location.port ? `:${window.location.port}` : '';
+const IS_PROD_DOMAIN = HOSTNAME.endsWith(DOMAIN);
 
 const EMAIL_REGEX = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 const GROUPNAME_REGEX = /^[a-zA-Z0-9\-_]+$/i;
@@ -133,7 +139,11 @@ class GroupCreateContainer extends Component {
     const { redirectGroupname, params, alert } = this.state;
 
     if (redirectGroupname) {
-      return <Redirect push to={`/${redirectGroupname}`}/>;
+      if (IS_PROD_DOMAIN) {
+        window.location.assign(`//${redirectGroupname}.${DOMAIN}${PORT}/${redirectGroupname}`);
+      } else {
+        return <Redirect push to={`/${redirectGroupname}`}/>;
+      }
     }
 
     return (
