@@ -10,7 +10,7 @@ import NotFound from '../components/NotFound';
 const HOSTNAME = window.location.hostname;
 const DOMAIN = Server.domain;
 const IS_PROD_DOMAIN = HOSTNAME.endsWith(DOMAIN);
-const HOST_GROUP_NAME = HOSTNAME.includes('.') ? HOSTNAME.split('.')[0] : null;
+const HOST_GROUP_NAME = HOSTNAME.includes(`.${DOMAIN}`) ? HOSTNAME.split('.')[0] : null;
 
 class App extends Component {
   getGroupname() {
