@@ -180,7 +180,7 @@ export default class GroupHome extends Component {
       logout,
     } = this.props;
 
-    const userBalanceBars = group.users.map(user => (
+    const userBalanceBars = group.users.sort((a, b) => (a.balance - b.balance)).map(user => (
       <UserBalanceBar key={user.id} users={group.users} user={user} />
     ));
 
