@@ -9,7 +9,7 @@ This app is dockerized for both development and production environment.
 
 ### Set up
 
-You need [Docker](https://www.docker.com/) and and [Docker Compose](https://docs.docker.com/compose/install/) version 2 or higher installed on your system.
+You need [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/install/) version 2 or higher installed on your system.
 
 Build Docker image for development and release with the command below.
 
