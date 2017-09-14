@@ -3,6 +3,8 @@
 
 This is a standalone web client for Table app.
 
+This app is dockerized for both development and production environment.
+
 ## Development
 
 ### Set up
