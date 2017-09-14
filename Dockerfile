@@ -1,4 +1,4 @@
-FROM yarnpkg/node-yarn:latest
+FROM node:6
 
 WORKDIR /usr/src/app
 RUN yarn install
