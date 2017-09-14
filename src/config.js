@@ -3,6 +3,7 @@ import '../temp/config';
 
 const REPLACE_VALUES = [
   [ /{{HOSTNAME}}/g, window.location.hostname ],
+  [ /{{HOST}}/g, window.location.host ],
   [ /{{ORIGIN}}/g, window.location.origin ],
   [ /{{PATHNAME}}/g, window.location.pathname ],
   [ /{{PORT}}/g, window.location.port ],
