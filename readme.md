@@ -1,7 +1,9 @@
 
-## table-web
+# table-web
 
 This is a standalone web client for Table app.
+
+## Development
 
 ### Set up
 
@@ -27,7 +29,12 @@ Use [Webpack's dev server](https://webpack.js.org/configuration/dev-server/) to 
 table-web$ yarn start
 ```
 
-### 
+## Deployment
+
+### Set up
+
+
+
 
 ### Build
 
