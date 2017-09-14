@@ -4,6 +4,7 @@ services:
     build: .
     volumes:
       - .:/usr/src/app/:rw
+      - ~/.ssh:/root/.ssh
     environment:
       - NODE_ENV=development
     ports:

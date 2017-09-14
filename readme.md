@@ -12,7 +12,7 @@ You need [Docker](https://www.docker.com/) and and [Docker Compose](https://docs
 Build Docker image for development and release with the command below.
 
 ```
-table-web$ docker build .
+table-web$ docker-compose build
 ```
 
 After building the Docker image, copy example config files and edit them to change configurations.
