@@ -1,0 +1,8 @@
+version: '2'
+services:
+  web:
+    image: yarnpkg/node-yarn:latest
+    volumes:
+      - .:.
+    ports:
+      - "8080:8080"
