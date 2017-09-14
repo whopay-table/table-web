@@ -62,6 +62,9 @@
   },
   "scripts": {
     "start": "node ./scripts/gulp.js",
-    "build": "node ./scripts/gulp.js build"
+    "build": "node ./scripts/gulp.js build",
+    "release": "sh ./scripts/release.sh",
+    "deploy": "sh ./scripts/deploy.sh",
+    "install-service": "sh ./scripts/install-service.sh"
   }
 }
