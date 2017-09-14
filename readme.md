@@ -7,15 +7,15 @@ This is a standalone web client for Table app.
 
 ### Set up
 
-You need [node.js](https://nodejs.org/en/) version 5.10 or higher and [Yarn](https://yarnpkg.com/en/docs/install) installed on your system.
+You need [Docker](https://www.docker.com/) and and [Docker Compose](https://docs.docker.com/compose/install/) version 2 or higher installed on your system.
 
-Install required dependencies with the command below.
+Build Docker image for development and release with the command below.
 
 ```
-table-web$ yarn install
+table-web$ docker build .
 ```
 
-After installing all dependencies, copy example config files and edit them to change configurations.
+After building the Docker image, copy example config files and edit them to change configurations.
 
 ```
 table-web$ cp configs/examples/* configs
@@ -23,41 +23,48 @@ table-web$ cp configs/examples/* configs
 
 ### Run development server
 
-Use [Webpack's dev server](https://webpack.js.org/configuration/dev-server/) to see your version of code served live on the local web server.
+Use [Webpack's dev server](https://webpack.js.org/configuration/dev-server/) to see your version of code served live on the local web server. Use docker-compose to update all dependencies and start up dev server.
 
 ```
-table-web$ yarn start
+table-web$ docker-compose up
 ```
+
+### Build static web app
+
+Build the static web based client app you can directly deploy on production server.
+
+```
+table-web$ docker-compose run web yarn build
+```
+
+This command will compile your code and output client package on `table-web/build`.
 
 ## Deployment
 
 ### Set up
 
-
-
-
-### Build
-
-Build the static web based client app you can directly deploy on production server.
-
+To run production server as a service, run following command to install `table-web.service`.
 ```
-table-web$ yarn build
+table-web$ sh ./scripts/install-service.sh
 ```
 
-This command will compile your code and output client package on `table-web/build`.
+### Release a specific version
 
-### Release
+To release a specific version of the client based on Git tag, follow the steps below.
 
-Release a specific version of client based on Git tag.
+#### Build for release
 
-```
-table-web$ yarn run release {version}
-```
-
-This will pull the version `{version}` from the Git server and build the client.
-
-After successfully build the desired version of the source code to a client, run following command to put the built app in `table-web/deploy`, and then restart the server to apply.
+Pull the version `{version}` from the Git server and build the client with the following command.
 
 ```
-table-web$ yarn run deploy
+table-web$ docker-compose run web yarn run release {version}
+```
+
+#### Deploy the client
+
+After successfully build the desired version of the source code to a client,
+run following command to put the built app in `table-web/deploy`, and then restart the server to apply.
+
+```
+table-web$ sh ./scripts/deploy.sh
 ```
