@@ -6,6 +6,7 @@ const fs = require('fs');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const mkdirp = require('mkdirp');
+const path = require('path');
 const rev = require('gulp-rev');
 const revReplace = require('gulp-rev-replace');
 const uglify = require('gulp-uglify');
@@ -14,13 +15,38 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('./assets/webpack-config');
 
+const CONFIG_PATH = './temp/config.js'
+const CONFIG_KEYS = ['WEB_API_URL', 'WEB_DOMAIN'];
+
 const DEFAULT_DEV_TOOL = '#eval-source-map';
 const DEFAULT_DEV_HOST = '0.0.0.0';
 const DEFAULT_DEV_PORT = 8080;
 
+gulp.task('clean-temp', () => {
+  return gulp.src('./temp/**/*.*', {read: false})
+    .pipe(vinylPaths(del));
+});
+
 gulp.task('clean-build', () => {
   return gulp.src('./build/**/*.*', {read: false})
     .pipe(vinylPaths(del));
+});
+
+gulp.task('write-config-file', ['clean-temp'], callback => {
+  const configBody = `window.__CONFIG__ = {${CONFIG_KEYS.map(key => `"${key}": "${process.env[key]}"`).join(',')}};`;
+
+  mkdirp(path.dirname(CONFIG_PATH), err => {
+    if (err) {
+      throw new gutil.PluginError('write-config-file', err);
+    }
+
+    fs.writeFile(CONFIG_PATH, configBody, err => {
+      if (err) {
+        throw new gutil.PluginError('write-config-file', err);
+      }
+      callback();
+    });
+  });
 });
 
 gulp.task('copy-static-files', ['clean-build'], () => {
@@ -28,7 +54,7 @@ gulp.task('copy-static-files', ['clean-build'], () => {
     .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('webpack-dev-server', ['copy-static-files'], callback => {
+gulp.task('webpack-dev-server', ['copy-static-files', 'write-config-file'], callback => {
   const devConfig = Object.create(webpackConfig);
   const devtool = DEFAULT_DEV_TOOL;
   const host = DEFAULT_DEV_HOST;
@@ -57,7 +83,7 @@ gulp.task('webpack-dev-server', ['copy-static-files'], callback => {
   });
 });
 
-gulp.task('webpack-build', ['copy-static-files'], callback => {
+gulp.task('webpack-build', ['copy-static-files', 'write-config-file'], callback => {
   const devConfig = Object.create(webpackConfig);
   devConfig.plugins = devConfig.plugins.concat(
     new webpack.DefinePlugin({

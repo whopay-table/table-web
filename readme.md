@@ -18,7 +18,7 @@ table-web$ docker-compose build
 After building the Docker image, copy example config files and edit them to change configurations.
 
 ```
-table-web$ cp configs/examples/* configs
+table-web$ cp configs.examples.env configs.env
 ```
 
 ### Run development server
@@ -44,8 +44,15 @@ This command will compile your code and output client package on `table-web/buil
 ### Set up
 
 To run production server as a service, run following command to install `table-web.service`.
+
 ```
 table-web$ sh ./scripts/install-service.sh
+```
+
+And then, set to use production config file.
+
+```
+table-web$ cp configs.production.env configs.env
 ```
 
 ### Release a specific version

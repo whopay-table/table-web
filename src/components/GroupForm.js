@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import * as Server from '../../configs/server';
+import Config from '../config';
 
-const DOMAIN = Server.domain;
+const DOMAIN = Config.WEB_DOMAIN;
 
 export default class GroupForm extends Component {
   handleGroupnameBlur(e) {

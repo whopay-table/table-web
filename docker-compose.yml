@@ -5,8 +5,8 @@ services:
     volumes:
       - .:/usr/src/app/:rw
       - ~/.ssh:/root/.ssh
-    environment:
-      - NODE_ENV=development
+    env_file:
+      - configs.env
     ports:
       - "8080:8080"
     command: bash -c "yarn install && yarn start"

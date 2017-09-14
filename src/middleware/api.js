@@ -1,8 +1,8 @@
 import { camelizeKeys } from 'humps'
 import queryString from 'query-string';
-import * as Server from '../../configs/server';
+import Config from '../config';
 
-const API_URL = Server.url;
+const API_URL = Config.WEB_API_URL;
 const API_REQUEST_KEY = 'API_REQUEST';
 
 const requestApi = (method, endpoint, params, token) => {

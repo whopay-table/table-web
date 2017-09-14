@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import * as Server from '../../configs/server';
+import Config from '../config';
 
 const HOSTNAME = window.location.hostname;
-const DOMAIN = Server.domain;
+const DOMAIN = Config.WEB_DOMAIN;
 const IS_PROD_DOMAIN = HOSTNAME.endsWith(DOMAIN);
 
 export default class Header extends Component {

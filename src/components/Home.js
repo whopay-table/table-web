@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router-dom';
-import * as Server from '../../configs/server';
+import Config from '../config';
 import Header from './Header';
 import Footer from './Footer';
 
-const DOMAIN = Server.domain;
+const DOMAIN = Config.WEB_DOMAIN;
 
 export default class Home extends Component {
   state = {

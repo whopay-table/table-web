@@ -4,10 +4,10 @@ import { Redirect } from 'react-router-dom';
 import QueryString from 'query-string';
 import { createGroup, getGroupIndex } from '../actions';
 import GroupCreate from '../components/GroupCreate';
-import * as Server from '../../configs/server';
+import Config from '../config';
 
 const HOSTNAME = window.location.hostname;
-const DOMAIN = Server.domain;
+const DOMAIN = Config.WEB_DOMAIN;
 const PORT = window.location.port ? `:${window.location.port}` : '';
 const IS_PROD_DOMAIN = HOSTNAME.endsWith(DOMAIN);
 
