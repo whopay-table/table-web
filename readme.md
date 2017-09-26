@@ -11,16 +11,16 @@ This app is dockerized for both development and production environment.
 
 You need [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/install/) version 2 or higher installed on your system.
 
-Build Docker image for development and release with the command below.
-
-```
-table-web$ docker-compose build
-```
-
-After building the Docker image, copy example config files and edit them to change configurations.
+Copy the example config file and edit to change configurations.
 
 ```
 table-web$ cp configs.examples.env configs.env
+```
+
+After setting up the config file, build Docker image for development and release with the command below.
+
+```
+table-web$ docker-compose build
 ```
 
 ### Run development server
