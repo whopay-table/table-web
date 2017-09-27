@@ -1,0 +1,24 @@
+.c-container {
+  padding-left: rem(10px);
+  padding-right: rem(10px);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: rem(1024px);
+
+  &--is-headered {
+    padding-top: $header-height;
+  }
+
+  &--is-group-headered {
+    padding-top: $group-header-height;
+  }
+}
+
+@media (max-width: $media-sm-width) {
+  .c-container {
+    &--is-group-headered {
+      padding-top: $group-header-sm-height;
+    }
+  }
+}

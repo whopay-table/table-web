@@ -1,0 +1,19 @@
+.c-content-group {
+  display: block;
+
+  &--size-small {
+    padding-bottom: rem(4px);
+  }
+
+  &--size-default {
+    padding-bottom: rem(8px);
+  }
+
+  &--size-large {
+    padding-bottom: rem(16px);
+  }
+
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+}

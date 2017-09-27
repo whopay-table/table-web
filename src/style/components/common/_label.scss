@@ -1,0 +1,12 @@
+.c-label {
+  display: block;
+  padding: 4px 0;
+  color: color('dark-grey');
+  font-size: 14px;
+
+  &__required-icon {
+    display: inline-block;
+    color: color('red');
+    padding-left: 4px;
+  }
+}

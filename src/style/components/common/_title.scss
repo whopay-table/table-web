@@ -1,0 +1,16 @@
+.c-title {
+  display: inline;
+  font-weight: $bold;
+
+  &--size-small {
+    font-size: rem(16px);
+  }
+
+  &--size-default {
+    font-size: rem(18px);
+  }
+
+  &--size-large {
+    font-size: rem(20px);
+  }
+}

@@ -1,0 +1,10 @@
+.c-button {
+  display: inline-block;
+  background-color: color('link');
+  padding: rem(8px) rem(12px);
+  min-width: rem(100px);
+  text-align: center;
+  color: color('white');
+  font-size: rem(14px);
+  cursor: pointer;
+}

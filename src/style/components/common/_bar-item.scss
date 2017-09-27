@@ -1,0 +1,20 @@
+
+.c-bar-item {
+  display: block;
+  float: left;
+
+  &--align-left {
+    float: left;
+    padding-right: rem(12px);
+  }
+
+  &--align-right {
+    float: right;
+    padding-left: rem(12px);
+  }
+
+  &:last-of-type {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

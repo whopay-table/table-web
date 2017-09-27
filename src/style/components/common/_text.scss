@@ -1,0 +1,15 @@
+.c-text {
+  display: inline;
+
+  &--size-small {
+    font-size: 0.8em;
+  }
+
+  &--size-default {
+    font-size: 1em;
+  }
+
+  &--size-large {
+    font-size: 1.4em;
+  }
+}

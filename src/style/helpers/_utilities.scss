@@ -302,3 +302,49 @@
     list-style-position: inside;
   }
 }
+
+// For common components.
+
+.u-colored-text {
+  &--role-default {
+    color: color('default');
+  }
+
+  &--role-success {
+    color: color('success');
+  }
+
+  &--role-info {
+    color: color('info');
+  }
+
+  &--role-warning {
+    color: color('warning');
+  }
+
+  &--role-danger {
+    color: color('danger');
+  }
+}
+
+.u-colored-background {
+  &--role-default {
+    background-color: color('default');
+  }
+
+  &--role-success {
+    background-color: color('success');
+  }
+
+  &--role-info {
+    background-color: color('info');
+  }
+
+  &--role-warning {
+    background-color: color('warning');
+  }
+
+  &--role-danger {
+    background-color: color('danger');
+  }
+}

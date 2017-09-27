@@ -1,0 +1,15 @@
+.u-input {
+  display: block;
+  margin: 4px 0;
+  border: 1px solid color('grey');
+  border-radius: 0;
+  outline: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: color('dark-grey');
+  width: 100%;
+
+  &:focus {
+    border: 1px solid color('link');
+  }
+}
