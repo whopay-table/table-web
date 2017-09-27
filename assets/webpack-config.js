@@ -15,7 +15,11 @@ module.exports = {
     chunkFilename: '[chunkhash].js'
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    modules: ['node_modules'],
+    alias: {
+      src: path.resolve(__dirname, '../src'),
+    }
   },
   module: {
     rules: [
