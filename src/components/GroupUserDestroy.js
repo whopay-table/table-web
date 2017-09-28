@@ -1,6 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import GroupHeader from './GroupHeader';
+import Alert from 'src/components/common/Alert';
+import Bar from 'src/components/common/Bar';
+import BarItem from 'src/components/common/BarItem';
+import Button from 'src/components/common/Button';
+import Container from 'src/components/common/Container';
+import ContentGroup from 'src/components/common/ContentGroup';
+import GroupHeader from 'src/components/GroupHeader';
+import Title from 'src/components/common/Title';
 
 export default class GroupUserDestroy extends Component {
   static defaultProps = {
@@ -32,13 +39,19 @@ export default class GroupUserDestroy extends Component {
     } = this.props;
 
     const alertBlock = alert ? (
-      <div className="alert alert-danger" role="alert">
+      <Alert
+        role="danger"
+      >
         {alert}
-      </div>
+      </Alert>
     ) : null;
 
     return (
-      <div className="c-group-user-destroy u-group-header-container">
+      <Container
+        className="c-group-user-destroy"
+        type="wrapper"
+        isGroupHeadered={true}
+      >
         <GroupHeader
           currentUser={currentUser}
           group={group}
@@ -46,47 +59,45 @@ export default class GroupUserDestroy extends Component {
           logout={logout}
           activeMenuItem={'user-destroy'}
         />
-        <div className="u-container">
-          <div className="c-group-user-destroy__body">
-            <div className="u-page-title">
-              그룹 탈퇴
-            </div>
-            <small className="u-input-info">
-              주의: 그룹을 탈퇴하면 거래 기록을 제외한 모든 내 정보가 사라지며,
-              현재 내 이메일 주소는 이 그룹에서 다시는 사용할 수 없게 되고,
-              이는 복구할 수 없습니다.
-            </small>
-            <form
-              className="c-group-user-destroy-form"
-              onSubmit={e => this.handleSubmit(e)}
-            >
-              <div className="u-input-group">
-                <label className="u-label">
-                  비밀번호
-                </label>
-                <input
-                  type="password"
-                  className="u-input"
-                  onChange={e => this.props.setPassword(e.target.value)}
-                  value={password}
-                />
-                <small className="u-input-info">
-                  그룹 탈퇴를 위해 로그인에 사용되는 비밀번호를 입력하세요.
-                </small>
-              </div>
-              <div className="u-button-row">
-                <a
-                  className="u-button u-button--is-danger"
+        <Container>
+          <Title>
+            그룹 탈퇴
+          </Title>
+          <Text size="small">
+            주의: 그룹을 탈퇴하면 거래 기록을 제외한 모든 내 정보가 사라지며,
+            현재 내 이메일 주소는 이 그룹에서 다시는 사용할 수 없게 되고,
+            이는 복구할 수 없습니다.
+          </Text>
+          <form
+            onSubmit={e => this.handleSubmit(e)}
+          >
+            <ContentGroup size="small">
+              <Label>
+                비밀번호
+              </Label>
+              <Textbox
+                type="password"
+                onChange={e => this.props.setPassword(e.target.value)}
+                value={password}
+              />
+              <Text size="small">
+                그룹 탈퇴를 위해 로그인에 사용되는 비밀번호를 입력하세요.
+              </Text>
+            </ContentGroup>
+            <Bar>
+              <BarItem align="left">
+                <Button
+                  role="danger"
                   onClick={() => this.handleSubmit()}
                 >
                   탈퇴
-                </a>
-              </div>
-              {alertBlock}
-            </form>
-          </div>
-        </div>
-      </div>
+                </Button>
+              </BarItem>
+            </Bar>
+            {alertBlock}
+          </form>
+        </Container>
+      </Container>
     );
   }
 }

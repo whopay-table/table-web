@@ -1,5 +1,14 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
+import Alert from 'src/components/common/Alert';
+import Bar from 'src/components/common/Bar';
+import BarItem from 'src/components/common/BarItem';
+import Button from 'src/components/common/Button';
+import ContentGroup from 'src/components/common/ContentGroup';
+import Label from 'src/components/common/Label';
+import Title from 'src/components/common/Title';
+import Text from 'src/components/common/Text';
+import Textbox from 'src/components/common/Textbox';
 
 export default class GroupUserForm extends Component {
   handleEmailBlur(e) {
@@ -100,33 +109,30 @@ export default class GroupUserForm extends Component {
 
     const formGroups = formBase.map(item => {
       const infoBlock = item.info ? (
-        <small className="u-input-info">
+        <Text
+          size="small"
+        >
           {item.info}
-        </small>
+        </Text>
       ) : null;
       const errorBlock = paramErrors[item.name] ? (
-        <span className="u-help-block">
+        <Text
+          size="small"
+          role="danger"
+        >
           {paramErrors[item.name]}
-        </span>
+        </Text>
       ) : null;
       return (
-        <div
+        <ContentGroup
           key={item.name}
-          className={classnames(
-            'u-input-group',
-            { 'has-error': paramErrors[item.name] }
-          )}
+          size="small"
         >
-          <label
-            className="u-label"
-            htmlFor={`group-user-create-${item.name}`}
-          >
+          <Label>
             {item.label}
-          </label>
-          <input
+          </Label>
+          <Textbox
             type={item.inputType}
-            className="u-input"
-            id={`group-user-create-${item.name}`}
             name={item.name}
             placeholder={item.placeholder}
             onChange={e => this.handleInputChange(e)}
@@ -136,14 +142,16 @@ export default class GroupUserForm extends Component {
           />
           {errorBlock}
           {infoBlock}
-        </div>
+        </ContentGroup>
       );
     });
 
     const alertBlock = alert ? (
-      <div className="alert alert-danger" role="alert">
+      <Alert
+        role="danger"
+      >
         {alert}
-      </div>
+      </Alert>
     ) : null;
 
     return (
@@ -153,19 +161,15 @@ export default class GroupUserForm extends Component {
       >
         {formGroups}
         {alertBlock}
-        <input
-          type="submit"
-          className="u-no-display"
-          value="-"
-        />
-        <div className="u-button-row">
-          <a
-            className="u-button"
-            onClick={() => this.handleSubmit()}
-          >
-            {isUpdate ? '수정' : '확인'}
-          </a>
-        </div>
+        <Bar>
+          <BarItem>
+            <Button
+              type="submit"
+            >
+              {isUpdate ? '수정' : '확인'}
+            </Button>
+          </BarItem>
+        </Bar>
       </form>
     );
   }
