@@ -1,7 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
+import Bar from 'src/components/common/Bar';
+import BarItem from 'src/components/common/BarItem';
+import Button from 'src/components/common/Button';
+import Container from 'src/components/common/Container';
+import ContentGroup from 'src/components/common/ContentGroup';
 import GroupUserForm from './GroupUserForm';
 import GroupHeader from './GroupHeader';
+import Label from 'src/components/common/Label';
+import Title from 'src/components/common/Title';
 
 export default class GroupUserUpdate extends Component {
   static defaultProps = {
@@ -26,7 +33,11 @@ export default class GroupUserUpdate extends Component {
     } = this.props;
 
     return (
-      <div className="c-group-user-update u-group-header-container">
+      <Container
+        className="c-group-user-update"
+        type="wrapper"
+        isGroupHeadered={true}
+      >
         <GroupHeader
           currentUser={currentUser}
           group={group}
@@ -34,36 +45,36 @@ export default class GroupUserUpdate extends Component {
           logout={logout}
           activeMenuItem={'user-update'}
         />
-        <div className="u-container">
-          <div className="c-group-user-update__body">
-            <div className="u-page-title">
-              개인정보 수정
-            </div>
-            <div className="u-input-group">
-              <div className="u-label">
-                그룹 탈퇴
-              </div>
-              <div className="u-button-row">
-                <Link
+        <Container>
+          <Title>
+            개인정보 수정
+          </Title>
+          <ContentGroup size="small">
+            <Label>
+              그룹 탈퇴
+            </Label>
+            <Bar>
+              <BarItem>
+                <Button
                   to={`/${groupname}/me/destroy`}
-                  className="u-button u-button--left-align u-button--is-danger"
+                  role="danger"
                 >
                   그룹 탈퇴
-                </Link>
-              </div>
-            </div>
-            <GroupUserForm
-              isUpdate={true}
-              onSubmit={updateUser}
-              getUserIdByEmail={getUserIdByEmail}
-              params={params}
-              paramErrors={paramErrors}
-              alert={alert}
-              setParams={setParams}
-            />
-          </div>
-        </div>
-      </div>
+                </Button>
+              </BarItem>
+            </Bar>
+          </ContentGroup>
+          <GroupUserForm
+            isUpdate={true}
+            onSubmit={updateUser}
+            getUserIdByEmail={getUserIdByEmail}
+            params={params}
+            paramErrors={paramErrors}
+            alert={alert}
+            setParams={setParams}
+          />
+        </Container>
+      </Container>
     );
   }
 }
