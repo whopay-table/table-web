@@ -60,42 +60,46 @@ export default class GroupUserDestroy extends Component {
           activeMenuItem={'user-destroy'}
         />
         <Container>
-          <Title>
-            그룹 탈퇴
-          </Title>
-          <Text size="small">
-            주의: 그룹을 탈퇴하면 거래 기록을 제외한 모든 내 정보가 사라지며,
-            현재 내 이메일 주소는 이 그룹에서 다시는 사용할 수 없게 되고,
-            이는 복구할 수 없습니다.
-          </Text>
-          <form
-            onSubmit={e => this.handleSubmit(e)}
-          >
-            <ContentGroup size="small">
-              <Label>
-                비밀번호
-              </Label>
-              <Textbox
-                type="password"
-                onChange={e => this.props.setPassword(e.target.value)}
-                value={password}
-              />
-              <Text size="small">
-                그룹 탈퇴를 위해 로그인에 사용되는 비밀번호를 입력하세요.
-              </Text>
-            </ContentGroup>
-            <Bar>
-              <BarItem align="left">
-                <Button
-                  role="danger"
-                  onClick={() => this.handleSubmit()}
-                >
-                  탈퇴
-                </Button>
-              </BarItem>
-            </Bar>
-            {alertBlock}
-          </form>
+          <ContentGroup>
+            <Title>
+              그룹 탈퇴
+            </Title>
+            <Text size="small">
+              주의: 그룹을 탈퇴하면 거래 기록을 제외한 모든 내 정보가 사라지며,
+              현재 내 이메일 주소는 이 그룹에서 다시는 사용할 수 없게 되고,
+              이는 복구할 수 없습니다.
+            </Text>
+          </ContentGroup>
+          <ContentGroup>
+            <form
+              onSubmit={e => this.handleSubmit(e)}
+            >
+              <ContentGroup size="small">
+                <Label>
+                  비밀번호
+                </Label>
+                <Textbox
+                  type="password"
+                  onChange={e => this.props.setPassword(e.target.value)}
+                  value={password}
+                />
+                <Text size="small">
+                  그룹 탈퇴를 위해 로그인에 사용되는 비밀번호를 입력하세요.
+                </Text>
+              </ContentGroup>
+              <Bar>
+                <BarItem align="left">
+                  <Button
+                    role="danger"
+                    onClick={() => this.handleSubmit()}
+                  >
+                    탈퇴
+                  </Button>
+                </BarItem>
+              </Bar>
+              {alertBlock}
+            </form>
+          </ContentGroup>
         </Container>
       </Container>
     );

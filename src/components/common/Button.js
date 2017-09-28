@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 export default class Button extends Component {
   static defaultProps = {
     className: '',
+    fixedWidth: false,
     isActive: false,
     role: 'default',
   };
@@ -67,6 +68,7 @@ export default class Button extends Component {
   render() {
     const {
       className,
+      fixedWidth,
       href,
       isActive,
       onClick,
@@ -78,6 +80,7 @@ export default class Button extends Component {
     const classNames = [
       'c-button',
       { 'c-button--is-active' : isActive },
+      { 'c-button--fixed-width' : fixedWidth },
       className,
       'u-colored-background',
       `u-colored-background--role-${role}`,

@@ -7,11 +7,17 @@ import Button from 'src/components/common/Button';
 import Config from 'src/config';
 import ContentGroup from 'src/components/common/ContentGroup';
 import Label from 'src/components/common/Label';
+import Listbox from 'src/components/common/Listbox';
 import Title from 'src/components/common/Title';
 import Text from 'src/components/common/Text';
 import Textbox from 'src/components/common/Textbox';
 
 export default class GroupTransactionForm extends Component {
+  static defaultProps = {
+    onCancel: () => {},
+    onSubmit: () => {},
+  };
+
   handleInputChange = e => {
     this.props.setParams(Object.assign({}, this.props.params, {[e.target.name]: e.target.value}));
   };
@@ -39,17 +45,32 @@ export default class GroupTransactionForm extends Component {
     }));
   }
 
-  handleAddFromUser(userId) {
+  handleAddFromUsers(userIds) {
     const { params } = this.props;
     const fromUserIds = JSON.parse(params[`transaction[from_user_ids]`]);
-    if (!fromUserIds.includes(userId)) {
+    const newUserIds = userIds.filter(uid => !fromUserIds.includes(uid));
+    if (newUserIds.length > 0) {
       this.props.setParams(Object.assign({}, params, {
-        'transaction[from_user_ids]': JSON.stringify(fromUserIds.concat([userId]))
+        'transaction[from_user_ids]': JSON.stringify(fromUserIds.concat(newUserIds))
       }, params.totalAmount !== null ? {
-        'transaction[amount]': (params.totalAmount === '' ? '' :
-          parseInt(parseInt(params.totalAmount) / (fromUserIds.length + 2)))
+        'transaction[amount]': (
+          params.totalAmount === '' ?
+          '' : parseInt(parseInt(params.totalAmount) / (fromUserIds.length + 2))
+        )
       } : {}));
     }
+  }
+
+  handleAddFromUser(userId) {
+    this.handleAddFromUsers([userId]);
+  }
+
+  handleAddAllFromUser() {
+    const {
+      currentUser,
+      group,
+    } = this.props;
+    this.handleAddFromUsers(group.users.map(user => user.id).filter(uid => uid !== currentUser.id));
   }
 
   handleClearFromUser() {
@@ -104,26 +125,35 @@ export default class GroupTransactionForm extends Component {
     } = this.props;
 
     const userSelectorButtons = group.users.filter(user => user.id !== currentUser.id).map(user => (
-      <a
+      <BarItem
+        align="left"
         key={user.id}
-        className="u-input-selector__button"
-        onClick={() => this.handleSelectToUser(user.id)}
       >
-        {user.name}
-      </a>
+        <Button
+          onClick={() => this.handleSelectToUser(user.id)}
+          fixedWidth={true}
+        >
+          {user.name}
+        </Button>
+      </BarItem>
     ));
+
+    const toUserValue = params[`transaction[to_user_id]`] ? [{
+      id: params[`transaction[to_user_id]`],
+      label: this.getUserNameById(params[`transaction[to_user_id]`]),
+    }] : [];
 
     return (
       <ContentGroup size="small">
         <Label>
           내게 송금받는 사람
         </Label>
-        <Textbox
-          value={this.getUserNameById(params[`transaction[to_user_id]`])}
+        <Listbox
+          value={toUserValue}
         />
-        <div className="u-input-selector">
+        <Bar>
           {userSelectorButtons}
-        </div>
+        </Bar>
         <Text size="small">
           버튼을 눌러 사람을 선택하세요.
         </Text>
@@ -139,35 +169,54 @@ export default class GroupTransactionForm extends Component {
     } = this.props;
 
     const userSelectorButtons = group.users.filter(user => user.id !== currentUser.id).map(user => (
-      <a
+      <BarItem
+        align="left"
         key={user.id}
-        className="u-input-selector__button"
-        onClick={() => this.handleAddFromUser(user.id)}
       >
-        {user.name}
-      </a>
+        <Button
+          onClick={() => this.handleAddFromUser(user.id)}
+          fixedWidth={true}
+        >
+          {user.name}
+        </Button>
+      </BarItem>
     ));
 
     const fromUserIds = JSON.parse(params[`transaction[from_user_ids]`]);
-    const fromUserNamesString = fromUserIds.map(uid => this.getUserNameById(uid)).join(', ');
+    const fromUserValue = fromUserIds.map(uid => ({
+      id: uid,
+      label: this.getUserNameById(uid),
+    }));
 
     return (
       <ContentGroup size="small">
         <Label>
           내게 송금할 사람
         </Label>
-        <Textbox
-          value={fromUserNamesString}
+        <Listbox
+          value={fromUserValue}
         />
-        <div className="u-input-selector">
+        <Bar>
           {userSelectorButtons}
-          <a
-            className="u-input-selector__button"
-            onClick={() => this.handleClearFromUser()}
-          >
-            리셋
-          </a>
-        </div>
+          <BarItem align="left">
+            <Button
+              onClick={() => this.handleAddAllFromUser()}
+              fixedWidth={true}
+              role="info"
+            >
+              모두 선택
+            </Button>
+          </BarItem>
+          <BarItem align="left">
+            <Button
+              onClick={() => this.handleClearFromUser()}
+              fixedWidth={true}
+              role="warning"
+            >
+              리셋
+            </Button>
+          </BarItem>
+        </Bar>
         <Text size="small">
           버튼을 눌러 사람을 선택하세요.
         </Text>
@@ -273,6 +322,7 @@ export default class GroupTransactionForm extends Component {
     const {
       alert,
       group,
+      onCancel,
       params,
       paramErrors,
       isFromCurrentUser
@@ -323,7 +373,7 @@ export default class GroupTransactionForm extends Component {
           </BarItem>
           <BarItem align="left">
             <Button
-              onClick={() => this.cancel()}
+              onClick={() => onCancel()}
               role="warning"
             >
               취소

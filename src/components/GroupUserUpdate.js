@@ -46,33 +46,39 @@ export default class GroupUserUpdate extends Component {
           activeMenuItem={'user-update'}
         />
         <Container>
-          <Title>
-            개인정보 수정
-          </Title>
-          <ContentGroup size="small">
-            <Label>
-              그룹 탈퇴
-            </Label>
-            <Bar>
-              <BarItem>
-                <Button
-                  to={`/${groupname}/me/destroy`}
-                  role="danger"
-                >
-                  그룹 탈퇴
-                </Button>
-              </BarItem>
-            </Bar>
+          <ContentGroup>
+            <Title>
+              개인정보 수정
+            </Title>
           </ContentGroup>
-          <GroupUserForm
-            isUpdate={true}
-            onSubmit={updateUser}
-            getUserIdByEmail={getUserIdByEmail}
-            params={params}
-            paramErrors={paramErrors}
-            alert={alert}
-            setParams={setParams}
-          />
+          <ContentGroup>
+            <ContentGroup size="small">
+              <Label>
+                그룹 탈퇴
+              </Label>
+              <Bar>
+                <BarItem>
+                  <Button
+                    to={`/${groupname}/me/destroy`}
+                    role="danger"
+                  >
+                    그룹 탈퇴
+                  </Button>
+                </BarItem>
+              </Bar>
+            </ContentGroup>
+            <ContentGroup>
+              <GroupUserForm
+                isUpdate={true}
+                onSubmit={updateUser}
+                getUserIdByEmail={getUserIdByEmail}
+                params={params}
+                paramErrors={paramErrors}
+                alert={alert}
+                setParams={setParams}
+              />
+            </ContentGroup>
+          </ContentGroup>
         </Container>
       </Container>
     );

@@ -55,16 +55,20 @@ export default class GroupTransactions extends Component {
           activeMenuItem="transactions"
         />
         <Container>
-          <Title>
-            거래 내역
-          </Title>
-          {transactionItems}
-          <a
-            className="u-more-button"
-            onClick={getMoreTransactions}
-          >
-            더 불러오기
-          </a>
+          <ContentGroup>
+            <Title>
+              거래 내역
+            </Title>
+          </ContentGroup>
+          <ContentGroup>
+            {transactionItems}
+            <a
+              className="u-more-button"
+              onClick={getMoreTransactions}
+            >
+              더 불러오기
+            </a>
+          </ContentGroup>
         </Container>
       </Container>
     );

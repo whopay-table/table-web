@@ -1,5 +1,6 @@
 .c-title {
-  display: inline;
+  display: block;
+  padding: rem(4px) 0;
   font-weight: $bold;
 
   &--size-small {

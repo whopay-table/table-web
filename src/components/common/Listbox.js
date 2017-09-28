@@ -3,63 +3,37 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Listbox extends Component {
   static defaultProps = {
-    autoFocus: false,
-    autoCapitalize: false,
-    autoComplete: false,
     className: '',
-    disabled: false,
-    id: undefined,
-    name: undefined,
-    onChange: () => {},
-    onFocus: () => {},
-    onBlur: () => {},
-    onKeyDown: () => {},
-    placeholder: '',
-    type: 'text',
-    readOnly: false,
-    value: '',
+    value: [],
   };
+
+  renderValue() {
+    const { value } = this.props;
+    return value.map(({ id, label }) => (
+      <div
+        key={id}
+        className="c-listbox__item"
+      >
+        {label}
+      </div>
+    ));
+  }
 
   render() {
     const {
-      autoFocus,
-      autoCapitalize,
-      autoComplete,
       className,
-      disabled,
-      id,
-      name,
-      onChange,
-      onFocus,
-      onBlur,
-      onKeyDown,
-      placeholder,
-      type,
-      readOnly,
       value,
     } = this.props;
 
     return (
-      <input
+      <div
         className={classnames(
-          'c-textbox',
+          'c-listbox',
           className
         )}
-        ref={e => this.input = e}
-        autoFocus={autoFocus}
-        autoCapitalize={autoCapitalize ? 'sentences' : 'off'}
-        autoComplete={autoComplete ? true : 'off'}
-        disabled={disabled}
-        id={id}
-        name={name}
-        onChange={onChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onKeyDown={onKeyDown}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-      />
+      >
+        {this.renderValue()}
+      </div>
     );
   }
 }
