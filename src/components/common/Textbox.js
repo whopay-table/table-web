@@ -49,7 +49,6 @@ export default class Textbox extends Component {
         autoFocus={autoFocus}
         autoCapitalize={autoCapitalize ? 'sentences' : 'off'}
         autoComplete={autoComplete ? true : 'off'}
-        className={className}
         disabled={disabled}
         id={id}
         name={name}
@@ -59,7 +58,6 @@ export default class Textbox extends Component {
         onKeyDown={onKeyDown}
         placeholder={placeholder}
         type={type}
-        readOnly={readOnly}
         value={value}
       />
     );

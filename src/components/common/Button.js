@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 export default class Button extends Component {
   static defaultProps = {
     className: '',
+    isActive: false,
     role: 'default',
-    type: 'link',
   };
 
   renderAnchor(classNames) {
@@ -32,8 +32,8 @@ export default class Button extends Component {
     const {
       children,
       role,
-      to,
       onClick,
+      to,
     } = this.props;
 
     return (
@@ -68,17 +68,28 @@ export default class Button extends Component {
     const {
       className,
       href,
+      isActive,
       onClick,
       role,
       to,
+      type,
     } = this.props;
 
     const classNames = [
       'c-button',
+      { 'c-button--is-active' : isActive },
       className,
       'u-colored-background',
       `u-colored-background--role-${role}`,
     ];
+
+    if (type === 'link') {
+      return this.renderLink(classNames);
+    } else if (type === 'a') {
+      return this.renderAnchor(classNames);
+    } else if (type === 'submit') {
+      return this.renderSubmit(classNames);
+    }
 
     if (href) {
       return this.renderAnchor(classNames);

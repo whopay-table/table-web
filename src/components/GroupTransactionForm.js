@@ -1,11 +1,17 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
+import Alert from 'src/components/common/Alert';
+import Bar from 'src/components/common/Bar';
+import BarItem from 'src/components/common/BarItem';
+import Button from 'src/components/common/Button';
+import Config from 'src/config';
+import ContentGroup from 'src/components/common/ContentGroup';
+import Label from 'src/components/common/Label';
+import Title from 'src/components/common/Title';
+import Text from 'src/components/common/Text';
+import Textbox from 'src/components/common/Textbox';
 
 export default class GroupTransactionForm extends Component {
-  static propTypes = {
-
-  };
-
   handleInputChange = e => {
     this.props.setParams(Object.assign({}, this.props.params, {[e.target.name]: e.target.value}));
   };
@@ -108,23 +114,20 @@ export default class GroupTransactionForm extends Component {
     ));
 
     return (
-      <div className="u-input-group">
-        <label className="u-label">
+      <ContentGroup size="small">
+        <Label>
           내게 송금받는 사람
-        </label>
-        <input
-          className="u-input"
-          type="text"
+        </Label>
+        <Textbox
           value={this.getUserNameById(params[`transaction[to_user_id]`])}
-          readOnly
         />
         <div className="u-input-selector">
           {userSelectorButtons}
         </div>
-        <small className="u-input-info">
+        <Text size="small">
           버튼을 눌러 사람을 선택하세요.
-        </small>
-      </div>
+        </Text>
+      </ContentGroup>
     );
   }
 
@@ -149,15 +152,12 @@ export default class GroupTransactionForm extends Component {
     const fromUserNamesString = fromUserIds.map(uid => this.getUserNameById(uid)).join(', ');
 
     return (
-      <div className="u-input-group">
-        <label className="u-label">
+      <ContentGroup size="small">
+        <Label>
           내게 송금할 사람
-        </label>
-        <input
-          className="u-input"
-          type="text"
+        </Label>
+        <Textbox
           value={fromUserNamesString}
-          readOnly
         />
         <div className="u-input-selector">
           {userSelectorButtons}
@@ -168,43 +168,39 @@ export default class GroupTransactionForm extends Component {
             리셋
           </a>
         </div>
-        <small className="u-input-info">
+        <Text size="small">
           버튼을 눌러 사람을 선택하세요.
-        </small>
-      </div>
+        </Text>
+      </ContentGroup>
     );
   }
 
   renderAmountTypeSelector() {
     const { params } = this.props;
     return (
-      <div className="u-input-group">
-        <label className="u-label">
+      <ContentGroup size="small">
+        <Label>
           금액 입력 방법
-        </label>
-        <div className="u-button-row">
-          <a
-            className={classnames(
-              'u-button',
-              'u-button--left-align',
-              { 'u-button--is-active': params.totalAmount !== null }
-            )}
-            onClick={() => this.handleTotalAmountClick(true)}
-          >
-            전체 금액 입력해서 1/N 하기
-          </a>
-          <a
-            className={classnames(
-              'u-button',
-              'u-button--left-align',
-              { 'u-button--is-active': params.totalAmount === null }
-            )}
-            onClick={() => this.handleTotalAmountClick(false)}
-          >
-            한 사람당 받을 금액 입력하기
-          </a>
-        </div>
-      </div>
+        </Label>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              isActive={params.totalAmount !== null}
+              onClick={() => this.handleTotalAmountClick(true)}
+            >
+              전체 금액 입력해서 1/N 하기
+            </Button>
+          </BarItem>
+          <BarItem align="left">
+            <Button
+              isActive={params.totalAmount === null}
+              onClick={() => this.handleTotalAmountClick(false)}
+            >
+              전체 금액 입력해서 1/N 하기
+            </Button>
+          </BarItem>
+        </Bar>
+      </ContentGroup>
     );
   }
 
@@ -231,21 +227,22 @@ export default class GroupTransactionForm extends Component {
     } = this.props;
 
     const amountErrorBlock = paramErrors['transaction[amount]'] ? (
-      <span className="u-help-block">
+      <Text
+        size="small"
+        role="danger"
+      >
         {paramErrors['transaction[amount]']}
-      </span>
+      </Text>
     ) : null;
 
     const inputItem = params.totalAmount !== null ? (
-      <input
-        className="u-input"
+      <Textbox
         type="number"
         onChange={this.handleTotalAmountChange}
         value={params.totalAmount}
       />
     ) : (
-      <input
-        className="u-input"
+      <Textbox
         type="number"
         name="transaction[amount]"
         onChange={this.handleInputChange}
@@ -255,20 +252,20 @@ export default class GroupTransactionForm extends Component {
 
     const amount = params[`transaction[amount]`] === '' ? 0 : params[`transaction[amount]`];
     const amountInfo = !isFromCurrentUser && (params.totalAmount !== null) ? (
-      <small className="u-input-info">
+      <Text size="small">
         {`한 사람당 내가 받을 금액은 ${amount} 입니다.`}
-      </small>
+      </Text>
     ) : null;
 
     return (
-      <div className="u-input-group">
-        <label className="u-label">
+      <ContentGroup size="small">
+        <Label>
           {this.renderAmountLabel()}
-        </label>
+        </Label>
         {inputItem}
         {amountInfo}
         {amountErrorBlock}
-      </div>
+      </ContentGroup>
     );
   }
 
@@ -282,9 +279,11 @@ export default class GroupTransactionForm extends Component {
     } = this.props;
 
     const alertBlock = alert ? (
-      <div className="u-alert">
+      <Alert
+        role="danger"
+      >
         {alert}
-      </div>
+      </Alert>
     ) : null;
 
     const userSelector = isFromCurrentUser ? this.renderToUserSelector() : this.renderFromUserSelector();
@@ -292,43 +291,45 @@ export default class GroupTransactionForm extends Component {
 
     return (
       <form
-        className="c-group-transaction-create__form"
+        className="c-group-transaction-form"
         ref={e => this.form = e}
         onSubmit={e => this.handleSubmit(e)}
       >
         {userSelector}
         {amountTypeSelector}
         {this.renderAmountInput()}
-        <div className="u-input-group">
-          <label className="u-label">
+        <ContentGroup size="small">
+          <Label>
             설명
-          </label>
-          <input
-            className="u-input"
+          </Label>
+          <Textbox
             type="text"
             name="transaction[description]"
             value={params[`transaction[description]`]}
             onChange={this.handleInputChange}
           />
-          <small className="u-input-info">
+          <Text size="small">
             생략할 수 있습니다.
-          </small>
-        </div>
+          </Text>
+        </ContentGroup>
         {alertBlock}
-        <div className="u-button-row">
-          <a
-            className="u-button u-button--is-cancel"
-            onClick={() => this.cancel()}
-          >
-            취소
-          </a>
-          <a
-            className="u-button"
-            onClick={() => this.handleSubmit()}
-          >
-            확인
-          </a>
-        </div>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              type="submit"
+            >
+              확인
+            </Button>
+          </BarItem>
+          <BarItem align="left">
+            <Button
+              onClick={() => this.cancel()}
+              role="warning"
+            >
+              취소
+            </Button>
+          </BarItem>
+        </Bar>
       </form>
     );
   }

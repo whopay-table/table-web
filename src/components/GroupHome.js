@@ -1,13 +1,20 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import GroupHeader from './GroupHeader';
-import GroupPayback from './GroupPayback';
-import GroupSettlement from './GroupSettlement';
-import GroupWithdraw from './GroupWithdraw';
-import Transaction from './Transaction';
-import UserBalance from './UserBalance';
-import UserBalanceBar from './UserBalanceBar';
+
+import Bar from 'src/components/common/Bar';
+import BarItem from 'src/components/common/BarItem';
+import Button from 'src/components/common/Button';
+import Container from 'src/components/common/Container';
+import ContentGroup from 'src/components/common/ContentGroup';
+
+import GroupHeader from 'src/components/GroupHeader';
+import GroupPayback from 'src/components/GroupPayback';
+import GroupSettlement from 'src/components/GroupSettlement';
+import GroupWithdraw from 'src/components/GroupWithdraw';
+import Transaction from 'src/components/Transaction';
+import UserBalance from 'src/components/UserBalance';
+import UserBalanceBar from 'src/components/UserBalanceBar';
 
 const MAX_TRANSACTION_COUNT = 10;
 
@@ -61,17 +68,17 @@ export default class GroupHome extends Component {
     } = this.state;
 
     const withdrawButton = !isWithdrawVisible ? (
-      <div className="u-button-row u-button-row--tight">
-        <a
-          className={classnames(
-            'u-button',
-            'u-button--left-align'
-          )}
-          onClick={() => this.showWithdraw()}
-        >
-          현금 출금하기
-        </a>
-      </div>
+      <ContentGroup>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              onClick={() => this.showWithdraw()}
+            >
+              현금 출금하기
+            </Button>
+          </BarItem>
+        </Bar>
+      </ContentGroup>
     ) : null;
 
     const withdraw = isWithdrawVisible ? (
@@ -100,17 +107,17 @@ export default class GroupHome extends Component {
     } = this.state;
 
     const paybackButton = !isPaybackVisible ? (
-      <div className="u-button-row u-button-row--tight">
-        <a
-          className={classnames(
-            'u-button',
-            'u-button--left-align'
-          )}
-          onClick={() => this.showPayback()}
-        >
-          빚 갚기
-        </a>
-      </div>
+      <ContentGroup>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              onClick={() => this.showPayback()}
+            >
+              빚 갚기
+            </Button>
+          </BarItem>
+        </Bar>
+      </ContentGroup>
     ) : null;
 
     const payback = isPaybackVisible ? (
@@ -139,17 +146,17 @@ export default class GroupHome extends Component {
     } = this.state;
 
     const settlementButton = !isSettlementVisible ? (
-      <div className="u-button-row u-button-row--tight">
-        <a
-          className={classnames(
-            'u-button',
-            'u-button--left-align'
-          )}
-          onClick={() => this.showSettlement()}
-        >
-          그룹 전체 정산하기
-        </a>
-      </div>
+      <ContentGroup>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              onClick={() => this.showSettlement()}
+            >
+              그룹 전체 정산하기
+            </Button>
+          </BarItem>
+        </Bar>
+      </ContentGroup>
     ) : null;
 
     const settlement = isSettlementVisible ? (
@@ -204,7 +211,11 @@ export default class GroupHome extends Component {
     );
 
     return (
-      <div className="c-group-home u-group-header-container">
+      <Container
+        className="c-group-home"
+        type="wrapper"
+        isGroupHeadered={true}
+      >
         <GroupHeader
           currentUser={currentUser}
           group={group}
@@ -212,7 +223,7 @@ export default class GroupHome extends Component {
           logout={logout}
           activeMenuItem="home"
         />
-        <div className="u-container">
+        <Container>
           <div className="c-group-home__user-balance">
             <UserBalance
               users={group.users}
@@ -237,8 +248,8 @@ export default class GroupHome extends Component {
               {allTransactionsButton}
             </div>
           </div>
-        </div>
-      </div>
+        </Container>
+      </Container>
     );
   }
 }

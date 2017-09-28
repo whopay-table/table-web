@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import GroupForm from './GroupForm';
-import Header from './Header';
+import GroupForm from 'src/components/GroupForm';
+import Header from 'src/components/Header';
+import Container from 'src/components/common/Container';
+import ContentGroup from 'src/components/common/ContentGroup';
+import Title from 'src/components/common/Title';
 
 export default class GroupCreate extends Component {
   static propTypes = {
@@ -18,13 +21,19 @@ export default class GroupCreate extends Component {
     } = this.props;
 
     return (
-      <div className="c-group-create u-header-container">
+      <Container
+        className="c-group-create"
+        type="wrapper"
+        isHeadered={true}
+      >
         <Header />
-        <div className="u-container">
-          <div className="c-group-create__body">
-            <div className="u-page-title">
+        <Container>
+          <ContentGroup>
+            <Title>
               새 그룹 만들기
-            </div>
+            </Title>
+          </ContentGroup>
+          <ContentGroup>
             <GroupForm
               onSubmit={createGroup}
               getGroupIndex={getGroupIndex}
@@ -33,9 +42,9 @@ export default class GroupCreate extends Component {
               alert={alert}
               setParams={setParams}
             />
-          </div>
-        </div>
-      </div>
+          </ContentGroup>
+        </Container>
+      </Container>
     );
   }
 }

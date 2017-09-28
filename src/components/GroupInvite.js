@@ -1,7 +1,13 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import GroupHeader from './GroupHeader';
+
+import Container from 'src/components/common/Container';
+import ContentGroup from 'src/components/common/ContentGroup';
+import GroupHeader from 'src/components/GroupHeader';
+import Label from 'src/components/common/Label';
+import Title from 'src/components/common/Title';
+import Textbox from 'src/components/common/Textbox';
 
 export default class GroupInvite extends Component {
   static defaultProps = {
@@ -25,7 +31,11 @@ export default class GroupInvite extends Component {
     } = this.props;
 
     return (
-      <div className="c-group-invite u-group-header-container">
+      <Container
+        className="c-group-invide"
+        type="wrapper"
+        isGroupHeadered={true}
+      >
         <GroupHeader
           currentUser={currentUser}
           group={group}
@@ -33,33 +43,24 @@ export default class GroupInvite extends Component {
           logout={logout}
           activeMenuItem="invite"
         />
-        <div className="u-container">
-          <div className="c-group-invite__body u-page-body">
-            <div className="u-page-title">
+        <Container>
+          <ContentGroup>
+            <Title>
               그룹 초대하기
-            </div>
-            <div
-              className={classnames(
-                'u-input-group'
-              )}
-            >
-              <label
-                className="u-label"
-                htmlFor="group-invite-signup-link"
-              >
-                초대하고 싶은 사람에게 아래 그룹 가입 링크를 공유하세요.
-              </label>
-              <input
-                id="group-invite-signup-link"
-                type="text"
-                className="u-input"
-                value={this.getSignupLink()}
-                readOnly
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+            </Title>
+          </ContentGroup>
+          <ContentGroup>
+            <Label>
+              초대하고 싶은 사람에게 아래 그룹 가입 링크를 공유하세요.
+            </Label>
+            <Textbox
+              type="text"
+              value={this.getSignupLink()}
+              readOnly={true}
+            />
+          </ContentGroup>
+        </Container>
+      </Container>
     );
   }
 }

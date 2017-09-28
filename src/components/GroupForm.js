@@ -1,7 +1,16 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import Config from '../config';
+import Alert from 'src/components/common/Alert';
+import Bar from 'src/components/common/Bar';
+import BarItem from 'src/components/common/BarItem';
+import Button from 'src/components/common/Button';
+import Config from 'src/config';
+import ContentGroup from 'src/components/common/ContentGroup';
+import Label from 'src/components/common/Label';
+import Title from 'src/components/common/Title';
+import Text from 'src/components/common/Text';
+import Textbox from 'src/components/common/Textbox';
 
 const DOMAIN = Config.WEB_DOMAIN;
 
@@ -27,30 +36,30 @@ export default class GroupForm extends Component {
     const { alert, params, paramErrors } = this.props;
 
     const errorBlock = paramErrors[item.name] ? (
-      <span className="u-help-block">
+      <Text
+        size="small"
+        role="danger"
+      >
         {paramErrors[item.name]}
-      </span>
+      </Text>
     ) : null;
     const infoBlock = item.info ? (
-      <small className="u-input-info">
+      <Text
+        size="small"
+      >
         {item.info}
-      </small>
+      </Text>
     ) : null;
     return (
-      <div
+      <ContentGroup
         key={item.name}
-        className={classnames(
-          'u-input-group',
-          { 'has-error': paramErrors[item.name] }
-        )}
+        size="small"
       >
-        <label
-          className="u-label"
-          htmlFor={`group-create-${item.name}`}
+        <Label
         >
           {item.label}
-        </label>
-        <input
+        </Label>
+        <Textbox
           type={item.inputType}
           className="u-input"
           id={`group-create-${item.name}`}
@@ -63,7 +72,7 @@ export default class GroupForm extends Component {
         />
         {errorBlock}
         {infoBlock}
-      </div>
+      </ContentGroup>
     );
   }
 
@@ -123,9 +132,9 @@ export default class GroupForm extends Component {
     const userFormGroups = userFormBase.map(item => this.renderFormGroup(item));
 
     const alertBlock = alert ? (
-      <div className="u-alert">
+      <Alert>
         {alert}
-      </div>
+      </Alert>
     ) : null;
 
     return (
@@ -133,33 +142,40 @@ export default class GroupForm extends Component {
         className="c-group-form"
         onSubmit={e => this.handleSubmit(e)}
       >
-        <div className="u-form-subtitle">
-          그룹 정보
-        </div>
-        {groupFormGroups}
-        <div className="u-form-subtitle">
-          내 정보
-        </div>
-        {userFormGroups}
+        <ContentGroup>
+          <Title size="small">
+            그룹 정보
+          </Title>
+        </ContentGroup>
+        <ContentGroup>
+          {groupFormGroups}
+        </ContentGroup>
+        <ContentGroup>
+          <Title size="small">
+            내 정보
+          </Title>
+        </ContentGroup>
+        <ContentGroup>
+          {userFormGroups}
+        </ContentGroup>
         {alertBlock}
-        <input
-          type="submit"
-          className="u-no-display"
-        />
-        <div className="u-button-row">
-          <Link
-            className="u-button u-button--is-cancel"
-            to="/"
-          >
-            취소
-          </Link>
-          <a
-            className="u-button"
-            onClick={e => this.handleSubmit(e)}
-          >
-            확인
-          </a>
-        </div>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              type="submit"
+            >
+              확인
+            </Button>
+          </BarItem>
+          <BarItem align="left">
+            <Button
+              to="/"
+              role="warning"
+            >
+              취소
+            </Button>
+          </BarItem>
+        </Bar>
       </form>
     );
   }

@@ -1,8 +1,14 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import GroupHeader from './GroupHeader';
-import Transaction from './Transaction';
+
+import Container from 'src/components/common/Container';
+import ContentGroup from 'src/components/common/ContentGroup';
+import GroupHeader from 'src/components/GroupHeader';
+import Label from 'src/components/common/Label';
+import Title from 'src/components/common/Title';
+import Textbox from 'src/components/common/Textbox';
+import Transaction from 'src/components/Transaction';
 
 export default class GroupTransactions extends Component {
   static defaultProps = {
@@ -36,7 +42,11 @@ export default class GroupTransactions extends Component {
     ));
 
     return (
-      <div className="c-group-transactions u-group-header-container">
+      <Container
+        className="c-group-transactions"
+        type="wrapper"
+        isGroupHeadered={true}
+      >
         <GroupHeader
           currentUser={currentUser}
           group={group}
@@ -44,21 +54,19 @@ export default class GroupTransactions extends Component {
           logout={logout}
           activeMenuItem="transactions"
         />
-        <div className="u-container">
-          <div className="c-group-transactions__body u-page-body">
-            <div className="u-page-title">
-              거래 내역
-            </div>
-            {transactionItems}
-            <a
-              className="u-more-button"
-              onClick={getMoreTransactions}
-            >
-              더 불러오기
-            </a>
-          </div>
-        </div>
-      </div>
+        <Container>
+          <Title>
+            거래 내역
+          </Title>
+          {transactionItems}
+          <a
+            className="u-more-button"
+            onClick={getMoreTransactions}
+          >
+            더 불러오기
+          </a>
+        </Container>
+      </Container>
     );
   }
 }
