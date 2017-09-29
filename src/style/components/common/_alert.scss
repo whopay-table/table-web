@@ -1,7 +1,9 @@
 .c-alert {
   display: block;
+  padding: rem(12px) rem(24px);
 
   &__body {
+    color: color('white');
     font-size: rem(14px);
   }
 }

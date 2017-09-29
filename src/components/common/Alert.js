@@ -17,14 +17,14 @@ export default class Alert extends Component {
       <div
         className={classnames(
           'c-alert',
-          className
+          className,
+          'u-colored-background',
+          `u-colored-background--role-${role}`
         )}
       >
         <div
           className={classnames(
-            'c-alert__body',
-            'u-colored-text',
-            `u-colored-text--role-${role}`
+            'c-alert__body'
           )}
         >
           {children}
