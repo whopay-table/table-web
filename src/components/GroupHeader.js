@@ -96,7 +96,7 @@ export default class GroupHeader extends Component {
               { 'c-group-header__menu-item--is-active': activeMenuItem === 'invite' }
             )}
           >
-            그룹 초대
+            친구 초대
           </Link>
         </div>
       </div>

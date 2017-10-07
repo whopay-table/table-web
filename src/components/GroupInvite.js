@@ -88,7 +88,7 @@ export default class GroupInvite extends Component {
         <Container>
           <ContentGroup>
             <Title>
-              그룹 초대하기
+              친구 초대하기
             </Title>
           </ContentGroup>
           <ContentGroup>
