@@ -90,7 +90,7 @@ export default class LoginForm extends Component {
         </div>
         {formGroups}
         {alertBlock}
-        <input type="submit" className="u-no-display" />
+        <input type="submit" className="u-hidden-submit" />
         <div className="u-button-row">
           <a
             className="u-button"
