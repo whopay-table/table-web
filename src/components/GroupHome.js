@@ -188,7 +188,12 @@ export default class GroupHome extends Component {
     } = this.props;
 
     const userBalanceBars = group.users.sort((a, b) => (a.balance - b.balance)).map(user => (
-      <UserBalanceBar key={user.id} users={group.users} user={user} />
+      <UserBalanceBar
+        key={user.id}
+        users={group.users}
+        user={user}
+        currentUser={currentUser}
+      />
     ));
 
     const transactionItems = userTransactions.map(transaction => (

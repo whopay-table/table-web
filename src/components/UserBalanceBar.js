@@ -21,13 +21,24 @@ export default class UserBalanceBar extends Component {
 
   render() {
     const {
-      user
+      currentUser,
+      user,
     } = this.props;
+
+    const userName = (
+      <span
+        className={classnames(
+          { 'u-bold': currentUser.id === user.id }
+        )}
+      >
+        {user.name}
+      </span>
+    );
 
     return (
       <div className="c-user-balance-bar">
         <div className="c-user-balance-bar__info">
-          {user.name}
+          {userName}
           <span
             className={classnames(
               'c-user-balance-bar__amount',

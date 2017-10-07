@@ -84,6 +84,25 @@ export default class Transaction extends Component {
       isRejected,
     } = transaction;
 
+    const fromUserName = (
+      <span
+        className={classnames(
+          { 'u-bold': currentUser.id === fromUser.id }
+        )}
+      >
+        {fromUser.name}
+      </span>
+    );
+    const toUserName = (
+      <span
+        className={classnames(
+          { 'u-bold': currentUser.id === toUser.id }
+        )}
+      >
+        {toUser.name}
+      </span>
+    );
+
     return (
       <div className="c-transaction">
         <div className="c-transaction__info-box">
@@ -104,7 +123,9 @@ export default class Transaction extends Component {
             />
           </div>
           <div className="c-transaction__name">
-            {`${fromUser.name} ➔ ${toUser.name}`}
+            {fromUserName}
+            &nbsp;➔&nbsp;
+            {toUserName}
           </div>
           <div className="c-transaction__created-at">
             <TimeAgo date={createdAt} />
