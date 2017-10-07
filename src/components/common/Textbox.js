@@ -20,6 +20,10 @@ export default class Textbox extends Component {
     value: '',
   };
 
+  select() {
+    this.input.select();
+  }
+
   render() {
     const {
       autoFocus,
