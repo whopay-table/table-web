@@ -101,7 +101,7 @@ export default class GroupSettlement extends Component {
       </div>
     ) : (
       <div className="c-group-settlement__description u-info-block__description">
-        다른 사람들이 정산을 마칠 떄까지 기다려 주세요.
+        다른 사람들이 정산을 마칠 때까지 기다려 주세요.
       </div>
     );
     const currentUserItem = isCurrentUserPaymentRequired ? (
