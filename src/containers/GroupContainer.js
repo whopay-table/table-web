@@ -68,12 +68,22 @@ class GroupContainer extends Component {
     });
   };
 
-  refreshUserTransactions = () => {
+  refreshUserTransactions = callback => {
     this.props.getUserTransactions({
       groupId: this.props.groupIndex,
       userId: this.props.currentUser.id,
       offset: 0,
       count: REQUEST_TRANSACTION_COUNT,
+    }).then(v => {
+      callback && callback();
+    });
+  };
+
+  refreshPage = callback => {
+    this.refreshGroup(() => {
+      this.refreshUserTransactions(() => {
+        callback && callback();
+      });
     });
   };
 
@@ -155,6 +165,7 @@ class GroupContainer extends Component {
             getMoreTransactions={this.getMoreTransactions}
             refreshGroup={this.refreshGroup}
             refreshUserTransactions={this.refreshUserTransactions}
+            refreshPage={this.refreshPage}
             acceptTransaction={this.acceptTransaction}
             rejectTransaction={this.rejectTransaction}
             logout={this.logout}

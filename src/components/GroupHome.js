@@ -184,6 +184,7 @@ export default class GroupHome extends Component {
       userTransactions,
       acceptTransaction,
       rejectTransaction,
+      refreshPage,
       logout,
     } = this.props;
 
@@ -230,6 +231,12 @@ export default class GroupHome extends Component {
         />
         <Container>
           <div className="c-group-home__user-balance">
+            <a
+              className="c-group-home__refresh-button"
+              onClick={() => refreshPage()}
+            >
+              ↻
+            </a>
             <UserBalance
               users={group.users}
               user={currentUser}

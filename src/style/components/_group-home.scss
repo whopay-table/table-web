@@ -14,8 +14,29 @@
   }
 
   &__user-balance {
+    position: relative;
     padding: 16px 12px;
     border-bottom: 1px solid color('light-grey');
+  }
+
+  &__refresh-button {
+    display: block;
+    position: absolute;
+    padding: rem(8px) rem(8px);
+    right: rem(12px);
+    top: rem(16px);
+    border-radius: 0;
+    border: 0;
+    outline: 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: color('default');
+
+    &:hover {
+      color: color('default');
+      opacity: 0.7;
+    }
   }
 
   &__group-balance {

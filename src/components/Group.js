@@ -24,6 +24,7 @@ export default class Group extends Component {
       getMoreTransactions,
       refreshGroup,
       refreshUserTransactions,
+      refreshPage,
       acceptTransaction,
       rejectTransaction,
       logout,
@@ -108,6 +109,7 @@ export default class Group extends Component {
               userTransactions={userTransactions}
               acceptTransaction={acceptTransaction}
               rejectTransaction={rejectTransaction}
+              refreshPage={refreshPage}
               logout={logout}
             />
           </Route>
