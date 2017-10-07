@@ -109,19 +109,25 @@ export default class GroupUserForm extends Component {
 
     const formGroups = formBase.map(item => {
       const infoBlock = item.info ? (
-        <Text
-          size="small"
-        >
-          {item.info}
-        </Text>
+        <ContentGroup size="small">
+          <Text
+            tag="div"
+            size="small"
+          >
+            {item.info}
+          </Text>
+        </ContentGroup>
       ) : null;
       const errorBlock = paramErrors[item.name] ? (
-        <Text
-          size="small"
-          role="danger"
-        >
-          {paramErrors[item.name]}
-        </Text>
+        <ContentGroup size="small">
+          <Text
+            tag="div"
+            size="small"
+            role="danger"
+          >
+            {paramErrors[item.name]}
+          </Text>
+        </ContentGroup>
       ) : null;
       return (
         <ContentGroup
@@ -147,11 +153,13 @@ export default class GroupUserForm extends Component {
     });
 
     const alertBlock = alert ? (
-      <Alert
-        role="danger"
-      >
-        {alert}
-      </Alert>
+      <ContentGroup>
+        <Alert
+          role="danger"
+        >
+          {alert}
+        </Alert>
+      </ContentGroup>
     ) : null;
 
     return (

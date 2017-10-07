@@ -12,7 +12,7 @@ const PORT = window.location.port ? `:${window.location.port}` : '';
 const IS_PROD_DOMAIN = HOSTNAME.endsWith(DOMAIN);
 
 const EMAIL_REGEX = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const GROUPNAME_REGEX = /^[a-zA-Z0-9\-_]+$/i;
+const GROUPNAME_REGEX = /^[a-z0-9\-_]+$/i;
 const ALPHABET_REGEX = /[a-zA-Z]/i;
 const DIGIT_REGEX = /[0-9]/i;
 
@@ -61,9 +61,9 @@ class GroupCreateContainer extends Component {
 
   createGroup = () => {
     const { params, paramErrors } = this.state;
-    const isError = Object.keys(paramErrors).map(key => paramErrors[key]).join('') !== '';
+    const isValid = this.validateParams(true);
 
-    if (!this.isGroupnameTaken() && !isError) {
+    if (!this.isGroupnameTaken() && isValid) {
       this.setState({ alert: null }, () => {
         this.props.createGroup(this.state.params).then(v => {
           if (v.response) {
@@ -79,44 +79,45 @@ class GroupCreateContainer extends Component {
     }
   };
 
-  validateParams() {
+  validateParams(includeEmptyParams) {
     const { params } = this.state;
     const paramErrors = {};
-    if (params['group[groupname]']) {
+    if (includeEmptyParams || params['group[groupname]']) {
       if (!GROUPNAME_REGEX.test(params['group[groupname]'])) {
-        paramErrors['group[groupname]'] = '그룹 ID에는 알파벳, 숫자, 또는 "-", "_"만 사용할 수 있습니다.';
+        paramErrors['group[groupname]'] = '그룹 ID에는 소문자 알파벳, 숫자, 또는 "-", "_"만 사용할 수 있습니다.';
       } else if (!hasLengthBetween(params['group[groupname]'], 3, 20)) {
         paramErrors['group[groupname]'] = '그룹 ID는 3-20 글자로 이루어져야 합니다.';
       }
     }
-    if (params['group[title]']) {
+    if (includeEmptyParams || params['group[title]']) {
       if (!hasLengthBetween(params['group[title]'], 1, 20)) {
         paramErrors['group[title]'] = '그룹 이름 1-20 글자로 이루어져야 합니다.';
       }
     }
-    if (params['user[email]']) {
+    if (includeEmptyParams || params['user[email]']) {
       if (!EMAIL_REGEX.test(params['user[email]'])) {
         paramErrors['user[email]'] = '올바른 email 주소를 입력해 주세요.';
       }
     }
-    if (params['user[name]']) {
+    if (includeEmptyParams || params['user[name]']) {
       if (!hasLengthBetween(params['user[name]'], 1, 128)) {
         paramErrors['user[name]'] = '이름은 1-128 글자로 입력할 수 있습니다.';
       }
     }
-    if (params['user[password]']) {
+    if (includeEmptyParams || params['user[password]']) {
       if (!hasLengthBetween(params['user[password]'], 8, 20)) {
         paramErrors['user[password]'] = '비밀번호는 8-20 글자로 이루어져야 합니다.';
       } else if (!ALPHABET_REGEX.test(params['user[password]']) || !DIGIT_REGEX.test(params['user[password]'])) {
         paramErrors['user[password]'] = '비밀번호에는 적어도 한 개의 알파벳 문자와 숫자가 포함되어야 합니다.';
       }
     }
-    if (params['user[password]'] && params['user[password_confirmation]']) {
+    if (includeEmptyParams || (params['user[password]'] && params['user[password_confirmation]'])) {
       if (params['user[password]'] !== params['user[password_confirmation]']) {
         paramErrors['user[password_confirmation]'] = '비밀번호가 일치하지 않습니다.';
       }
     }
     this.setState({ paramErrors: Object.assign({}, CREATE_GROUP_PARAMS, paramErrors) });
+    return Object.keys(paramErrors).length === 0;
   }
 
   getGroupIdByGroupname() {

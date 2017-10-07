@@ -101,6 +101,7 @@ export default class GroupInvite extends Component {
               value={this.getSignupLink()}
             />
           </ContentGroup>
+          {this.renderMessage()}
           <ContentGroup>
             <Button
               onClick={() => this.copySignupLink()}
@@ -108,7 +109,6 @@ export default class GroupInvite extends Component {
               링크 복사하기
             </Button>
           </ContentGroup>
-          {this.renderMessage()}
         </Container>
       </Container>
     );

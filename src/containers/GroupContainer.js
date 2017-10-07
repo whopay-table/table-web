@@ -10,10 +10,10 @@ import {
   login,
   logout,
   rejectTransaction
-} from '../actions';
-import Group from '../components/Group';
-import GroupAuth from '../components/GroupAuth';
-import NotFound from '../components/NotFound';
+} from 'src/actions';
+import Group from 'src/components/Group';
+import GroupAuth from 'src/components/GroupAuth';
+import NotFound from 'src/components/NotFound';
 
 const REQUEST_TRANSACTION_COUNT = 10;
 

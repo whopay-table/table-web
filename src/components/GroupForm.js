@@ -36,19 +36,25 @@ export default class GroupForm extends Component {
     const { alert, params, paramErrors } = this.props;
 
     const errorBlock = paramErrors[item.name] ? (
-      <Text
-        size="small"
-        role="danger"
-      >
-        {paramErrors[item.name]}
-      </Text>
+      <ContentGroup size="small">
+        <Text
+          tag="div"
+          size="small"
+          role="danger"
+        >
+          {paramErrors[item.name]}
+        </Text>
+      </ContentGroup>
     ) : null;
     const infoBlock = item.info ? (
-      <Text
-        size="small"
-      >
-        {item.info}
-      </Text>
+      <ContentGroup size="small">
+        <Text
+          tag="div"
+          size="small"
+        >
+          {item.info}
+        </Text>
+      </ContentGroup>
     ) : null;
     return (
       <ContentGroup
@@ -132,9 +138,11 @@ export default class GroupForm extends Component {
     const userFormGroups = userFormBase.map(item => this.renderFormGroup(item));
 
     const alertBlock = alert ? (
-      <Alert>
-        {alert}
-      </Alert>
+      <ContentGroup>
+        <Alert>
+          {alert}
+        </Alert>
+      </ContentGroup>
     ) : null;
 
     return (

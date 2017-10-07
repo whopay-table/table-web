@@ -6,6 +6,7 @@ export default class Text extends Component {
     className: '',
     role: 'default',
     size: 'default',
+    tag: 'span',
   };
 
   render() {
@@ -14,19 +15,42 @@ export default class Text extends Component {
       className,
       role,
       size,
+      tag,
     } = this.props;
-    return (
-      <span
-        className={classnames(
-          'c-text',
-          className,
-          `c-text--size-${size}`,
-          'u-colored-text',
-          `u-colored-text--role-${role}`
-        )}
-      >
-        {children}
-      </span>
+
+    const classNames = classnames(
+      'c-text',
+      className,
+      `c-text--size-${size}`,
+      'u-colored-text',
+      `u-colored-text--role-${role}`
     );
+    if (tag === 'span') {
+      return (
+        <span
+          className={classNames}
+        >
+          {children}
+        </span>
+      );
+    } else if (tag === 'div') {
+      return (
+        <div
+          className={classNames}
+        >
+          {children}
+        </div>
+      );
+    } else {
+      const Tag = tag;
+      return (
+        <Tag
+          className={classNames}
+        >
+          {children}
+        </Tag>
+      );
+    }
+
   }
 }
