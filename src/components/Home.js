@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+﻿import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router-dom';
 import Config from '../config';
 import Header from './Header';
@@ -13,7 +13,15 @@ export default class Home extends Component {
 
   handleGroupnameChange = e => {
     this.setState({ groupname: e.target.value });
-  }
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { history } = this.props;
+    const { groupname } = this.state;
+
+    history.push(`/create?groupname=${groupname}`);
+  };
 
   render() {
     const { groupname } = this.state;
@@ -42,29 +50,38 @@ export default class Home extends Component {
               </div>
               <div className="c-home__main-row-action">
                 <div className="c-home__main-row-action-contents">
-                  <div className="c-home__main-row-action-url">
-                    <div className="u-subdomain-input">
-                      <div className="u-subdomain-input__input-container">
-                        <input
-                          className="u-subdomain-input__input"
-                          type="text"
-                          placeholder="mygroup"
-                          value={groupname}
-                          autoCapitalize="none"
-                          onChange={e => this.handleGroupnameChange(e)}
-                        />
-                      </div>
-                      <div className="u-subdomain-input__domain">
-                        {`.${DOMAIN}`}
+                  <form
+                    className="c-home__main-row-action-contents-form"
+                    onSubmit={e => this.handleSubmit(e)}
+                  >
+                    <div className="c-home__main-row-action-url">
+                      <div className="u-subdomain-input">
+                        <div className="u-subdomain-input__input-container">
+                          <input
+                            className="u-subdomain-input__input"
+                            type="text"
+                            placeholder="mygroup"
+                            value={groupname}
+                            autoCapitalize="none"
+                            onChange={e => this.handleGroupnameChange(e)}
+                          />
+                        </div>
+                        <div className="u-subdomain-input__domain">
+                          {`.${DOMAIN}`}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <Link
-                    className="c-home__main-row-action-button"
-                    to={groupname ? `/create?groupname=${groupname}` : '/create'}
-                  >
-                    그룹 만들고 시작하기
-                  </Link>
+                    <Link
+                      className="c-home__main-row-action-button"
+                      to={groupname ? `/create?groupname=${groupname}` : '/create'}
+                    >
+                      그룹 만들고 시작하기
+                    </Link>
+                    <input
+                      type="submit"
+                      className="u-hidden-submit"
+                    />
+                  </form>
                 </div>
               </div>
             </div>

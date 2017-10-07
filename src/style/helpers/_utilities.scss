@@ -12,6 +12,13 @@
   display: none;
 }
 
+.u-hidden-submit {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
 .u-header-container {
   padding-top: $header-height;
 }
