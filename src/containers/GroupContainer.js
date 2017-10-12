@@ -14,6 +14,7 @@ import {
 import Group from 'src/components/Group';
 import GroupAuth from 'src/components/GroupAuth';
 import NotFound from 'src/components/NotFound';
+import Spinner from 'src/components/common/Spinner';
 
 const REQUEST_TRANSACTION_COUNT = 10;
 
@@ -149,7 +150,7 @@ class GroupContainer extends Component {
       isWaitingLogout,
     } = this.props;
 
-    const isLoaded = groupIndex;
+    const isLoaded = groupIndex && (groupSession !== undefined);
     const isNotFound = groupIndex === null;
     const isLoggedIn = !(groupIndex && !groupSession);
 
@@ -174,7 +175,7 @@ class GroupContainer extends Component {
             rejectTransaction={this.rejectTransaction}
             logout={this.logout}
           />
-        ) : <div />;
+        ) : <Spinner />;
       } else {
         return (
           <GroupAuth
@@ -191,8 +192,7 @@ class GroupContainer extends Component {
         <NotFound />
       )
     } else {
-      // TODO: show spinner here.
-      return <div />;
+      return <Spinner />;
     }
   }
 }
