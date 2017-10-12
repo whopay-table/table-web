@@ -25,6 +25,7 @@ export default class GroupUserUpdate extends Component {
       getUserIdByEmail,
       group,
       groupname,
+      isWaitingUpdateUser,
       params,
       paramErrors,
       alert,
@@ -71,6 +72,7 @@ export default class GroupUserUpdate extends Component {
               <GroupUserForm
                 isUpdate={true}
                 onSubmit={updateUser}
+                isWaitingSubmit={isWaitingUpdateUser}
                 getUserIdByEmail={getUserIdByEmail}
                 params={params}
                 paramErrors={paramErrors}

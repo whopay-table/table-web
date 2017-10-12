@@ -15,6 +15,7 @@ export default class GroupUserCreate extends Component {
       paramErrors,
       alert,
       setParams,
+      isWaitingCreateUser,
     } = this.props;
 
     return (
@@ -33,6 +34,7 @@ export default class GroupUserCreate extends Component {
           <ContentGroup>
             <GroupUserForm
               onSubmit={createUser}
+              isWaitingSubmit={isWaitingCreateUser}
               getUserIdByEmail={getUserIdByEmail}
               params={params}
               paramErrors={paramErrors}

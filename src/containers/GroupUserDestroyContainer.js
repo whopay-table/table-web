@@ -50,6 +50,7 @@ class GroupUserDestroyContainer extends Component {
       currentUser,
       group,
       groupname,
+      isWaitingDestroyUser,
       logout,
     } = this.props;
     const {
@@ -67,6 +68,7 @@ class GroupUserDestroyContainer extends Component {
         currentUser={currentUser}
         group={group}
         groupname={groupname}
+        isWaitingDestroyUser={isWaitingDestroyUser}
         destroyUser={this.destroyUser}
         logout={logout}
         password={password}
@@ -79,9 +81,11 @@ class GroupUserDestroyContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const groupIndex = state.entities.groupIndexes[ownProps.groupname];
+  const isWaitingDestroyUser = state.isWaiting.destroyUser;
 
   return {
     groupIndex,
+    isWaitingDestroyUser,
   };
 };
 

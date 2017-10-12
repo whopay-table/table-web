@@ -29,6 +29,7 @@ export default class GroupTransactionCreate extends Component {
       alert,
       currentUser,
       isFromCurrentUser,
+      isWaitingCreateTransaction,
       group,
       groupname,
       params,
@@ -76,6 +77,7 @@ export default class GroupTransactionCreate extends Component {
               paramErrors={paramErrors}
               currentUser={currentUser}
               isFromCurrentUser={isFromCurrentUser}
+              isWaitingSubmit={isWaitingCreateTransaction}
               group={group}
               setParams={setParams}
               onSubmit={createTransaction}

@@ -2,6 +2,10 @@ import * as ActionTypes from 'src/constants/ActionTypes';
 
 const WAITING_STATE_ACTION_TYPE_MAP = {
   createGroup: ActionTypes.CREATE_GROUP,
+  createTransaction: ActionTypes.CREATE_TRANSACTION,
+  createUser: ActionTypes.CREATE_USER,
+  destroyUser: ActionTypes.DESTROY_USER,
+  updateUser: ActionTypes.UPDATE_USER,
   login: ActionTypes.LOGIN,
   logout: ActionTypes.LOGOUT,
 };

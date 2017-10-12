@@ -126,8 +126,9 @@ class GroupUserCreateContainer extends Component {
 
   render() {
     const {
+      isWaitingCreateUser,
       match,
-      location
+      location,
     } = this.props;
     const {
       params,
@@ -145,6 +146,7 @@ class GroupUserCreateContainer extends Component {
         groupname={groupname}
         createUser={this.createUser}
         getUserIdByEmail={this.getUserIdByEmail}
+        isWaitingCreateUser={isWaitingCreateUser}
         params={params}
         paramErrors={this.getParamErrors()}
         alert={alert}
@@ -157,10 +159,12 @@ class GroupUserCreateContainer extends Component {
 const mapStateToProps = (state, ownProps) => {
   const groupIndex = state.entities.groupIndexes[ownProps.match.params.groupname];
   const groupUserIdsByEmails = state.entities.groupUserIdsByEmails;
+  const isWaitingCreateUser = state.isWaiting.createUser;
 
   return {
     groupIndex,
     groupUserIdsByEmails,
+    isWaitingCreateUser,
   };
 };
 

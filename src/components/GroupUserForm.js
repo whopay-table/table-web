@@ -101,6 +101,7 @@ export default class GroupUserForm extends Component {
     const {
       alert,
       isUpdate,
+      isWaitingSubmit,
       params,
       paramErrors,
     } = this.props;
@@ -173,6 +174,7 @@ export default class GroupUserForm extends Component {
           <BarItem>
             <Button
               type="submit"
+              isBusy={isWaitingSubmit}
             >
               {isUpdate ? '수정' : '확인'}
             </Button>

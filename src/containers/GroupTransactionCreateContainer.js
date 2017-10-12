@@ -96,7 +96,8 @@ class GroupTransactionCreateContainer extends Component {
       currentUser,
       group,
       groupname,
-      isFromCurrentUser
+      isFromCurrentUser,
+      isWaitingCreateTransaction,
     } = this.props;
     const {
       params,
@@ -118,6 +119,7 @@ class GroupTransactionCreateContainer extends Component {
         group={group}
         groupname={groupname}
         isFromCurrentUser={isFromCurrentUser}
+        isWaitingCreateTransaction={isWaitingCreateTransaction}
         createTransaction={this.createTransaction}
         setParams={this.setParams}
         logout={this.logout}
@@ -131,12 +133,14 @@ const mapStateToProps = (state, ownProps) => {
   const groupSession = groupIndex ? state.entities.groupSessions[groupIndex] : null;
   const group = groupIndex ? state.entities.groups[groupIndex] : null;
   const currentUser = groupIndex ? state.entities.groupCurrentUsers[groupIndex] : null;
+  const isWaitingCreateTransaction = state.isWaiting.createTransaction;
 
   return {
     groupIndex,
     groupSession,
     group,
-    currentUser
+    currentUser,
+    isWaitingCreateTransaction,
   };
 };
 

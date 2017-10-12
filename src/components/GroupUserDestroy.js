@@ -35,6 +35,7 @@ export default class GroupUserDestroy extends Component {
       destroyUser,
       group,
       groupname,
+      isWaitingDestroyUser,
       password,
       alert,
       setPassword,
@@ -42,11 +43,13 @@ export default class GroupUserDestroy extends Component {
     } = this.props;
 
     const alertBlock = alert ? (
-      <Alert
-        role="danger"
-      >
-        {alert}
-      </Alert>
+      <ContentGroup>
+        <Alert
+          role="danger"
+        >
+          {alert}
+        </Alert>
+      </ContentGroup>
     ) : null;
 
     return (
@@ -95,6 +98,7 @@ export default class GroupUserDestroy extends Component {
                   <Button
                     role="danger"
                     onClick={() => this.handleSubmit()}
+                    isBusy={isWaitingDestroyUser}
                   >
                     탈퇴
                   </Button>

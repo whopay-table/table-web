@@ -156,6 +156,7 @@ class GroupUserUpdateContainer extends Component {
   render() {
     const {
       currentUser,
+      isWaitingUpdateUser,
       group,
       groupname,
     } = this.props;
@@ -174,6 +175,7 @@ class GroupUserUpdateContainer extends Component {
         currentUser={currentUser}
         group={group}
         groupname={groupname}
+        isWaitingUpdateUser={isWaitingUpdateUser}
         updateUser={this.updateUser}
         logout={this.logout}
         params={params}
@@ -187,9 +189,11 @@ class GroupUserUpdateContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const groupIndex = state.entities.groupIndexes[ownProps.groupname];
+  const isWaitingUpdateUser = state.isWaiting.updateUser;
 
   return {
     groupIndex,
+    isWaitingUpdateUser,
   };
 };
 

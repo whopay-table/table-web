@@ -325,15 +325,18 @@ export default class GroupTransactionForm extends Component {
       onCancel,
       params,
       paramErrors,
-      isFromCurrentUser
+      isFromCurrentUser,
+      isWaitingSubmit,
     } = this.props;
 
     const alertBlock = alert ? (
-      <Alert
-        role="danger"
-      >
-        {alert}
-      </Alert>
+      <ContentGroup>
+        <Alert
+          role="danger"
+        >
+          {alert}
+        </Alert>
+      </ContentGroup>
     ) : null;
 
     const userSelector = isFromCurrentUser ? this.renderToUserSelector() : this.renderFromUserSelector();
@@ -367,6 +370,7 @@ export default class GroupTransactionForm extends Component {
           <BarItem align="left">
             <Button
               type="submit"
+              isBusy={isWaitingSubmit}
             >
               확인
             </Button>
