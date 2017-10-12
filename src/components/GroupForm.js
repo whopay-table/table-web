@@ -61,19 +61,16 @@ export default class GroupForm extends Component {
         key={item.name}
         size="small"
       >
-        <Label
-        >
+        <Label>
           {item.label}
         </Label>
         <Textbox
           type={item.inputType}
-          className="u-input"
-          id={`group-create-${item.name}`}
           name={item.name}
           placeholder={item.placeholder}
           onChange={e => this.handleInputChange(e)}
           onBlur={item.onBlur}
-          autoCapitalize={item.autoCapitalize || 'sentences'}
+          autoCapitalize={item.autoCapitalize}
           value={params[item.name]}
         />
         {errorBlock}
@@ -96,7 +93,6 @@ export default class GroupForm extends Component {
         inputType: 'text',
         name: 'group[groupname]',
         placeholder: '',
-        autoCapitalize: 'none',
         onBlur: e => this.handleGroupnameBlur(e),
         info: `${params['group[groupname]']}.${DOMAIN} 로 나중에 접속하시게 됩니다.`,
       },
@@ -105,6 +101,7 @@ export default class GroupForm extends Component {
         inputType: 'text',
         name: 'group[title]',
         placeholder: '',
+        autoCapitalize: true,
         info: '그룹 페이지에 표시될 그룹 이름입니다.',
       },
     ];
@@ -121,6 +118,7 @@ export default class GroupForm extends Component {
         inputType: 'text',
         name: 'user[name]',
         placeholder: '',
+        autoCapitalize: true,
         info: '본인의 이름을 입력하세요.',
       },
       {

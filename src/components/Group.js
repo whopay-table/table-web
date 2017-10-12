@@ -19,6 +19,7 @@ export default class Group extends Component {
       currentUser,
       group,
       groupname,
+      isWaitingLogout,
       transactions,
       userTransactions,
       getMoreTransactions,

@@ -1,5 +1,12 @@
 import classnames from 'classnames';
 import React, { Component, PropTypes } from 'react';
+import Alert from 'src/components/common/Alert';
+import Bar from 'src/components/common/Bar';
+import BarItem from 'src/components/common/BarItem';
+import Button from 'src/components/common/Button';
+import ContentGroup from 'src/components/common/ContentGroup';
+import Label from 'src/components/common/Label';
+import Textbox from 'src/components/common/Textbox';
 
 const LOGIN_PARAMS = {
   email: '',
@@ -26,7 +33,14 @@ export default class LoginForm extends Component {
   }
 
   render() {
-    const { groupname, groupSession } = this.props;
+    const {
+      groupname,
+      groupSession,
+      isWaitingLogin,
+    } = this.props;
+    const {
+      params
+    } = this.state;
     const isLoginFailed = groupSession === false;
 
     const formBase = [
@@ -46,35 +60,31 @@ export default class LoginForm extends Component {
 
     const formGroups = formBase.map(item => {
       return (
-        <div
+        <ContentGroup
           key={item.name}
-          className={classnames(
-            'u-input-group'
-          )}
+          size="small"
         >
-          <label
-            className="u-label"
-            htmlFor={`group-create-${item.name}`}
-          >
+          <Label>
             {item.label}
-          </label>
-          <input
+          </Label>
+          <Textbox
             type={item.inputType}
-            className="u-input"
-            id={`group-create-${item.name}`}
             name={item.name}
             placeholder={item.placeholder}
             onChange={e => this.handleInputChange(e)}
             onBlur={item.onBlur}
+            value={params[item.name]}
           />
-        </div>
+        </ContentGroup>
       );
     });
 
     const alertBlock = isLoginFailed ? (
-      <div className="alert alert-danger" role="alert">
-        로그인에 실패했습니다. Email과 비밀번호를 확인하고 다시 시도해주세요.
-      </div>
+      <ContentGroup>
+        <Alert role="danger">
+          로그인에 실패했습니다. Email과 비밀번호를 확인하고 다시 시도해주세요.
+        </Alert>
+      </ContentGroup>
     ) : null;
 
     return (
@@ -90,15 +100,16 @@ export default class LoginForm extends Component {
         </div>
         {formGroups}
         {alertBlock}
-        <input type="submit" className="u-hidden-submit" />
-        <div className="u-button-row">
-          <a
-            className="u-button"
-            onClick={e => this.handleSubmit(e)}
-          >
-            로그인
-          </a>
-        </div>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              isBusy={isWaitingLogin}
+              type="submit"
+            >
+              로그인
+            </Button>
+          </BarItem>
+        </Bar>
       </form>
     );
   }

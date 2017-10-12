@@ -9,6 +9,7 @@ export default class GroupAuth extends Component {
     const {
       groupname,
       groupSession,
+      isWaitingLogin,
       login
     } = this.props;
 
@@ -31,6 +32,7 @@ export default class GroupAuth extends Component {
               groupname={groupname}
               groupSession={groupSession}
               login={login}
+              isWaitingLogin={isWaitingLogin}
             />
           </Route>
         </Switch>
