@@ -57,6 +57,8 @@ And then, set to use production config file.
 table-web$ cp configs.production.env configs.env
 ```
 
+You also need to provide required SSL certificates in `table-api/cert` directory.
+
 ### Release a specific version
 
 To release a specific version of the client based on Git tag, follow the steps below.
