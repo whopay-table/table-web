@@ -7,7 +7,10 @@ import Button from 'src/components/common/Button';
 import Container from 'src/components/common/Container';
 import ContentGroup from 'src/components/common/ContentGroup';
 import GroupHeader from 'src/components/GroupHeader';
+import Label from 'src/components/common/Label';
 import Title from 'src/components/common/Title';
+import Text from 'src/components/common/Text';
+import Textbox from 'src/components/common/Textbox';
 
 export default class GroupUserDestroy extends Component {
   static defaultProps = {
