@@ -7,6 +7,7 @@ export default class Button extends Component {
     className: '',
     fixedWidth: false,
     isActive: false,
+    isBusy: false,
     role: 'default',
   };
 
@@ -26,6 +27,23 @@ export default class Button extends Component {
       >
         {children}
       </a>
+    );
+  }
+
+  renderBusy(classNames) {
+    const {
+      children,
+      role,
+      href,
+      onClick,
+    } = this.props;
+
+    return (
+      <div
+        className={classnames(...classNames)}
+      >
+        <i className="fa fa-circle-o-notch fa-spin" />
+      </div>
     );
   }
 
@@ -71,6 +89,7 @@ export default class Button extends Component {
       fixedWidth,
       href,
       isActive,
+      isBusy,
       onClick,
       role,
       to,
@@ -80,11 +99,16 @@ export default class Button extends Component {
     const classNames = [
       'c-button',
       { 'c-button--is-active' : isActive },
+      { 'c-button--is-busy' : isBusy },
       { 'c-button--fixed-width' : fixedWidth },
       className,
       'u-colored-background',
       `u-colored-background--role-${role}`,
     ];
+
+    if (isBusy) {
+      return this.renderBusy(classNames);
+    }
 
     if (type === 'link') {
       return this.renderLink(classNames);

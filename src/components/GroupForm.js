@@ -83,7 +83,12 @@ export default class GroupForm extends Component {
   }
 
   render() {
-    const { alert, params, paramErrors } = this.props;
+    const {
+      alert,
+      isWaitingSubmit,
+      params,
+      paramErrors,
+    } = this.props;
 
     const groupFormBase = [
       {
@@ -170,6 +175,7 @@ export default class GroupForm extends Component {
         <Bar>
           <BarItem align="left">
             <Button
+              isBusy={isWaitingSubmit}
               type="submit"
             >
               확인

@@ -13,6 +13,7 @@ export default class GroupCreate extends Component {
   render() {
     const {
       createGroup,
+      isWaitingCreateGroup,
       getGroupIndex,
       params,
       paramErrors,
@@ -35,6 +36,7 @@ export default class GroupCreate extends Component {
           </ContentGroup>
           <ContentGroup>
             <GroupForm
+              isWaitingSubmit={isWaitingCreateGroup}
               onSubmit={createGroup}
               getGroupIndex={getGroupIndex}
               params={params}

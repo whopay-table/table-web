@@ -136,7 +136,10 @@ class GroupCreateContainer extends Component {
   }
 
   render() {
-    const { getGroupIndex } = this.props;
+    const {
+      getGroupIndex,
+      isWaitingCreateGroup,
+    } = this.props;
     const { redirectGroupname, params, alert } = this.state;
 
     if (redirectGroupname) {
@@ -150,6 +153,7 @@ class GroupCreateContainer extends Component {
     return (
       <GroupCreate
         createGroup={this.createGroup}
+        isWaitingCreateGroup={isWaitingCreateGroup}
         getGroupIndex={getGroupIndex}
         params={params}
         paramErrors={this.getParamErrors()}
@@ -162,12 +166,14 @@ class GroupCreateContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const groupIndexes = state.entities.groupIndexes;
+  const isWaitingCreateGroup = state.isWaiting.createGroup;
   return {
-    groupIndexes
+    groupIndexes,
+    isWaitingCreateGroup,
   };
 };
 
 export default connect(mapStateToProps, {
   createGroup,
-  getGroupIndex
+  getGroupIndex,
 })(GroupCreateContainer);

@@ -20,6 +20,10 @@
     opacity: 0.7;
   }
 
+  &--is-busy {
+    cursor: wait;
+  }
+
   &--fixed-width {
     width: rem(100px);
   }

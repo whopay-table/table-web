@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 import * as ActionTypes from 'src/constants/ActionTypes';
-import groupIndexes from 'src/reducers/groupIndexes';
-import groups from 'src/reducers/groups';
-import groupSessions from 'src/reducers/groupSessions';
-import groupUserIdsByEmails from 'src/reducers/groupUserIdsByEmails';
-import groupCurrentUsers from 'src/reducers/groupCurrentUsers';
-import groupTransactionLists from 'src/reducers/groupTransactionLists';
-import groupUserTransactionLists from 'src/reducers/groupUserTransactionLists';
+import groupIndexes from 'src/reducers/entities/groupIndexes';
+import groups from 'src/reducers/entities/groups';
+import groupSessions from 'src/reducers/entities/groupSessions';
+import groupUserIdsByEmails from 'src/reducers/entities/groupUserIdsByEmails';
+import groupCurrentUsers from 'src/reducers/entities/groupCurrentUsers';
+import groupTransactionLists from 'src/reducers/entities/groupTransactionLists';
+import groupUserTransactionLists from 'src/reducers/entities/groupUserTransactionLists';
+import isWaiting from 'src/reducers/isWaiting';
 
 const entities = combineReducers({
   groupIndexes,
@@ -19,7 +20,8 @@ const entities = combineReducers({
 });
 
 const app = combineReducers({
-  entities
+  entities,
+  isWaiting,
 });
 
 export default app;
