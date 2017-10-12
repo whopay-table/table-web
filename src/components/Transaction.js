@@ -41,7 +41,9 @@ export default class Transaction extends Component {
   renderButtons() {
     const {
       currentUser,
-      transaction
+      transaction,
+      isWaitingAcceptTransaction,
+      isWaitingRejectTransaction,
     } = this.props;
     const {
       id,
@@ -58,6 +60,7 @@ export default class Transaction extends Component {
           <BarItem align="left">
             <Button
               size="small"
+              isBusy={isWaitingAcceptTransaction[id]}
               onClick={() => this.props.acceptTransaction(id)}
             >
               승인
@@ -67,6 +70,7 @@ export default class Transaction extends Component {
             <Button
               role="danger"
               size="small"
+              isBusy={isWaitingRejectTransaction[id]}
               onClick={() => this.props.rejectTransaction(id)}
             >
               거절

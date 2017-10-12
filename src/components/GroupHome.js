@@ -184,6 +184,8 @@ export default class GroupHome extends Component {
       userTransactions,
       acceptTransaction,
       rejectTransaction,
+      isWaitingAcceptTransaction,
+      isWaitingRejectTransaction,
       refreshPage,
       logout,
     } = this.props;
@@ -204,6 +206,8 @@ export default class GroupHome extends Component {
         currentUser={currentUser}
         acceptTransaction={acceptTransaction}
         rejectTransaction={rejectTransaction}
+        isWaitingAcceptTransaction={isWaitingAcceptTransaction}
+        isWaitingRejectTransaction={isWaitingRejectTransaction}
       />
     ));
 

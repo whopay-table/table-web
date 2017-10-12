@@ -148,6 +148,8 @@ class GroupContainer extends Component {
       groupSession,
       isWaitingLogin,
       isWaitingLogout,
+      isWaitingAcceptTransaction,
+      isWaitingRejectTransaction,
     } = this.props;
 
     const isLoaded = groupIndex && (groupSession !== undefined);
@@ -165,6 +167,8 @@ class GroupContainer extends Component {
             groupname={match.params.groupname}
             isWaitingLogin={isWaitingLogin}
             isWaitingLogout={isWaitingLogout}
+            isWaitingAcceptTransaction={isWaitingAcceptTransaction}
+            isWaitingRejectTransaction={isWaitingRejectTransaction}
             transactions={transactions}
             userTransactions={userTransactions}
             getMoreTransactions={this.getMoreTransactions}
@@ -206,6 +210,8 @@ const mapStateToProps = (state, ownProps) => {
   const userTransactions = groupIndex ? state.entities.groupUserTransactionLists[groupIndex] : null;
   const isWaitingLogin = state.isWaiting.login;
   const isWaitingLogout = state.isWaiting.logout;
+  const isWaitingAcceptTransaction = state.isWaiting.acceptTransaction || {};
+  const isWaitingRejectTransaction = state.isWaiting.rejectTransaction || {};
 
   return {
     groupIndex,
@@ -216,6 +222,8 @@ const mapStateToProps = (state, ownProps) => {
     userTransactions,
     isWaitingLogin,
     isWaitingLogout,
+    isWaitingAcceptTransaction,
+    isWaitingRejectTransaction,
   };
 };
 

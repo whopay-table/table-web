@@ -23,6 +23,24 @@ export default function isWaiting(state = {}, action) {
     }
   }
   switch (action.type) {
+    case ActionTypes.ACCEPT_TRANSACTION.request:
+      return Object.assign({}, state, {
+        acceptTransaction: Object.assign({}, state.acceptTransaction, { [action.params.transactionId]: true }),
+      });
+    case ActionTypes.ACCEPT_TRANSACTION.success:
+    case ActionTypes.ACCEPT_TRANSACTION.failure:
+      return Object.assign({}, state, {
+        acceptTransaction: Object.assign({}, state.acceptTransaction, { [action.params.transactionId]: false }),
+      });
+    case ActionTypes.REJECT_TRANSACTION.request:
+      return Object.assign({}, state, {
+        rejectTransaction: Object.assign({}, state.rejectTransaction, { [action.params.transactionId]: true }),
+      });
+    case ActionTypes.REJECT_TRANSACTION.success:
+    case ActionTypes.REJECT_TRANSACTION.failure:
+      return Object.assign({}, state, {
+        rejectTransaction: Object.assign({}, state.rejectTransaction, { [action.params.transactionId]: false }),
+      });
     default:
       return state;
   }

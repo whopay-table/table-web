@@ -28,6 +28,8 @@ export default class GroupTransactions extends Component {
       getMoreTransactions,
       acceptTransaction,
       rejectTransaction,
+      isWaitingAcceptTransaction,
+      isWaitingRejectTransaction,
       logout,
     } = this.props;
 
@@ -38,6 +40,8 @@ export default class GroupTransactions extends Component {
         currentUser={currentUser}
         acceptTransaction={acceptTransaction}
         rejectTransaction={rejectTransaction}
+        isWaitingAcceptTransaction={isWaitingAcceptTransaction}
+        isWaitingRejectTransaction={isWaitingRejectTransaction}
       />
     ));
 
