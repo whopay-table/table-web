@@ -9,12 +9,12 @@ export default class Button extends Component {
     isActive: false,
     isBusy: false,
     role: 'default',
+    size: 'default',
   };
 
   renderAnchor(classNames) {
     const {
       children,
-      role,
       href,
       onClick,
     } = this.props;
@@ -33,7 +33,6 @@ export default class Button extends Component {
   renderBusy(classNames) {
     const {
       children,
-      role,
       href,
       onClick,
     } = this.props;
@@ -50,7 +49,6 @@ export default class Button extends Component {
   renderLink(classNames) {
     const {
       children,
-      role,
       onClick,
       to,
     } = this.props;
@@ -69,7 +67,6 @@ export default class Button extends Component {
   renderSubmit(classNames) {
     const {
       children,
-      role,
       onClick,
     } = this.props;
 
@@ -92,12 +89,14 @@ export default class Button extends Component {
       isBusy,
       onClick,
       role,
+      size,
       to,
       type,
     } = this.props;
 
     const classNames = [
       'c-button',
+      `c-button--size-${size}`,
       { 'c-button--is-active' : isActive },
       { 'c-button--is-busy' : isBusy },
       { 'c-button--fixed-width' : fixedWidth },

@@ -2,7 +2,11 @@ import classnames from 'classnames';
 import NumberFormat from 'react-number-format';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import TimeAgo from './TimeAgo';
+import Bar from 'src/components/common/Bar';
+import BarItem from 'src/components/common/BarItem';
+import Button from 'src/components/common/Button';
+import ContentGroup from 'src/components/common/ContentGroup';
+import TimeAgo from 'src/components/TimeAgo';
 
 export default class Transaction extends Component {
   renderStatus() {
@@ -49,23 +53,27 @@ export default class Transaction extends Component {
     const isFromCurrentUser = currentUser.id === fromUser.id;
 
     return isRequested && isFromCurrentUser ? (
-      <div className="c-transaction__buttons">
-        <a
-          className="c-transaction__button"
-          onClick={() => this.props.acceptTransaction(id)}
-        >
-          승인
-        </a>
-        <a
-          className={classnames(
-            'c-transaction__button',
-            'c-transaction__button--is-cancel'
-          )}
-          onClick={() => this.props.rejectTransaction(id)}
-        >
-          거절
-        </a>
-      </div>
+      <ContentGroup>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              size="small"
+              onClick={() => this.props.acceptTransaction(id)}
+            >
+              승인
+            </Button>
+          </BarItem>
+          <BarItem align="left">
+            <Button
+              role="danger"
+              size="small"
+              onClick={() => this.props.rejectTransaction(id)}
+            >
+              거절
+            </Button>
+          </BarItem>
+        </Bar>
+      </ContentGroup>
     ) : null;
   }
 
@@ -105,33 +113,35 @@ export default class Transaction extends Component {
 
     return (
       <div className="c-transaction">
-        <div className="c-transaction__info-box">
-          <div className="c-transaction__description">
-            {description}
+        <ContentGroup size="small">
+          <div className="c-transaction__info-box">
+            <div className="c-transaction__description">
+              {description}
+            </div>
+            <div
+              className={classnames(
+                'c-transaction__amount',
+                { 'c-transaction__amount--is-rejected': isRejected }
+              )}
+            >
+              <NumberFormat
+                value={amount}
+                suffix="원"
+                displayType="text"
+                thousandSeparator={true}
+              />
+            </div>
+            <div className="c-transaction__name">
+              {fromUserName}
+              &nbsp;➔&nbsp;
+              {toUserName}
+            </div>
+            <div className="c-transaction__created-at">
+              <TimeAgo date={createdAt} />
+            </div>
+            {this.renderStatus()}
           </div>
-          <div
-            className={classnames(
-              'c-transaction__amount',
-              { 'c-transaction__amount--is-rejected': isRejected }
-            )}
-          >
-            <NumberFormat
-              value={amount}
-              suffix="원"
-              displayType="text"
-              thousandSeparator={true}
-            />
-          </div>
-          <div className="c-transaction__name">
-            {fromUserName}
-            &nbsp;➔&nbsp;
-            {toUserName}
-          </div>
-          <div className="c-transaction__created-at">
-            <TimeAgo date={createdAt} />
-          </div>
-          {this.renderStatus()}
-        </div>
+        </ContentGroup>
         {this.renderButtons()}
       </div>
     );

@@ -9,7 +9,19 @@
   text-align: center;
   color: color('white');
   font-size: rem(14px);
+  line-height: 1em;
   cursor: pointer;
+
+  &--size-small {
+    padding: rem(4px) rem(8px);
+    margin-right: rem(4px);
+    margin-bottom: rem(4px);
+    min-width: 0;
+    text-align: center;
+    font-size: rem(11px);
+    line-height: 1em;
+    cursor: pointer;
+  }
 
   &:hover {
     color: color('white');

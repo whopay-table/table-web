@@ -46,31 +46,4 @@
       color: color('red');
     }
   }
-
-  &__buttons {
-    padding: 4px 0;
-    overflow: hidden;
-  }
-
-  &__button {
-    display: block;
-    float: left;
-    background-color: color('link');
-    padding: 4px 8px;
-    margin-right: 4px;
-    margin-bottom: 4px;
-    text-align: center;
-    color: color('white');
-    font-size: 11px;
-    line-height: 1em;
-    cursor: pointer;
-
-    &--is-cancel {
-      background-color: color('grey');
-    }
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
 }
