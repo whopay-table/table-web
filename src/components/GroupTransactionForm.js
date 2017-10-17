@@ -245,7 +245,7 @@ export default class GroupTransactionForm extends Component {
               isActive={params.totalAmount === null}
               onClick={() => this.handleTotalAmountClick(false)}
             >
-              전체 금액 입력해서 1/N 하기
+              한 사람당 받을 금액 입력하기
             </Button>
           </BarItem>
         </Bar>
