@@ -8,7 +8,7 @@
   width: 100%;
   height: rem($group-header-height);
   z-index: 900;
-  
+
   &__logo-block {
     float: left;
     padding-right: rem(32px);
@@ -70,6 +70,7 @@
 
     &--is-active {
       color: color('main');
+      font-weight: $bold;
     }
   }
 }

@@ -59,7 +59,7 @@ export default class GroupTransactionCreate extends Component {
           group={group}
           groupname={groupname}
           logout={logout}
-          activeMenuItem={isFromCurrentUser ? 'transactions-create' : 'transaction-request-create'}
+          activeMenuItem={isFromCurrentUser ? 'transaction-create' : 'transaction-request-create'}
         />
         <Container>
           <ContentGroup>
