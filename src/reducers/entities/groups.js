@@ -9,9 +9,7 @@ function filterGroupUsers(group) {
 export default function groups(state = {}, action) {
   switch (action.type) {
     case ActionTypes.GET_GROUP.request:
-      return Object.assign({}, state, {
-        [action.params._id]: undefined
-      });
+      return state;
 
     case ActionTypes.GET_GROUP.success:
       return Object.assign({}, state, {

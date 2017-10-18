@@ -28,8 +28,18 @@ class GroupTransactionCreateContainer extends Component {
     params: Object.assign({}, CREATE_TRANSACTION_PARAMS),
     paramErrors: Object.assign({}, CREATE_TRANSACTION_PARAM_ERRORS),
     alert: null,
-    redirectToHome: false
+    alertRole: null,
+    redirectToHome: false,
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.isFromCurrentUser !== this.props.isFromCurrentUser) {
+      this.setState({
+        alert: null,
+        alertRole: null,
+      });
+    }
+  }
 
   setParams = params => {
     this.setState({ params }, () => {
@@ -63,16 +73,26 @@ class GroupTransactionCreateContainer extends Component {
         })).then(v => {
           if (v.response) {
             ga('send', 'event', 'transaction', isFromCurrentUser ? 'create' : 'create-request', groupname);
-            this.setState({ redirectToHome: true });
-            refreshGroup();
-            refreshUserTransactions();
+            this.setState({
+              params: Object.assign({}, CREATE_TRANSACTION_PARAMS),
+              paramErrors: Object.assign({}, CREATE_TRANSACTION_PARAM_ERRORS),
+              alert: '요청하신 거래를 등록했습니다.',
+              alertRole: 'success',
+            });
           } else if (v.error) {
-            this.setState({ alert: '거래 등록에 실패했습니다. 작성된 내용을 다시 확인해 주세요.' });
+            ga('send', 'event', 'web-error', isFromCurrentUser ? 'create' : 'create-request', groupname);
+            this.setState({
+              alert: '거래 등록에 실패했습니다. 작성된 내용을 다시 확인해 주세요.',
+              alertRole: 'danger',
+            });
           }
         });
       });
     } else {
-      this.setState({ alert: '거래 등록에 실패했습니다. 작성된 내용을 다시 확인해 주세요.' });
+      this.setState({
+        alert: '거래 등록에 실패했습니다. 작성된 내용을 다시 확인해 주세요.',
+        alertRole: 'danger',
+      });
     }
   };
 
@@ -105,6 +125,7 @@ class GroupTransactionCreateContainer extends Component {
       params,
       paramErrors,
       alert,
+      alertRole,
       redirectToHome
     } = this.state;
 
@@ -117,6 +138,7 @@ class GroupTransactionCreateContainer extends Component {
         params={params}
         paramErrors={paramErrors}
         alert={alert}
+        alertRole={alertRole}
         currentUser={currentUser}
         group={group}
         groupname={groupname}

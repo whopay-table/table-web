@@ -169,17 +169,19 @@ export default class GroupUserForm extends Component {
         onSubmit={e => this.handleSubmit(e)}
       >
         {formGroups}
+        <ContentGroup>
+          <Bar>
+            <BarItem>
+              <Button
+                type="submit"
+                isBusy={isWaitingSubmit}
+              >
+                {isUpdate ? '수정' : '확인'}
+              </Button>
+            </BarItem>
+          </Bar>
+        </ContentGroup>
         {alertBlock}
-        <Bar>
-          <BarItem>
-            <Button
-              type="submit"
-              isBusy={isWaitingSubmit}
-            >
-              {isUpdate ? '수정' : '확인'}
-            </Button>
-          </BarItem>
-        </Bar>
       </form>
     );
   }

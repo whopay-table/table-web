@@ -82,6 +82,7 @@ export default class GroupForm extends Component {
   render() {
     const {
       alert,
+      alertRole,
       isWaitingSubmit,
       params,
       paramErrors,
@@ -142,7 +143,9 @@ export default class GroupForm extends Component {
 
     const alertBlock = alert ? (
       <ContentGroup>
-        <Alert>
+        <Alert
+          role={alertRole || 'default'}
+        >
           {alert}
         </Alert>
       </ContentGroup>
@@ -169,25 +172,27 @@ export default class GroupForm extends Component {
         <ContentGroup>
           {userFormGroups}
         </ContentGroup>
+        <ContentGroup>
+          <Bar>
+            <BarItem align="left">
+              <Button
+                isBusy={isWaitingSubmit}
+                type="submit"
+              >
+                확인
+              </Button>
+            </BarItem>
+            <BarItem align="left">
+              <Button
+                to="/"
+                role="warning"
+              >
+                취소
+              </Button>
+            </BarItem>
+          </Bar>
+        </ContentGroup>
         {alertBlock}
-        <Bar>
-          <BarItem align="left">
-            <Button
-              isBusy={isWaitingSubmit}
-              type="submit"
-            >
-              확인
-            </Button>
-          </BarItem>
-          <BarItem align="left">
-            <Button
-              to="/"
-              role="warning"
-            >
-              취소
-            </Button>
-          </BarItem>
-        </Bar>
       </form>
     );
   }

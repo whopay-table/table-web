@@ -27,6 +27,7 @@ export default class GroupTransactionCreate extends Component {
   render() {
     const {
       alert,
+      alertRole,
       currentUser,
       isFromCurrentUser,
       isWaitingCreateTransaction,
@@ -73,6 +74,7 @@ export default class GroupTransactionCreate extends Component {
           <ContentGroup>
             <GroupTransactionForm
               alert={alert}
+              alertRole={alertRole}
               params={params}
               paramErrors={paramErrors}
               currentUser={currentUser}

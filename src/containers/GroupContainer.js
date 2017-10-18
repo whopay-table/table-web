@@ -35,7 +35,7 @@ class GroupContainer extends Component {
 
   getGroupWithId(groupId) {
     this.props.getGroup(groupId);
-    this.props.getCurrentUser({ groupId: groupId }).then(v => {
+    this.props.getCurrentUser({ groupId }).then(v => {
       if (v.response) {
         this.props.getUserTransactions({
           groupId: groupId,
@@ -70,6 +70,13 @@ class GroupContainer extends Component {
     });
   };
 
+  refreshCurrentUser = callback => {
+    const { groupIndex } = this.props;
+    this.props.getCurrentUser({ groupId: groupIndex }).then(v => {
+      callback && callback();
+    });
+  };
+
   refreshUserTransactions = callback => {
     this.props.getUserTransactions({
       groupId: this.props.groupIndex,
@@ -84,8 +91,10 @@ class GroupContainer extends Component {
   refreshPage = callback => {
     ga('send', 'event', 'web', 'refresh-group-page');
     this.refreshGroup(() => {
-      this.refreshUserTransactions(() => {
-        callback && callback();
+      this.refreshCurrentUser(() => {
+        this.refreshUserTransactions(() => {
+          callback && callback();
+        });
       });
     });
   };
@@ -100,11 +109,10 @@ class GroupContainer extends Component {
   };
 
   acceptTransaction = transactionId => {
-    const { match } = this.props;
+    const { groupIndex, match } = this.props;
     ga('send', 'event', 'transaction', 'accept', match.params.groupname, transactionId);
-    const groupId = this.props.groupIndex;
     this.props.acceptTransaction({
-      groupId,
+      groupId: groupIndex,
       transactionId,
     }).then(v => {
       this.refreshUserTransactions();
@@ -112,11 +120,10 @@ class GroupContainer extends Component {
   };
 
   rejectTransaction = transactionId => {
-    const { match } = this.props;
+    const { groupIndex, match } = this.props;
     ga('send', 'event', 'transaction', 'reject', match.params.groupname, transactionId);
-    const groupId = this.props.groupIndex;
     this.props.rejectTransaction({
-      groupId,
+      groupId: groupIndex,
       transactionId,
     }).then(v => {
       this.refreshGroup();

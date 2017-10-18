@@ -117,6 +117,8 @@ export default class Group extends Component {
               isWaitingAcceptTransaction={isWaitingAcceptTransaction}
               isWaitingRejectTransaction={isWaitingRejectTransaction}
               refreshPage={refreshPage}
+              refreshGroup={refreshGroup}
+              refreshUserTransactions={refreshUserTransactions}
               logout={logout}
             />
           </Route>

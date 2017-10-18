@@ -34,6 +34,13 @@ export default class GroupHome extends Component {
     isSettlementVisible: false,
   };
 
+  componentDidMount() {
+    const {
+      refreshPage,
+    } = this.props;
+    refreshPage();
+  }
+
   showWithdraw() {
     this.setState({ isWithdrawVisible: true });
   }

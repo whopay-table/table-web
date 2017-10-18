@@ -142,7 +142,11 @@ class GroupCreateContainer extends Component {
       getGroupIndex,
       isWaitingCreateGroup,
     } = this.props;
-    const { redirectGroupname, params, alert } = this.state;
+    const {
+      alert,
+      params,
+      redirectGroupname,
+    } = this.state;
 
     if (redirectGroupname) {
       if (IS_PROD_DOMAIN) {

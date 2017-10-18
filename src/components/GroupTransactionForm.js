@@ -321,6 +321,7 @@ export default class GroupTransactionForm extends Component {
   render() {
     const {
       alert,
+      alertRole,
       group,
       onCancel,
       params,
@@ -332,7 +333,7 @@ export default class GroupTransactionForm extends Component {
     const alertBlock = alert ? (
       <ContentGroup>
         <Alert
-          role="danger"
+          role={alertRole || 'default'}
         >
           {alert}
         </Alert>
@@ -365,25 +366,27 @@ export default class GroupTransactionForm extends Component {
             생략할 수 있습니다.
           </Text>
         </ContentGroup>
+        <ContentGroup>
+          <Bar>
+            <BarItem align="left">
+              <Button
+                type="submit"
+                isBusy={isWaitingSubmit}
+              >
+                확인
+              </Button>
+            </BarItem>
+            <BarItem align="left">
+              <Button
+                onClick={() => onCancel()}
+                role="warning"
+              >
+                취소
+              </Button>
+            </BarItem>
+          </Bar>
+        </ContentGroup>
         {alertBlock}
-        <Bar>
-          <BarItem align="left">
-            <Button
-              type="submit"
-              isBusy={isWaitingSubmit}
-            >
-              확인
-            </Button>
-          </BarItem>
-          <BarItem align="left">
-            <Button
-              onClick={() => onCancel()}
-              role="warning"
-            >
-              취소
-            </Button>
-          </BarItem>
-        </Bar>
       </form>
     );
   }
