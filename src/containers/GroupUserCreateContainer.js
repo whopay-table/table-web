@@ -45,7 +45,8 @@ class GroupUserCreateContainer extends Component {
       paramErrors
     } = this.state;
     const {
-      groupIndex
+      groupIndex,
+      match,
     } = this.props;
     const isError = Object.keys(paramErrors).map(key => paramErrors[key]).join('') !== '';
 
@@ -56,8 +57,10 @@ class GroupUserCreateContainer extends Component {
           groupSignupKey: this.getSignupKey()
         })).then(v => {
           if (v.response) {
+            ga('send', 'event', 'user', 'create', match.params.groupname);
             this.setState({ redirectToHome: true });
           } else if (v.error) {
+            ga('send', 'event', 'web-error', 'user-create', match.params.groupname);
             this.setState({ alert: '가입에 실패했습니다. 작성한 내용을 다시 한번 확인해 주세요.' });
           }
         });

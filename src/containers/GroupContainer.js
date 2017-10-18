@@ -55,6 +55,7 @@ class GroupContainer extends Component {
   }
 
   getGroup(groupname) {
+    ga('send', 'event', 'web', 'get-group', groupname);
     this.props.getGroupIndex(groupname).then(v => {
       if (v.response) {
         this.getGroupWithId(v.response.id);
@@ -81,6 +82,7 @@ class GroupContainer extends Component {
   };
 
   refreshPage = callback => {
+    ga('send', 'event', 'web', 'refresh-group-page');
     this.refreshGroup(() => {
       this.refreshUserTransactions(() => {
         callback && callback();
@@ -89,6 +91,7 @@ class GroupContainer extends Component {
   };
 
   getMoreTransactions = () => {
+    ga('send', 'event', 'web', 'more-transactions');
     this.props.getTransactions({
       groupId: this.props.groupIndex,
       offset: this.props.transactions.length,
@@ -97,6 +100,8 @@ class GroupContainer extends Component {
   };
 
   acceptTransaction = transactionId => {
+    const { match } = this.props;
+    ga('send', 'event', 'transaction', 'accept', match.params.groupname, transactionId);
     const groupId = this.props.groupIndex;
     this.props.acceptTransaction({
       groupId,
@@ -107,6 +112,8 @@ class GroupContainer extends Component {
   };
 
   rejectTransaction = transactionId => {
+    const { match } = this.props;
+    ga('send', 'event', 'transaction', 'reject', match.params.groupname, transactionId);
     const groupId = this.props.groupIndex;
     this.props.rejectTransaction({
       groupId,
@@ -118,7 +125,8 @@ class GroupContainer extends Component {
   };
 
   login = (email, password) => {
-    const { groupIndex } = this.props;
+    const { groupIndex, match } = this.props;
+    ga('send', 'event', 'web', 'login', `${match.params.groupname}::${email}`);
     this.props.login({
       groupId: groupIndex,
       email,
@@ -131,6 +139,8 @@ class GroupContainer extends Component {
   };
 
   logout = () => {
+    const { currentUser } = this.props;
+    ga('send', 'event', 'web', 'logout', currentUser ? currentUser.email : undefined);
     this.props.logout({
       groupId: this.props.groupIndex
     });

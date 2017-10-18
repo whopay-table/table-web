@@ -46,6 +46,7 @@ class GroupTransactionCreateContainer extends Component {
       currentUser,
       isFromCurrentUser,
       groupIndex,
+      groupname,
       refreshGroup,
       refreshUserTransactions,
     } = this.props;
@@ -61,6 +62,7 @@ class GroupTransactionCreateContainer extends Component {
           'transaction[to_user_id]': currentUser.id
         })).then(v => {
           if (v.response) {
+            ga('send', 'event', 'transaction', isFromCurrentUser ? 'create' : 'create-request', groupname);
             this.setState({ redirectToHome: true });
             refreshGroup();
             refreshUserTransactions();

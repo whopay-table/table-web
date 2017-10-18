@@ -67,8 +67,10 @@ class GroupCreateContainer extends Component {
       this.setState({ alert: null }, () => {
         this.props.createGroup(this.state.params).then(v => {
           if (v.response) {
+            ga('send', 'event', 'group', 'create', v.response.groupname);
             this.setState({ redirectGroupname: v.response.groupname });
           } else if (v.error) {
+            ga('send', 'event', 'web-error', 'group-create', v.params['group[groupname]']);
             this.setState({ alert: '그룹을 생성하지 못 했습니다. 작성된 내용을 다시 확인해 주세요.' });
             this.props.getGroupIndex(v.params['group[groupname]']);
           }

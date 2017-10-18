@@ -19,6 +19,7 @@ class GroupResetPasswordContainer extends Component {
     const { email } = this.state;
     const {
       groupIndex,
+      groupname,
     } = this.props;
 
     this.setState({ alert: null }, () => {
@@ -27,12 +28,15 @@ class GroupResetPasswordContainer extends Component {
         groupId: groupIndex,
       })).then(v => {
         if (v.response) {
+          ga('send', 'event', 'web', 'reset-user-password', `${groupname}::${email}`, groupIndex);
           this.setState({ isSucceed: true });
         } else if (v.error) {
           const firstError = v.error.errors[0];
           if (firstError.code === 'model_error' && firstError.key === 'user') {
+            ga('send', 'event', 'web', 'reset-user-password-fail', `${groupname}::${email}`, groupIndex);
             this.setState({ alert: '해당 email로 가입된 사용자가 없습니다. 확인 후 다시 시도해주세요.' });
           } else {
+            ga('send', 'event', 'web-error', 'reset-user-password', `${groupname}::${email}`, groupIndex);
             this.setState({ alert: '비밀번호 재설정에 실패했습니다. 잠시 후 다시 시도해주세요. 문제가 계속되면 관리자에게 문의해주세요.' });
           }
         }
