@@ -30,7 +30,7 @@ export default class Transaction extends Component {
             'c-transaction__status--is-rejected'
           )}
         >
-          거절됨
+          취소됨
         </div>
       );
     } else {
@@ -48,37 +48,61 @@ export default class Transaction extends Component {
     const {
       id,
       fromUser,
+      toUser,
       isAccepted,
       isRejected,
     } = transaction;
     const isRequested = !isAccepted && !isRejected;
     const isFromCurrentUser = currentUser.id === fromUser.id;
+    const isToCurrentUser = currentUser.id === toUser.id;
 
-    return isRequested && isFromCurrentUser ? (
-      <ContentGroup>
-        <Bar>
-          <BarItem align="left">
-            <Button
-              size="small"
-              isBusy={isWaitingAcceptTransaction[id]}
-              onClick={() => this.props.acceptTransaction(id)}
-            >
-              승인
-            </Button>
-          </BarItem>
-          <BarItem align="left">
-            <Button
-              role="danger"
-              size="small"
-              isBusy={isWaitingRejectTransaction[id]}
-              onClick={() => this.props.rejectTransaction(id)}
-            >
-              거절
-            </Button>
-          </BarItem>
-        </Bar>
-      </ContentGroup>
-    ) : null;
+    if (isRequested) {
+      if (isFromCurrentUser) {
+        return (
+          <ContentGroup>
+            <Bar>
+              <BarItem align="left">
+                <Button
+                  size="small"
+                  isBusy={isWaitingAcceptTransaction[id]}
+                  onClick={() => this.props.acceptTransaction(id)}
+                >
+                  승인
+                </Button>
+              </BarItem>
+              <BarItem align="left">
+                <Button
+                  role="danger"
+                  size="small"
+                  isBusy={isWaitingRejectTransaction[id]}
+                  onClick={() => this.props.rejectTransaction(id)}
+                >
+                  거절
+                </Button>
+              </BarItem>
+            </Bar>
+          </ContentGroup>
+        );
+      } else if (isToCurrentUser) {
+        return (
+          <ContentGroup>
+            <Bar>
+              <BarItem align="left">
+                <Button
+                  role="danger"
+                  size="small"
+                  isBusy={isWaitingRejectTransaction[id]}
+                  onClick={() => this.props.rejectTransaction(id)}
+                >
+                  취소
+                </Button>
+              </BarItem>
+            </Bar>
+          </ContentGroup>
+        );
+      }
+    }
+    return null;
   }
 
   render() {
