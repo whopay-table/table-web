@@ -16,7 +16,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('./assets/webpack-config');
 
 const CONFIG_PATH = './temp/config.js'
-const CONFIG_KEYS = ['WEB_API_URL', 'WEB_DOMAIN'];
+const CONFIG_KEYS = ['WEB_API_URL', 'WEB_DOMAIN', 'GA_TRACKING_ID'];
 
 const DEFAULT_DEV_TOOL = '#eval-source-map';
 const DEFAULT_DEV_HOST = '0.0.0.0';

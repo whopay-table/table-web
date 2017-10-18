@@ -6,6 +6,7 @@ import GroupContainer from './GroupContainer';
 import GroupCreateContainer from './GroupCreateContainer';
 import Home from '../components/Home';
 import NotFound from '../components/NotFound';
+import Tracker from '../components/Tracker';
 
 const HOSTNAME = window.location.hostname;
 const DOMAIN = Config.WEB_DOMAIN;
@@ -63,6 +64,7 @@ class App extends Component {
           <Route path="/create" component={GroupCreateContainer} />
           <Route path="/:groupname" component={GroupContainer} />
         </Switch>
+        <Tracker location={location} />
       </div>
     );
   }
