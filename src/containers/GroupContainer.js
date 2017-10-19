@@ -128,6 +128,7 @@ class GroupContainer extends Component {
     }).then(v => {
       this.refreshGroup();
       this.refreshUserTransactions();
+      this.refreshCurrentUser();
     });
   };
 

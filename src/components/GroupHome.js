@@ -34,13 +34,6 @@ export default class GroupHome extends Component {
     isSettlementVisible: false,
   };
 
-  componentDidMount() {
-    const {
-      refreshPage,
-    } = this.props;
-    refreshPage();
-  }
-
   showWithdraw() {
     this.setState({ isWithdrawVisible: true });
   }
@@ -246,7 +239,7 @@ export default class GroupHome extends Component {
               className="c-group-home__refresh-button"
               onClick={() => refreshPage()}
             >
-              ↻
+              <i className="fa fa-refresh" />
             </a>
             <UserBalance
               users={group.users}

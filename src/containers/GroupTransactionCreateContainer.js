@@ -57,8 +57,7 @@ class GroupTransactionCreateContainer extends Component {
       isFromCurrentUser,
       groupIndex,
       groupname,
-      refreshGroup,
-      refreshUserTransactions,
+      refreshPage,
     } = this.props;
     const isError = Object.keys(paramErrors).map(key => paramErrors[key]).join('') !== '';
 
@@ -73,6 +72,7 @@ class GroupTransactionCreateContainer extends Component {
         })).then(v => {
           if (v.response) {
             ga('send', 'event', 'transaction', isFromCurrentUser ? 'create' : 'create-request', groupname);
+            refreshPage();
             this.setState({
               params: Object.assign({}, CREATE_TRANSACTION_PARAMS),
               paramErrors: Object.assign({}, CREATE_TRANSACTION_PARAM_ERRORS),
