@@ -9,4 +9,5 @@ git fetch --all --tags --prune
 git checkout $1
 
 # Build the source code.
+yarn install
 yarn build
