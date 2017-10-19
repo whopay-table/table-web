@@ -22,6 +22,8 @@ export default class Group extends Component {
       isWaitingLogout,
       isWaitingAcceptTransaction,
       isWaitingRejectTransaction,
+      isWaitingGetTransactions,
+      isOutOfTransactions,
       transactions,
       userTransactions,
       getMoreTransactions,
@@ -73,6 +75,8 @@ export default class Group extends Component {
               rejectTransaction={rejectTransaction}
               isWaitingAcceptTransaction={isWaitingAcceptTransaction}
               isWaitingRejectTransaction={isWaitingRejectTransaction}
+              isWaitingGetTransactions={isWaitingGetTransactions}
+              isOutOfTransactions={isOutOfTransactions}
               logout={logout}
             />
           </Route>

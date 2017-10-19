@@ -8,6 +8,7 @@ import groupCurrentUsers from 'src/reducers/entities/groupCurrentUsers';
 import groupTransactionLists from 'src/reducers/entities/groupTransactionLists';
 import groupUserTransactionLists from 'src/reducers/entities/groupUserTransactionLists';
 import isWaiting from 'src/reducers/isWaiting';
+import status from 'src/reducers/status';
 
 const entities = combineReducers({
   groupIndexes,
@@ -22,6 +23,7 @@ const entities = combineReducers({
 const app = combineReducers({
   entities,
   isWaiting,
+  status,
 });
 
 export default app;

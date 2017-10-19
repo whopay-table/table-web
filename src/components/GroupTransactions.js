@@ -19,6 +19,34 @@ export default class GroupTransactions extends Component {
     transactions: []
   };
 
+  renderMoreButton() {
+    const {
+      getMoreTransactions,
+      isWaitingGetTransactions,
+      isOutOfTransactions,
+    } = this.props;
+    if (isWaitingGetTransactions) {
+      return (
+        <div
+          className="u-more-button"
+        >
+          <i className="fa fa-circle-o-notch fa-spin" />
+        </div>
+      );
+    } else if (isOutOfTransactions) {
+      return null;
+    } else {
+      return (
+        <a
+          className="u-more-button"
+          onClick={getMoreTransactions}
+        >
+          더 불러오기
+        </a>
+      );
+    }
+  }
+
   render() {
     const {
       currentUser,
@@ -66,12 +94,7 @@ export default class GroupTransactions extends Component {
           </ContentGroup>
           <ContentGroup>
             {transactionItems}
-            <a
-              className="u-more-button"
-              onClick={getMoreTransactions}
-            >
-              더 불러오기
-            </a>
+            {this.renderMoreButton()}
           </ContentGroup>
         </Container>
       </Container>
