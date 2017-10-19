@@ -61,6 +61,7 @@ export default class Group extends Component {
               logout={logout}
               refreshGroup={refreshGroup}
               refreshUserTransactions={refreshUserTransactions}
+              refreshPage={refreshPage}
             />
           </Route>
           <Route
