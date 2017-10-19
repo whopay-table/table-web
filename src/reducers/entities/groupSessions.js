@@ -1,4 +1,5 @@
 import * as ActionTypes from 'src/constants/ActionTypes';
+import * as storage from 'src/lib/storage';
 
 export default function groupSessions(state = {}, action) {
   switch (action.type) {
@@ -8,7 +9,7 @@ export default function groupSessions(state = {}, action) {
       });
 
     case ActionTypes.LOGIN.success:
-      localStorage.setItem(`table-session-${action.params._groupId}`, action.response.token);
+      storage.setItem(`table-session-${action.params._groupId}`, action.response.token);
       return Object.assign({}, state, {
         [action.params._groupId]: action.response.token
       });
@@ -19,13 +20,13 @@ export default function groupSessions(state = {}, action) {
       });
 
     case ActionTypes.LOGOUT.success:
-      localStorage.removeItem(`table-session-${action.params._groupId}`);
+      storage.removeItem(`table-session-${action.params._groupId}`);
       return Object.assign({}, state, {
         [action.params._groupId]: null
       });
 
     case ActionTypes.DESTROY_USER.success:
-      localStorage.removeItem(`table-session-${action.params._groupId}`);
+      storage.removeItem(`table-session-${action.params._groupId}`);
       return Object.assign({}, state, {
         [action.params._groupId]: null
       });

@@ -1,5 +1,6 @@
 import 'isomorphic-fetch';
 import 'script-loader!src/imports/ga.js';
+import 'script-loader!js-cookie/src/js.cookie.js';
 import 'script-loader!jquery/dist/jquery.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'script-loader!bootstrap/dist/js/bootstrap.js';

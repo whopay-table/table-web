@@ -1,5 +1,6 @@
 
-import * as ActionTypes from '../constants/ActionTypes';
+import * as ActionTypes from 'src/constants/ActionTypes';
+import * as storage from 'src/lib/storage';
 
 export const getGroupIndex = groupname => (dispatch, getState) => {
   return dispatch({
@@ -96,7 +97,7 @@ export const resetUserPassword = params => (dispatch, getState) => {
 };
 
 export const getGroup = id => (dispatch, getState) => {
-  const token = getState().entities.groupSessions[id] || localStorage.getItem(`table-session-${id}`);
+  const token = getState().entities.groupSessions[id] || storage.getItem(`table-session-${id}`);
   return dispatch({
     API_REQUEST: {
       type: ActionTypes.GET_GROUP,
@@ -127,7 +128,7 @@ export const getUserIdByEmail = params => (dispatch, getState) => {
 
 export const getCurrentUser = params => (dispatch, getState) => {
   const groupId = params.groupId;
-  const token = getState().entities.groupSessions[groupId] || localStorage.getItem(`table-session-${groupId}`);
+  const token = getState().entities.groupSessions[groupId] || storage.getItem(`table-session-${groupId}`);
   return dispatch({
     API_REQUEST: {
       type: ActionTypes.GET_CURRENT_USER,
@@ -185,7 +186,7 @@ export const rejectTransaction = params => (dispatch, getState) => {
 
 export const getTransactions = params => (dispatch, getState) => {
   const groupId = params.groupId;
-  const token = getState().entities.groupSessions[groupId] || localStorage.getItem(`table-session-${groupId}`);
+  const token = getState().entities.groupSessions[groupId] || storage.getItem(`table-session-${groupId}`);
   return dispatch({
     API_REQUEST: {
       type: ActionTypes.GET_TRANSACTIONS,
@@ -203,7 +204,7 @@ export const getTransactions = params => (dispatch, getState) => {
 
 export const getUserTransactions = params => (dispatch, getState) => {
   const groupId = params.groupId;
-  const token = getState().entities.groupSessions[groupId] || localStorage.getItem(`table-session-${groupId}`);
+  const token = getState().entities.groupSessions[groupId] || storage.getItem(`table-session-${groupId}`);
   return dispatch({
     API_REQUEST: {
       type: ActionTypes.GET_USER_TRANSACTIONS,
