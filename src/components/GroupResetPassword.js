@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
+import Alert from 'src/components/common/Alert';
 import Bar from 'src/components/common/Bar';
 import BarItem from 'src/components/common/BarItem';
 import Button from 'src/components/common/Button';
@@ -30,51 +31,61 @@ export default class GroupResetPassword extends Component {
       isSucceed,
     } = this.props;
 
+    console.log('isSucceed', isSucceed);
+
     const alertBlock = alert ? (
-      <Alert
-        role="danger"
-      >
-        {alert}
-      </Alert>
+      <ContentGroup>
+        <Alert
+          role="danger"
+        >
+          {alert}
+        </Alert>
+      </ContentGroup>
     ) : null;
 
     const succeedBlock = isSucceed ? (
-      <Alert
-        role="success"
-      >
-        입력하신 email 주소로 새로운 비밀번호가 전송 되었습니다.
-        확인 후 새로운 비밀번호를 사용해 로그인 해주세요.
-      </Alert>
+      <ContentGroup>
+        <Alert
+          role="success"
+        >
+          입력하신 email 주소로 새로운 비밀번호가 전송 되었습니다.
+          확인 후 새로운 비밀번호를 사용해 로그인 해주세요.
+        </Alert>
+      </ContentGroup>
     ) : null;
 
     const buttons = isSucceed ? (
-      <Bar>
-        <BarItem align="left">
-          <Button
-            to={`/${groupname}`}
-          >
-            확인
-          </Button>
-        </BarItem>
-      </Bar>
+      <ContentGroup>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              to={`/${groupname}`}
+            >
+              돌아가기
+            </Button>
+          </BarItem>
+        </Bar>
+      </ContentGroup>
     ) : (
-      <Bar>
-        <BarItem align="left">
-          <Button
-            type="submit"
-          >
-            확인
-          </Button>
-        </BarItem>
-        <BarItem align="left">
-          <Button
-            to={`/${groupname}`}
-            role="warning"
-          >
-            취소
-          </Button>
-        </BarItem>
-      </Bar>
+      <ContentGroup>
+        <Bar>
+          <BarItem align="left">
+            <Button
+              type="submit"
+            >
+              확인
+            </Button>
+          </BarItem>
+          <BarItem align="left">
+            <Button
+              to={`/${groupname}`}
+              role="warning"
+            >
+              취소
+            </Button>
+          </BarItem>
+        </Bar>
+      </ContentGroup>
     );
 
     return (
@@ -114,9 +125,9 @@ export default class GroupResetPassword extends Component {
                   비밀번호를 재설정할 사용자 계정에 등록된 이메일 주소를 입력하세요.
                 </Text>
               </ContentGroup>
+              {buttons}
               {alertBlock}
               {succeedBlock}
-              {buttons}
             </form>
           </ContentGroup>
         </Container>
