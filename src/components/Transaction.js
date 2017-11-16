@@ -60,7 +60,7 @@ export default class Transaction extends Component {
 
     const autoAcceptInfo = autoAcceptAt ? (
       <span className="c-transaction__auto-accept-at">
-        {moment(autoAcceptAt) > moment() ? <TimeAgo date={autoAcceptAt} /> : '오늘 밤'} 자동승인
+        {moment(autoAcceptAt) > moment().startOf('day'); ? <TimeAgo date={autoAcceptAt} /> : '오늘 밤'} 자동승인
       </span>
     ) : null;
 
