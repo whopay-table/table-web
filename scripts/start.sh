@@ -1,1 +1,1 @@
-export $(cat configs.env | xargs) && yarn start
+eval $(egrep -v '^#' configs.env | xargs) yarn start
