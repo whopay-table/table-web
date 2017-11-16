@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import React, { Component, PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
@@ -51,10 +52,17 @@ export default class Transaction extends Component {
       toUser,
       isAccepted,
       isRejected,
+      autoAcceptAt,
     } = transaction;
     const isRequested = !isAccepted && !isRejected;
     const isFromCurrentUser = currentUser.id === fromUser.id;
     const isToCurrentUser = currentUser.id === toUser.id;
+
+    const autoAcceptInfo = autoAcceptAt ? (
+      <span className="c-transaction__auto-accept-at">
+        {moment(autoAcceptAt) > moment() ? <TimeAgo date={autoAcceptAt} /> : '오늘 밤'} 자동승인
+      </span>
+    ) : null;
 
     if (isRequested) {
       if (isFromCurrentUser) {
@@ -80,6 +88,9 @@ export default class Transaction extends Component {
                   거절
                 </Button>
               </BarItem>
+              <BarItem align="right">
+                {autoAcceptInfo}
+              </BarItem>
             </Bar>
           </ContentGroup>
         );
@@ -96,6 +107,9 @@ export default class Transaction extends Component {
                 >
                   취소
                 </Button>
+              </BarItem>
+              <BarItem align="right">
+                {autoAcceptInfo}
               </BarItem>
             </Bar>
           </ContentGroup>
