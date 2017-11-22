@@ -69,7 +69,7 @@ export default class GroupSettlement extends Component {
         key={`${currentUser.id}-2`}
         className="c-group-settlement__item u-info-block__item"
       >
-        {`모든 사람들의 현금 전달이 끝나면, WHOPAY에서 같은 액수를 ${user.name} 에게 송금 요청합니다.`}
+        {`모든 사람들의 현금 전달이 끝나면, WHOPAY에서 같은 액수를 ${user.name} 에게 받습니다.`}
       </li>
     ];
   }

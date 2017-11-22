@@ -43,8 +43,8 @@ export default class GroupTransactionCreate extends Component {
       redirectToHome,
     } = this.state;
 
-    const title = isFromCurrentUser ? '송금' : '송금 요청';
-    const description = isFromCurrentUser ? '돈을 보냅니다.' : '돈을 보내달라고 요청합니다.';
+    const title = isFromCurrentUser ? '보내기' : '받기';
+    const description = isFromCurrentUser ? '돈을 보냅니다.' : '돈을 받습니다.';
 
     const redirector = redirectToHome ? <Redirect push to={`/${groupname}/`} /> : null;
 

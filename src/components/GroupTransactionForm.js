@@ -146,7 +146,7 @@ export default class GroupTransactionForm extends Component {
     return (
       <ContentGroup size="small">
         <Label>
-          내게 송금받는 사람
+          내게 돈을 받는 사람
         </Label>
         <Listbox
           value={toUserValue}
@@ -191,7 +191,7 @@ export default class GroupTransactionForm extends Component {
     return (
       <ContentGroup size="small">
         <Label>
-          내게 송금할 사람
+          내게 돈을 보낼 사람
         </Label>
         <Listbox
           value={fromUserValue}

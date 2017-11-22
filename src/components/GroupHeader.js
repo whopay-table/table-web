@@ -78,7 +78,7 @@ export default class GroupHeader extends Component {
               { 'c-group-header__menu-item--is-active': activeMenuItem === 'transaction-create' }
             )}
           >
-            송금
+            보내기
           </Link>
           <Link
             to={`/${groupname}/transactions/create_request`}
@@ -87,7 +87,7 @@ export default class GroupHeader extends Component {
               { 'c-group-header__menu-item--is-active': activeMenuItem === 'transaction-request-create' }
             )}
           >
-            송금 요청
+            받기
           </Link>
           <Link
             to={`/${groupname}/invite`}
