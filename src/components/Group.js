@@ -5,6 +5,7 @@ import GroupHome from './GroupHome';
 import GroupInvite from './GroupInvite';
 import GroupTransactionCreateContainer from '../containers/GroupTransactionCreateContainer';
 import GroupTransactions from './GroupTransactions';
+import GroupUsers from './GroupUsers';
 import GroupUserUpdateContainer from '../containers/GroupUserUpdateContainer';
 import GroupUserDestroyContainer from '../containers/GroupUserDestroyContainer';
 import NotFound from './NotFound';
@@ -110,6 +111,15 @@ export default class Group extends Component {
           </Route>
           <Route path="/:groupname/users/create">
             <Redirect push to={`/${groupname}`} />
+          </Route>
+          <Route path="/:groupname/users">
+            <GroupUsers
+              currentUser={currentUser}
+              group={group}
+              groupname={groupname}
+              refreshGroup={refreshGroup}
+              logout={logout}
+            />
           </Route>
           <Route exact path="/:groupname">
             <GroupHome
