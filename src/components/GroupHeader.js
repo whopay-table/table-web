@@ -14,6 +14,7 @@ export default class GroupHeader extends Component {
       groupname,
       activeMenuItem,
     } = this.props;
+
     return (
       <div className="c-group-header">
         <Link to={`/${groupname}`}>

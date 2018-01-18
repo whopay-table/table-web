@@ -1,0 +1,21 @@
+.c-list-item {
+  border-bottom: 1px solid color('light-white');
+  padding: 18px 12px;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: color('black');
+  overflow: hidden;
+
+  &__info-box {
+    overflow: hidden;
+  }
+
+  &__title {
+    font-weight: $bold;
+    padding-bottom: 4px;
+  }
+
+  &__content {
+
+  }
+}
