@@ -124,7 +124,10 @@ export default class GroupTransactionForm extends Component {
       params,
     } = this.props;
 
-    const userSelectorButtons = group.users.filter(user => user.id !== currentUser.id).map(user => (
+    const userSelectorButtons = group.users
+        .filter(user => user.id !== currentUser.id)
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(user => (
       <BarItem
         align="left"
         key={user.id}
